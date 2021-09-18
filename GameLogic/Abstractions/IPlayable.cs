@@ -7,10 +7,13 @@ namespace GameLogic
 {
 	public interface IPlayable
 	{
+		// Used for communication inside Logic unit
 		Board GetBoard();
 
+		// Used for communication inside Logic unit
 		Cell GetLastMove();
 
+		// From here onwards, used for communication with UI
 		bool DidLastPlayerQuitSingleGame();
 
 		eGameState GetGameState();

@@ -8,29 +8,17 @@ namespace GameLogic
 	public class PlayerHuman : Player
 	{
 		private const ePlayerType k_PlayerType = ePlayerType.Human;
-		public event Action SelectedColumn;
 
 		public ePlayerType PlayerType => k_PlayerType;
-		
-		public PlayerHuman(
-			Board i_BoardOfPlayer,
-			eBoardCellType i_DiscType,
-			eTurnState i_TurnState,
-			Action )
+
+		public PlayerHuman(Board i_BoardOfPlayer, eBoardCellType i_DiscType, eTurnState i_TurnState)
 			: base(i_BoardOfPlayer, i_DiscType, i_TurnState)
 		{
 		}
 
 		public override int ChooseColumnForMove()
 		{
-			int randomChoice = NumberOperations.GetRandomNumber(BoardOfPlayer.NumberOfColumnIndices);
-
-			while (!this.BoardOfPlayer.IsColumnAvailableForDisc(randomChoice))
-			{
-				randomChoice = NumberOperations.GetRandomNumber(this.BoardOfPlayer.NumberOfColumnIndices);
-			}
-
-			return randomChoice;
+			return this.GameForBoard.GetLastMove().Column;
 		}
 	}
 }

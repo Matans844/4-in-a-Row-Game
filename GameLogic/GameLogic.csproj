@@ -44,7 +44,7 @@
     <Compile Include="Abstractions\IPlayable.cs" />
     <Compile Include="ConnectFour\ResultChecker.cs" />
     <Compile Include="Extensions\Array2DimOperations.cs" />
-    <Compile Include="Extensions\Array2DimInitializers.cs" />
+    <Compile Include="Extensions\Array2DimInitOrReset.cs" />
     <Compile Include="Extensions\JaggedArray2DimOperations.cs" />
     <Compile Include="Extensions\NumberOperations.cs" />
     <Compile Include="Players\Player.cs" />

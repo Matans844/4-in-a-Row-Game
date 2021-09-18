@@ -12,5 +12,14 @@ namespace GameLogic
 		Board GetBoard();
 
 		Cell GetLastMove();
+
+		void UpdateAfterValidMove(int i_ChosenColumn);
+
+		void UpdateAfterQuit();
+
+
+		void SetUpNewGame();
+
+		bool IsMoveValid(int i_ChosenColumn);
 	}
 }

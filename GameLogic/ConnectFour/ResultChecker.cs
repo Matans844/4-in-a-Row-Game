@@ -97,23 +97,23 @@ namespace GameLogic
 		}
 
 		// A move was made here. So no quitting occurred.
-		public static eBoardState CalculateBoardStateAfterMove(IPlayable i_Game)
+		public static eGameState CalculateGameStateAfterMove(IPlayable i_Game)
 		{
-			eBoardState stateOfBoardAfterMove = eBoardState.NotFinished;
+			eGameState stateOfGameAfterMove = eGameState.NotFinished;
 
 			if (ResultChecker.IsGameFinishedByBoard(i_Game))
 			{
 				if (ResultChecker.HasWinnerByBoard(i_Game))
 				{
-					stateOfBoardAfterMove = eBoardState.FinishedInWinByBoard;
+					stateOfGameAfterMove = eGameState.FinishedInWinByBoard;
 				}
 				else
 				{
-					stateOfBoardAfterMove = eBoardState.FinishedInDraw;
+					stateOfGameAfterMove = eGameState.FinishedInDraw;
 				}
 			}
 
-			return stateOfBoardAfterMove;
+			return stateOfGameAfterMove;
 		}
 
 		private static bool IsWinningConnection(Board i_Board, Cell i_FocalBoardCell, eDirectionOfDiscConnection i_DirectionOfConnection)

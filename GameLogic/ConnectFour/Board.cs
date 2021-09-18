@@ -11,8 +11,7 @@ namespace GameLogic
 		public const int k_ZeroIndex = 0;
 		private readonly IPlayable r_GameForBoard;
 		private readonly Cell[,] r_CellMatrix;
-		private readonly int[] r_NumberOfCellVacanciesInColumn;
-		private eBoardState m_BoardState = eBoardState.NotFinished;
+		private readonly int[] r_NumberOfCellVacanciesByColumn;
 		private int m_NumberOfRowIndices;
 		private int m_NumberOfColumnIndices;
 		private int m_NumberOfRows;
@@ -39,12 +38,6 @@ namespace GameLogic
 
 		public IPlayable GameForBoard => this.r_GameForBoard;
 
-		public eBoardState BoardState
-		{
-			get => this.m_BoardState;
-			set => this.m_BoardState = value;
-		}
-
 		public int NumberOfRows
 		{
 			get => this.m_NumberOfRows;
@@ -57,7 +50,7 @@ namespace GameLogic
 			set => this.m_NumberOfColumns = value;
 		}
 
-		public int[] NumberOfCellVacanciesInColumn => this.r_NumberOfCellVacanciesInColumn;
+		public int[] NumberOfCellVacanciesByColumn => this.r_NumberOfCellVacanciesByColumn;
 
 		public Cell[,] CellMatrix => this.r_CellMatrix;
 
@@ -69,16 +62,17 @@ namespace GameLogic
 			this.NumberOfRows = i_ChosenNumberOfRows;
 			this.NumberOfRowIndices = i_ChosenNumberOfRows - k_TransformBoardToMatrixIndicesWith1;
 			this.r_CellMatrix = new Cell[i_ChosenNumberOfRows, i_ChosenNumberOfColumns];
+			this.r_CellMatrix.InitWithBoardCells();
 			this.NumberOfCellVacanciesInBoard = i_ChosenNumberOfRows * i_ChosenNumberOfColumns;
-			this.r_NumberOfCellVacanciesInColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
+			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
 		}
 
 		public void SlideDiskToBoard(int i_ChosenBoardColumnAdjustedForMatrix, eBoardCellType i_PlayerDiscType)
 		{
 			int rowIndexOfLastVacantCellInChosenColumn =
-				this.NumberOfCellVacanciesInColumn[i_ChosenBoardColumnAdjustedForMatrix] - k_TransformBoardToMatrixIndicesWith1;
+				this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix] - k_TransformBoardToMatrixIndicesWith1;
 
-			this.NumberOfCellVacanciesInColumn[i_ChosenBoardColumnAdjustedForMatrix]--;
+			this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix]--;
 			this.NumberOfCellVacanciesInBoard--;
 
 			this.CellMatrix[rowIndexOfLastVacantCellInChosenColumn, i_ChosenBoardColumnAdjustedForMatrix].CellType = i_PlayerDiscType;
@@ -94,18 +88,42 @@ namespace GameLogic
 				k_ZeroIndex,
 				this.NumberOfColumnIndices))
 			{
-				isValidChoice = this.NumberOfCellVacanciesInColumn[chosenColumnTranslatedToMatrixIndices] != 0;
+				isValidChoice = this.NumberOfCellVacanciesByColumn[chosenColumnTranslatedToMatrixIndices] != 0;
 			}
 
 			return isValidChoice;
 		}
-	}
 
-	public enum eBoardState
-	{
-		NotFinished = 0,
-		FinishedInDraw = 1,
-		FinishedInWinByBoard = 2,
-		FinishedInWinByQuit = 3
+		public Cell GetLastAvailableCellInColumn(int i_ColumnIndex)
+		{
+			int rowIndex = this.NumberOfCellVacanciesByColumn[i_ColumnIndex] - k_TransformBoardToMatrixIndicesWith1;
+
+			return this.CellMatrix[rowIndex, i_ColumnIndex];
+		}
+
+		public void PrepareBoardForNewGame()
+		{
+			this.resetCellMatrix();
+			this.resetNumberOfCellVacanciesInBoard();
+			this.resetNumberOfCellVacanciesByColumn();
+		}
+
+		private void resetCellMatrix()
+		{
+			this.CellMatrix.ResetBoardCells();
+		}
+
+		private void resetNumberOfCellVacanciesInBoard()
+		{
+			this.NumberOfCellVacanciesInBoard = this.NumberOfRows * this.NumberOfColumns;
+		}
+
+		private void resetNumberOfCellVacanciesByColumn()
+		{
+			for (int i = 0; i < this.NumberOfColumnIndices; i++)
+			{
+				this.r_NumberOfCellVacanciesByColumn[i] = this.NumberOfRows;
+			}
+		}
 	}
 }

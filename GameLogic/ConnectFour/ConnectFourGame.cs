@@ -5,6 +5,8 @@ using System.Text;
 
 namespace GameLogic
 {
+	using System.Diagnostics.Eventing.Reader;
+
 	public class ConnectFourGame : IPlayable
 	{
 		public const int k_ZeroPoints = 0;
@@ -13,13 +15,19 @@ namespace GameLogic
 		private readonly Player r_Player1WithXs;
 		private readonly Player r_Player2WithOs;
 		private readonly eGameMode r_Mode;
-		private Cell m_LastMovePlayed;
+		private Cell m_LastMovePlayed; // Needs update after move in game loop
 		private int m_GameNumber;
-		private Player m_PlayerToWinInCaseOfQuit;
+		private eGameState m_GameState = eGameState.NotFinished;
 		private Player m_WinnerOfLastGame;
 		private Player m_PlayerToWinIfOtherQuit;
 		private Player m_PlayerToMove;
 		private bool m_PlayerToMoveQuit = false;
+
+		public eGameState GameState
+		{
+			get => this.m_GameState;
+			set => this.m_GameState = value;
+		}
 
 		public Player PlayerToWinIfOtherQuit
 		{
@@ -33,7 +41,7 @@ namespace GameLogic
 			private set
 			{
 				this.m_PlayerToMove = value;
-				this.PlayerToWinIfOtherQuit = getOtherPlayer(value);
+				this.PlayerToWinIfOtherQuit = this.getOtherPlayer(value);
 			}
 		}
 
@@ -47,12 +55,6 @@ namespace GameLogic
 		{
 			get => this.m_WinnerOfLastGame;
 			set => this.m_WinnerOfLastGame = value;
-		}
-
-		public Player PlayerToWinInCaseOfQuit
-		{
-			get => this.m_PlayerToWinInCaseOfQuit;
-			set => this.m_PlayerToWinInCaseOfQuit = value;
 		}
 
 		public int GameNumber
@@ -123,11 +125,81 @@ namespace GameLogic
 			return this.LastMove;
 		}
 
+		public void UpdateAfterValidMove(int i_ChosenColumn)
+		{
+			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
+			this.LastMove = this.GameBoard.GetLastAvailableCellInColumn(chosenMoveAdjustedToMatrix);
+			this.PlayerToMove.PlayMove(chosenMoveAdjustedToMatrix);
+			this.updateGameState();
+		}
+
+		public void UpdateAfterQuit()
+		{
+			this.PlayerToMoveQuit = true;
+			this.updateGameState();
+		}
+
+		public bool IsMoveValid(int i_ChosenColumn)
+		{
+			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
+
+			return this.GameBoard.IsColumnAvailableForDisc(chosenMoveAdjustedToMatrix);
+		}
+
 		public bool DidLastPlayerQuit()
 		{
 			return this.PlayerToMoveQuit;
 		}
 
+		private void updateGameState()
+		{
+			if (ResultChecker.IsGameFinished(this))
+			{
+				if (ResultChecker.IsGameFinishedByBoard(this))
+				{
+					if (ResultChecker.IsGameDrawnByBoard(this))
+					{
+						this.GameState = eGameState.FinishedInDraw;
+					}
+					else
+					{
+						this.GameState = eGameState.FinishedInWinByBoard;
+						this.WinnerOfLastGame = this.PlayerToMove;
+						this.WinnerOfLastGame.PointsEarned++;
+					}
+				}
+				else
+				{
+					// Game finished by quit
+					this.GameState = eGameState.FinishedInWinByQuit;
+					this.WinnerOfLastGame = this.PlayerToWinIfOtherQuit;
+					this.WinnerOfLastGame.PointsEarned++;
+				}
+			}
+			else
+			{
+				// Game is not finished
+				this.PlayerToMove.TurnState = eTurnState.NotYourTurn;
+				this.switchPlayerTurn(); // switches players
+				this.PlayerToMove.TurnState = eTurnState.YourTurn;
+			}
+		}
+
+		private void switchPlayerTurn()
+		{
+			// The setter in PlayerToMove also changes PlayerToWinIfOtherQuit
+			this.PlayerToMove = this.PlayerToWinIfOtherQuit;
+		}
+
+		public void SetUpNewGame()
+		{
+			this.GameBoard.PrepareBoardForNewGame();
+			this.Player1WithXs.TurnState = eTurnState.YourTurn;
+			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
+			this.PlayerToMove = this.Player1WithXs;
+		}
+
+		// TODO This loop should be in the UI??
 		public StartGame()
 		{
 			int chosenValidBoardMoveAdjustedToMatrix;
@@ -149,5 +221,13 @@ namespace GameLogic
 	{
 		PlayerVsPlayer = 1,
 		PlayerVsComputer = 2
+	}
+
+	public enum eGameState
+	{
+		NotFinished = 0,
+		FinishedInDraw = 1,
+		FinishedInWinByBoard = 2,
+		FinishedInWinByQuit = 3
 	}
 }

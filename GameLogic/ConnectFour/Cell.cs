@@ -58,6 +58,11 @@ namespace GameLogic
 
 			return hasSameType;
 		}
+
+		public void Reset()
+		{
+			this.CellType = eBoardCellType.Empty;
+		}
 	}
 
 	public enum eBoardCellType

@@ -129,7 +129,7 @@ namespace GameLogic
 		{
 			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
 			this.LastMove = this.GameBoard.GetLastAvailableCellInColumn(chosenMoveAdjustedToMatrix);
-			this.PlayerToMove.PlayMove(chosenMoveAdjustedToMatrix);
+			this.PlayerToMove.PlayMove(); // The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
 			this.updateGameState();
 		}
 
@@ -200,7 +200,7 @@ namespace GameLogic
 		}
 
 		// TODO This loop should be in the UI??
-		public StartGame()
+/*		public StartGame()
 		{
 			int chosenValidBoardMoveAdjustedToMatrix;
 
@@ -214,7 +214,7 @@ namespace GameLogic
 
 			}
 
-		}
+		}*/
 	}
 
 	public enum eGameMode

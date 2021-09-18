@@ -41,7 +41,7 @@ namespace GameLogic
 			s_InstanceCounter++;
 		}
 
-		public void PlayMove(int i_ChosenColumnAfterIndexAdjustment)
+		public void PlayMove()
 		{
 			this.BoardOfPlayer.SlideDiskToBoard(this.ChooseColumnForMove(), this.DiscType);
 		}

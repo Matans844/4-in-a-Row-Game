@@ -42,6 +42,7 @@
     <Compile Include="ConnectFour\Cell.cs" />
     <Compile Include="ConnectFour\ConnectFourGame.cs" />
     <Compile Include="Abstractions\IPlayable.cs" />
+    <Compile Include="ConnectFour\ResultChecker.cs" />
     <Compile Include="Extensions\Array2DimOperations.cs" />
     <Compile Include="Extensions\Array2DimInitializers.cs" />
     <Compile Include="Extensions\JaggedArray2DimOperations.cs" />

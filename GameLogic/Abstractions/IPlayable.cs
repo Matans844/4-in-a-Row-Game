@@ -7,5 +7,10 @@ namespace GameLogic
 {
 	public interface IPlayable
 	{
+		bool DidLastPlayerQuit();
+
+		Board GetBoard();
+
+		Cell GetLastMove();
 	}
 }

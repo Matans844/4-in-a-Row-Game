@@ -1,4 +1,6 @@
-﻿namespace GameLogic
+﻿using System;
+
+namespace GameLogic
 {
 	public abstract class Player
 	{
@@ -36,7 +38,13 @@
 			s_InstanceCounter++;
 		}
 
-		public abstract void MakeMove(int i_ChosenColumnAfterIndexAdjustment);
+		protected void PlayMove(int i_ChosenColumnAfterIndexAdjustment)
+		{
+			this.BoardOfPlayer.SlideDiskToBoard(this.ChooseColumnForMove(), this.DiscType);
+			this.TurnState = eTurnState.NotYourTurn;
+		};
+
+		public abstract int ChooseColumnForMove();
 	}
 
 	public enum ePlayerType

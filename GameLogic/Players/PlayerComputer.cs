@@ -16,19 +16,13 @@ namespace GameLogic
 		{
 		}
 
-		public override void MakeMove(int i_ChosenColumn)
+		public override int ChooseColumnForMove()
 		{
-			this.BoardOfPlayer.SlideDiskToBoard(this.ChooseColumnForMove(), this.DiscType);
-			this.TurnState = eTurnState.NotYourTurn;
-		}
+			int randomChoice = NumberOperations.GetRandomNumber(this.BoardOfPlayer.NumberOfColumnIndices);
 
-		public int ChooseColumnForMove()
-		{
-			int randomChoice = NumberOperations.GetRandomNumber(BoardOfPlayer.NumberOfColumnIndices);
-
-			while (!BoardOfPlayer.IsColumnAvailableForDisc(randomChoice))
+			while (!this.BoardOfPlayer.IsColumnAvailableForDisc(randomChoice))
 			{
-				randomChoice = NumberOperations.GetRandomNumber(BoardOfPlayer.NumberOfColumnIndices);
+				randomChoice = NumberOperations.GetRandomNumber(this.BoardOfPlayer.NumberOfColumnIndices);
 			}
 
 			return randomChoice;

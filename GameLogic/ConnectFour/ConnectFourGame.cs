@@ -15,6 +15,45 @@ namespace GameLogic
 		private readonly eGameMode r_Mode;
 		private Cell m_LastMovePlayed;
 		private int m_GameNumber;
+		private Player m_PlayerToWinInCaseOfQuit;
+		private Player m_WinnerOfLastGame;
+		private Player m_PlayerToWinIfOtherQuit;
+		private Player m_PlayerToMove;
+		private bool m_PlayerToMoveQuit = false;
+
+		public Player PlayerToWinIfOtherQuit
+		{
+			get => this.m_PlayerToWinIfOtherQuit;
+			private set => this.m_PlayerToWinIfOtherQuit = value;
+		}
+
+		public Player PlayerToMove
+		{
+			get => this.m_PlayerToMove;
+			private set
+			{
+				this.m_PlayerToMove = value;
+				this.PlayerToWinIfOtherQuit = getOtherPlayer(value);
+			}
+		}
+
+		public bool PlayerToMoveQuit
+		{
+			get => this.m_PlayerToMoveQuit;
+			set => this.m_PlayerToMoveQuit = value;
+		}
+
+		public Player WinnerOfLastGame
+		{
+			get => this.m_WinnerOfLastGame;
+			set => this.m_WinnerOfLastGame = value;
+		}
+
+		public Player PlayerToWinInCaseOfQuit
+		{
+			get => this.m_PlayerToWinInCaseOfQuit;
+			set => this.m_PlayerToWinInCaseOfQuit = value;
+		}
 
 		public int GameNumber
 		{
@@ -32,7 +71,7 @@ namespace GameLogic
 
 		public object[] PlayersInGame => this.r_Players;
 
-		public Cell LastMovePlayed
+		public Cell LastMove
 		{
 			get => this.m_LastMovePlayed;
 			set => this.m_LastMovePlayed = value;
@@ -56,6 +95,53 @@ namespace GameLogic
 
 			this.PlayersInGame[0] = this.Player1WithXs;
 			this.PlayersInGame[1] = this.Player2WithOs;
+		}
+
+		private Player getOtherPlayer(Player i_Player)
+		{
+			Player otherPlayer;
+
+			if (i_Player.DiscType == eBoardCellType.XDisc)
+			{
+				otherPlayer = this.Player2WithOs;
+			}
+			else
+			{
+				otherPlayer = this.Player1WithXs;
+			}
+
+			return otherPlayer;
+		}
+
+		public Board GetBoard()
+		{
+			return this.GameBoard;
+		}
+
+		public Cell GetLastMove()
+		{
+			return this.LastMove;
+		}
+
+		public bool DidLastPlayerQuit()
+		{
+			return this.PlayerToMoveQuit;
+		}
+
+		public StartGame()
+		{
+			int chosenValidBoardMoveAdjustedToMatrix;
+
+			while (this.DidLastPlayerQuit())
+			{
+				foreach (Player currentPlayer in this.PlayersInGame)
+				{
+					this.PlayerToMove = currentPlayer;
+					currentPlayer.TurnState = eTurnState.YourTurn;
+				}
+
+			}
+
 		}
 	}
 

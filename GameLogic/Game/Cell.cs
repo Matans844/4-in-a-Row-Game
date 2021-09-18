@@ -5,11 +5,15 @@ using System.Text;
 
 namespace GameLogic
 {
+	public delegate void CellOccupiedByMoveEventHandler(object sender, CellOccupiedByMoveEventArgs e);
+
 	public class Cell
 	{
 		private readonly int r_Column;
 		private readonly int r_Row;
 		private eBoardCellType m_CellType;
+
+		public event CellOccupiedByMoveEventHandler CellTypeChanged;
 
 		public int Column => this.r_Column;
 
@@ -18,7 +22,20 @@ namespace GameLogic
 		public eBoardCellType CellType
 		{
 			get => this.m_CellType;
-			set => this.m_CellType = value;
+			set
+			{
+				this.m_CellType = value;
+				CellOccupiedByMoveEventArgs e = new CellOccupiedByMoveEventArgs { m_NewCellType = value };
+				this.OnCellOccupied(e);
+			}
+		}
+
+		protected virtual void OnCellOccupied(CellOccupiedByMoveEventArgs e)
+		{
+			if (this.CellTypeChanged != null)
+			{
+				this.CellTypeChanged(this, e);
+			}
 		}
 
 		public Cell(int i_Row, int i_Column, eBoardCellType i_CellType)

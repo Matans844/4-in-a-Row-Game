@@ -38,11 +38,13 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ConnectFour\Board.cs" />
-    <Compile Include="ConnectFour\Cell.cs" />
-    <Compile Include="ConnectFour\ConnectFourGame.cs" />
+    <Compile Include="CellOccupiedByMoveEventArgs.cs" />
+    <Compile Include="Delegates.cs" />
+    <Compile Include="Game\Board.cs" />
+    <Compile Include="Game\Cell.cs" />
+    <Compile Include="Game\ConnectFourGame.cs" />
     <Compile Include="Abstractions\IPlayable.cs" />
-    <Compile Include="ConnectFour\ResultChecker.cs" />
+    <Compile Include="Game\ResultChecker.cs" />
     <Compile Include="Extensions\Array2DimOperations.cs" />
     <Compile Include="Extensions\Array2DimInitOrReset.cs" />
     <Compile Include="Extensions\JaggedArray2DimOperations.cs" />

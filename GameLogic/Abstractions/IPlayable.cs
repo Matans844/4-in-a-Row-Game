@@ -7,15 +7,17 @@ namespace GameLogic
 {
 	public interface IPlayable
 	{
-		bool DidLastPlayerQuit();
-
 		Board GetBoard();
 
 		Cell GetLastMove();
 
-		void UpdateAfterValidMove(int i_ChosenColumn);
+		bool DidLastPlayerQuitSingleGame();
 
-		void UpdateAfterQuit();
+		eGameState GetGameState();
+
+		void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn);
+
+		void QuitSingleGameAndUpdateGameState();
 
 		void SetUpNewGame();
 

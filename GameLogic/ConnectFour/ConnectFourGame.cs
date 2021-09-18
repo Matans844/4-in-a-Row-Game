@@ -21,7 +21,7 @@ namespace GameLogic
 		private Player m_WinnerOfLastGame;
 		private Player m_PlayerToWinIfOtherQuit;
 		private Player m_PlayerToMove;
-		private bool m_PlayerToMoveQuit = false;
+		private bool m_PlayerToMoveQuitSingleGame = false;
 
 		public eGameState GameState
 		{
@@ -45,10 +45,10 @@ namespace GameLogic
 			}
 		}
 
-		public bool PlayerToMoveQuit
+		public bool PlayerToMoveQuitSingleGame
 		{
-			get => this.m_PlayerToMoveQuit;
-			set => this.m_PlayerToMoveQuit = value;
+			get => this.m_PlayerToMoveQuitSingleGame;
+			set => this.m_PlayerToMoveQuitSingleGame = value;
 		}
 
 		public Player WinnerOfLastGame
@@ -125,17 +125,20 @@ namespace GameLogic
 			return this.LastMove;
 		}
 
-		public void UpdateAfterValidMove(int i_ChosenColumn)
+		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
 			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
 			this.LastMove = this.GameBoard.GetLastAvailableCellInColumn(chosenMoveAdjustedToMatrix);
-			this.PlayerToMove.PlayMove(); // The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
+
+			// The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
+			// This also updates the Board.
+			this.PlayerToMove.PlayMove();
 			this.updateGameState();
 		}
 
-		public void UpdateAfterQuit()
+		public void QuitSingleGameAndUpdateGameState()
 		{
-			this.PlayerToMoveQuit = true;
+			this.PlayerToMoveQuitSingleGame = true;
 			this.updateGameState();
 		}
 
@@ -146,9 +149,9 @@ namespace GameLogic
 			return this.GameBoard.IsColumnAvailableForDisc(chosenMoveAdjustedToMatrix);
 		}
 
-		public bool DidLastPlayerQuit()
+		public bool DidLastPlayerQuitSingleGame()
 		{
-			return this.PlayerToMoveQuit;
+			return this.PlayerToMoveQuitSingleGame;
 		}
 
 		private void updateGameState()
@@ -193,10 +196,16 @@ namespace GameLogic
 
 		public void SetUpNewGame()
 		{
+			this.PlayerToMoveQuitSingleGame = false;
 			this.GameBoard.PrepareBoardForNewGame();
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;
+		}
+
+		public eGameState GetGameState()
+		{
+			return this.GameState;
 		}
 
 		// TODO This loop should be in the UI??
@@ -204,7 +213,7 @@ namespace GameLogic
 		{
 			int chosenValidBoardMoveAdjustedToMatrix;
 
-			while (this.DidLastPlayerQuit())
+			while (this.DidLastPlayerQuitSingleGame())
 			{
 				foreach (Player currentPlayer in this.PlayersInGame)
 				{

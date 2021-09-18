@@ -76,7 +76,7 @@ namespace GameLogic
 
 		public static bool IsGameFinishedByQuit(IPlayable i_Game)
 		{
-			return i_Game.DidLastPlayerQuit();
+			return i_Game.DidLastPlayerQuitSingleGame();
 		}
 
 		public static bool IsGameBoardExhausted(IPlayable i_Game)

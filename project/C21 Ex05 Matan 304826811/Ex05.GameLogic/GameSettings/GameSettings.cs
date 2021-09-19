@@ -7,32 +7,32 @@
 		public const string k_DefaultHumanPlayer2Name = "Player 2";
 		public const int k_MinimumBoardDimension = 4;
 		public const int k_MaximumBoardDimension = 8;
-		private static string s_Player1Name = k_DefaultHumanPlayer1Name;
-		private static string s_Player2Name = k_DefaultHumanPlayer2Name;
-		private static int? s_RowsForGame;
-		private static int? s_ColumnsForGame;
-		private static eGameMode? s_GameMode;
-		private static bool s_ReadyForGame = false;
+		private string s_Player1Name = k_DefaultHumanPlayer1Name;
+		private string s_Player2Name = k_DefaultHumanPlayer2Name;
+		private int? s_RowsForGame;
+		private int? s_ColumnsForGame;
+		private eGameMode? s_GameMode;
+		private bool s_ReadyForGame = false;
 
-		public static bool ReadyForGame
+		public bool ReadyForGame
 		{
 			get => s_ReadyForGame;
 			set => s_ReadyForGame = value;
 		}
 
-		public static string Player1Name
+		public string Player1Name
 		{
 			get => s_Player1Name;
 			set => s_Player1Name = value;
 		}
 
-		public static string Player2Name
+		public string Player2Name
 		{
 			get => s_Player2Name;
 			set => s_Player2Name = value;
 		}
 
-		public static int? RowsForGame
+		public int? RowsForGame
 		{
 			get => s_RowsForGame;
 			set
@@ -51,7 +51,7 @@
 			}
 		}
 
-		public static int? ColumnsForGame
+		public int? ColumnsForGame
 		{
 			get => s_ColumnsForGame;
 			set
@@ -70,7 +70,7 @@
 			}
 		}
 
-		public static eGameMode? ModeForGame
+		public eGameMode? ModeForGame
 		{
 			get => s_GameMode;
 			set
@@ -88,7 +88,7 @@
 		{
 		}
 
-		public static bool CanGameBegin()
+		public bool CanGameBegin()
 		{
 			if (allRequiredSettingsAreSet())
 			{
@@ -98,7 +98,7 @@
 			return ReadyForGame;
 		}
 
-		private static bool allRequiredSettingsAreSet()
+		private bool allRequiredSettingsAreSet()
 		{
 			bool allNullableValuesSet = RowsForGame.HasValue
 										&& ColumnsForGame.HasValue

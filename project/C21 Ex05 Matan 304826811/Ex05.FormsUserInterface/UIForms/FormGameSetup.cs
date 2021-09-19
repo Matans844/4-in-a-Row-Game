@@ -50,14 +50,44 @@ namespace Ex05.FormsUserInterface
 			this.r_GameSettingsManager = new GameSettings();
 		}
 
-		private void HumanOpponent_CheckedChanged(object sender, EventArgs e)
+		private void CheckBoxHumanOpponent_CheckedChanged(object sender, EventArgs e)
 		{
-			this.Player2ChosenName.ReadOnly = !this.Player2ChosenName.ReadOnly;
+			this.TextBoxPlayer2ChooseName.ReadOnly = !this.TextBoxPlayer2ChooseName.ReadOnly;
 
-			this.Player2ChosenName.Text = this.Player2ChosenName.ReadOnly
+			this.TextBoxPlayer2ChooseName.Text = this.TextBoxPlayer2ChooseName.ReadOnly
 											? k_DefaultComputerName
 											: string.Empty;
 			this.IsComputerGameMode = !this.IsComputerGameMode;
+		}
+
+		private void StartButton_Click(object sender, EventArgs e)
+		{
+			int chosenNumberOfBoardRows;
+			int chosenNumberOfBoardColumns;
+
+			bool isFieldNotEmpty = !string.IsNullOrEmpty(this.TextBoxPlayer1ChooseName.Text)
+									&& !string.IsNullOrEmpty(this.TextBoxPlayer2ChooseName.Text)
+									&& !string.IsNullOrWhiteSpace(this.TextBoxPlayer1ChooseName.Text)
+									&& !string.IsNullOrWhiteSpace(this.TextBoxPlayer2ChooseName.Text);
+
+			if (isFieldNotEmpty)
+			{
+				chosenNumberOfBoardRows = (int)this.NumericUpDownChooseNumberOfRows.Value;
+				chosenNumberOfBoardColumns = (int)this.NumericUpDownChooseNumberOfColumns.Value;
+				this.GameSettingsManager.Player1Name = this.TextBoxPlayer1ChooseName.Text;
+				this.GameSettingsManager.Player2Name = this.TextBoxPlayer2ChooseName.Text;
+				this.GameSettingsManager.RowsForGame = chosenNumberOfBoardRows;
+				this.GameSettingsManager.ColumnsForGame = chosenNumberOfBoardColumns;
+
+				this.BoardSizeManager.BoardNumberOfRows = chosenNumberOfBoardRows;
+				this.BoardSizeManager.BoardNumberOfColumns = chosenNumberOfBoardColumns;
+				this.BoardSizeManager.UpdateBoardDimensions();
+				this.Close();
+			}
+			else
+			{
+				MessageBox.Show(k_MessageMissingFields, k_TitleError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+			}
 		}
 	}
 }

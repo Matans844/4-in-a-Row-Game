@@ -20,13 +20,13 @@ namespace Ex05.FormsUserInterface
 		private int m_BoardHeight;
 		private int m_BoardWidth;
 
-		public int BoardRows
+		public int BoardNumberOfRows
 		{
 			get => this.m_BoardNumberOfRows;
 			set => this.m_BoardNumberOfRows = value;
 		}
 
-		public int BoardColumns
+		public int BoardNumberOfColumns
 		{
 			get => this.m_BoardNumberOfColumns;
 			set => this.m_BoardNumberOfColumns = value;
@@ -50,8 +50,8 @@ namespace Ex05.FormsUserInterface
 
 		public void UpdateBoardDimensions()
 		{
-			this.BoardWidth = (this.BoardColumns * (k_DistanceBetweenBoardColumnElements + k_ButtonCellWidth)) - k_DistanceBetweenBoardColumnElements;
-			this.BoardHeight = (this.BoardRows * (k_DistanceBetweenBoardRowElements + k_ButtonCellHeight)) + k_LabelHeight;
+			this.BoardWidth = (this.BoardNumberOfColumns * (k_DistanceBetweenBoardColumnElements + k_ButtonCellWidth)) - k_DistanceBetweenBoardColumnElements;
+			this.BoardHeight = (this.BoardNumberOfRows * (k_DistanceBetweenBoardRowElements + k_ButtonCellHeight)) + k_LabelHeight;
 		}
 
 		/*		private int MeasureStringMin(string i_StringToMeasure, PaintEventArgs e)

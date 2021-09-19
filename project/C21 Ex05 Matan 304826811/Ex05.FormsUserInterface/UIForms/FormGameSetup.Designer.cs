@@ -29,23 +29,30 @@ namespace Ex05.FormsUserInterface
 		/// </summary>
 		private void InitializeComponent()
 		{
-			this.SectionPlayerChooseName = new System.Windows.Forms.Label();
+			this.LabelSectionPlayerChooseName = new System.Windows.Forms.Label();
 			this.LabelPlayer1ChooseName = new System.Windows.Forms.Label();
 			this.LabelPlayer2ChooseName = new System.Windows.Forms.Label();
-			this.Player1ChosenName = new System.Windows.Forms.TextBox();
-			this.Player2ChosenName = new System.Windows.Forms.TextBox();
-			this.HumanOpponent = new System.Windows.Forms.CheckBox();
-			this.SectionBoardSize = new System.Windows.Forms.Label();
+			this.TextBoxPlayer1ChooseName = new System.Windows.Forms.TextBox();
+			this.TextBoxPlayer2ChooseName = new System.Windows.Forms.TextBox();
+			this.CheckBoxHumanOpponent = new System.Windows.Forms.CheckBox();
+			this.LabelSectionBoardSize = new System.Windows.Forms.Label();
+			this.LabelChooseRowNumber = new System.Windows.Forms.Label();
+			this.NumericUpDownChooseNumberOfRows = new System.Windows.Forms.NumericUpDown();
+			this.LabelChooseColumnNumber = new System.Windows.Forms.Label();
+			this.NumericUpDownChooseNumberOfColumns = new System.Windows.Forms.NumericUpDown();
+			this.StartButton = new System.Windows.Forms.Button();
+			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfRows)).BeginInit();
+			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfColumns)).BeginInit();
 			this.SuspendLayout();
 			// 
-			// SectionPlayerChooseName
+			// LabelSectionPlayerChooseName
 			// 
-			this.SectionPlayerChooseName.AutoSize = true;
-			this.SectionPlayerChooseName.Location = new System.Drawing.Point(26, 31);
-			this.SectionPlayerChooseName.Name = "SectionPlayerChooseName";
-			this.SectionPlayerChooseName.Size = new System.Drawing.Size(118, 32);
-			this.SectionPlayerChooseName.TabIndex = 10;
-			this.SectionPlayerChooseName.Text = "Players:";
+			this.LabelSectionPlayerChooseName.AutoSize = true;
+			this.LabelSectionPlayerChooseName.Location = new System.Drawing.Point(26, 31);
+			this.LabelSectionPlayerChooseName.Name = "LabelSectionPlayerChooseName";
+			this.LabelSectionPlayerChooseName.Size = new System.Drawing.Size(118, 32);
+			this.LabelSectionPlayerChooseName.TabIndex = 10;
+			this.LabelSectionPlayerChooseName.Text = "Players:";
 			// 
 			// LabelPlayer1ChooseName
 			// 
@@ -65,61 +72,140 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer2ChooseName.TabIndex = 50;
 			this.LabelPlayer2ChooseName.Text = "Player 2:";
 			// 
-			// Player1ChosenName
+			// TextBoxPlayer1ChooseName
 			// 
-			this.Player1ChosenName.Location = new System.Drawing.Point(282, 86);
-			this.Player1ChosenName.Name = "Player1ChosenName";
-			this.Player1ChosenName.Size = new System.Drawing.Size(336, 38);
-			this.Player1ChosenName.TabIndex = 30;
+			this.TextBoxPlayer1ChooseName.Location = new System.Drawing.Point(282, 86);
+			this.TextBoxPlayer1ChooseName.Name = "TextBoxPlayer1ChooseName";
+			this.TextBoxPlayer1ChooseName.Size = new System.Drawing.Size(336, 38);
+			this.TextBoxPlayer1ChooseName.TabIndex = 30;
 			// 
-			// Player2ChosenName
+			// TextBoxPlayer2ChooseName
 			// 
-			this.Player2ChosenName.Enabled = false;
-			this.Player2ChosenName.HideSelection = false;
-			this.Player2ChosenName.Location = new System.Drawing.Point(282, 145);
-			this.Player2ChosenName.Name = "Player2ChosenName";
-			this.Player2ChosenName.ReadOnly = true;
-			this.Player2ChosenName.Size = new System.Drawing.Size(336, 38);
-			this.Player2ChosenName.TabIndex = 60;
-			this.Player2ChosenName.Text = "[Computer]";
+			this.TextBoxPlayer2ChooseName.Enabled = false;
+			this.TextBoxPlayer2ChooseName.HideSelection = false;
+			this.TextBoxPlayer2ChooseName.Location = new System.Drawing.Point(282, 145);
+			this.TextBoxPlayer2ChooseName.Name = "TextBoxPlayer2ChooseName";
+			this.TextBoxPlayer2ChooseName.ReadOnly = true;
+			this.TextBoxPlayer2ChooseName.Size = new System.Drawing.Size(336, 38);
+			this.TextBoxPlayer2ChooseName.TabIndex = 60;
+			this.TextBoxPlayer2ChooseName.Text = "[Computer]";
 			// 
-			// HumanOpponent
+			// CheckBoxHumanOpponent
 			// 
-			this.HumanOpponent.AutoSize = true;
-			this.HumanOpponent.Location = new System.Drawing.Point(67, 145);
-			this.HumanOpponent.Name = "HumanOpponent";
-			this.HumanOpponent.Size = new System.Drawing.Size(34, 33);
-			this.HumanOpponent.TabIndex = 40;
-			this.HumanOpponent.UseVisualStyleBackColor = true;
-			this.HumanOpponent.CheckedChanged += new System.EventHandler(this.HumanOpponent_CheckedChanged);
+			this.CheckBoxHumanOpponent.AutoSize = true;
+			this.CheckBoxHumanOpponent.Location = new System.Drawing.Point(67, 145);
+			this.CheckBoxHumanOpponent.Name = "CheckBoxHumanOpponent";
+			this.CheckBoxHumanOpponent.Size = new System.Drawing.Size(34, 33);
+			this.CheckBoxHumanOpponent.TabIndex = 40;
+			this.CheckBoxHumanOpponent.UseVisualStyleBackColor = true;
+			this.CheckBoxHumanOpponent.CheckedChanged += new System.EventHandler(this.CheckBoxHumanOpponent_CheckedChanged);
 			// 
-			// SectionBoardSize
+			// LabelSectionBoardSize
 			// 
-			this.SectionBoardSize.AutoSize = true;
-			this.SectionBoardSize.Location = new System.Drawing.Point(26, 225);
-			this.SectionBoardSize.Name = "SectionBoardSize";
-			this.SectionBoardSize.Size = new System.Drawing.Size(405, 80);
-			this.SectionBoardSize.TabIndex = 70;
-			this.SectionBoardSize.Text = "Board Size:";
+			this.LabelSectionBoardSize.AutoSize = true;
+			this.LabelSectionBoardSize.Location = new System.Drawing.Point(26, 225);
+			this.LabelSectionBoardSize.Name = "LabelSectionBoardSize";
+			this.LabelSectionBoardSize.Size = new System.Drawing.Size(162, 32);
+			this.LabelSectionBoardSize.TabIndex = 70;
+			this.LabelSectionBoardSize.Text = "Board Size:";
+			// 
+			// LabelChooseRowNumber
+			// 
+			this.LabelChooseRowNumber.AutoSize = true;
+			this.LabelChooseRowNumber.Location = new System.Drawing.Point(59, 282);
+			this.LabelChooseRowNumber.Name = "LabelChooseRowNumber";
+			this.LabelChooseRowNumber.Size = new System.Drawing.Size(93, 32);
+			this.LabelChooseRowNumber.TabIndex = 70;
+			this.LabelChooseRowNumber.Text = "Rows:";
+			// 
+			// NumericUpDownChooseNumberOfRows
+			// 
+			this.NumericUpDownChooseNumberOfRows.Location = new System.Drawing.Point(168, 282);
+			this.NumericUpDownChooseNumberOfRows.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+			this.NumericUpDownChooseNumberOfRows.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.NumericUpDownChooseNumberOfRows.Name = "NumericUpDownChooseNumberOfRows";
+			this.NumericUpDownChooseNumberOfRows.Size = new System.Drawing.Size(82, 38);
+			this.NumericUpDownChooseNumberOfRows.TabIndex = 80;
+			this.NumericUpDownChooseNumberOfRows.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// LabelChooseColumnNumber
+			// 
+			this.LabelChooseColumnNumber.AutoSize = true;
+			this.LabelChooseColumnNumber.Location = new System.Drawing.Point(315, 282);
+			this.LabelChooseColumnNumber.Name = "LabelChooseColumnNumber";
+			this.LabelChooseColumnNumber.Size = new System.Drawing.Size(80, 32);
+			this.LabelChooseColumnNumber.TabIndex = 81;
+			this.LabelChooseColumnNumber.Text = "Cols:";
+			// 
+			// NumericUpDownChooseNumberOfColumns
+			// 
+			this.NumericUpDownChooseNumberOfColumns.Location = new System.Drawing.Point(415, 280);
+			this.NumericUpDownChooseNumberOfColumns.Maximum = new decimal(new int[] {
+            8,
+            0,
+            0,
+            0});
+			this.NumericUpDownChooseNumberOfColumns.Minimum = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			this.NumericUpDownChooseNumberOfColumns.Name = "NumericUpDownChooseNumberOfColumns";
+			this.NumericUpDownChooseNumberOfColumns.Size = new System.Drawing.Size(82, 38);
+			this.NumericUpDownChooseNumberOfColumns.TabIndex = 82;
+			this.NumericUpDownChooseNumberOfColumns.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+			// 
+			// StartButton
+			// 
+			this.StartButton.Location = new System.Drawing.Point(97, 378);
+			this.StartButton.Name = "StartButton";
+			this.StartButton.Size = new System.Drawing.Size(438, 48);
+			this.StartButton.TabIndex = 83;
+			this.StartButton.Text = "Start!";
+			this.StartButton.UseVisualStyleBackColor = true;
+			this.StartButton.Click += new System.EventHandler(this.StartButton_Click);
 			// 
 			// FormGameSetup
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(681, 485);
-			this.Controls.Add(this.SectionBoardSize);
-			this.Controls.Add(this.HumanOpponent);
-			this.Controls.Add(this.Player2ChosenName);
-			this.Controls.Add(this.Player1ChosenName);
+			this.ClientSize = new System.Drawing.Size(653, 466);
+			this.Controls.Add(this.StartButton);
+			this.Controls.Add(this.NumericUpDownChooseNumberOfColumns);
+			this.Controls.Add(this.LabelChooseColumnNumber);
+			this.Controls.Add(this.NumericUpDownChooseNumberOfRows);
+			this.Controls.Add(this.LabelChooseRowNumber);
+			this.Controls.Add(this.LabelSectionBoardSize);
+			this.Controls.Add(this.CheckBoxHumanOpponent);
+			this.Controls.Add(this.TextBoxPlayer2ChooseName);
+			this.Controls.Add(this.TextBoxPlayer1ChooseName);
 			this.Controls.Add(this.LabelPlayer2ChooseName);
 			this.Controls.Add(this.LabelPlayer1ChooseName);
-			this.Controls.Add(this.SectionPlayerChooseName);
+			this.Controls.Add(this.LabelSectionPlayerChooseName);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
 			this.MaximizeBox = false;
 			this.MinimizeBox = false;
 			this.Name = "FormGameSetup";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "Game Settings";
+			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfRows)).EndInit();
+			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfColumns)).EndInit();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -127,13 +213,18 @@ namespace Ex05.FormsUserInterface
 
 		#endregion
 
-		private System.Windows.Forms.Label SectionPlayerChooseName;
+		private System.Windows.Forms.Label LabelSectionPlayerChooseName;
 		private System.Windows.Forms.Label LabelPlayer1ChooseName;
 		private System.Windows.Forms.Label LabelPlayer2ChooseName;
-		private System.Windows.Forms.TextBox Player1ChosenName;
-		private System.Windows.Forms.TextBox Player2ChosenName;
-		private System.Windows.Forms.CheckBox HumanOpponent;
-		private System.Windows.Forms.Label SectionBoardSize;
+		private System.Windows.Forms.TextBox TextBoxPlayer1ChooseName;
+		private System.Windows.Forms.TextBox TextBoxPlayer2ChooseName;
+		private System.Windows.Forms.CheckBox CheckBoxHumanOpponent;
+		private System.Windows.Forms.Label LabelSectionBoardSize;
+		private System.Windows.Forms.Label LabelChooseRowNumber;
+		private System.Windows.Forms.NumericUpDown NumericUpDownChooseNumberOfRows;
+		private System.Windows.Forms.Label LabelChooseColumnNumber;
+		private System.Windows.Forms.NumericUpDown NumericUpDownChooseNumberOfColumns;
+		private System.Windows.Forms.Button StartButton;
 	}
 }
 

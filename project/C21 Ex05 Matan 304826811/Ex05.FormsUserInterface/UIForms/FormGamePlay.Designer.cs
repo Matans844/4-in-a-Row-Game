@@ -39,7 +39,7 @@ namespace Ex05.FormsUserInterface
 			// 
 			this.LabelPlayer1Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.LabelPlayer1Name.AutoSize = true;
-			this.LabelPlayer1Name.Location = new System.Drawing.Point(108, 111);
+			this.LabelPlayer1Name.Location = new System.Drawing.Point(127, 111);
 			this.LabelPlayer1Name.Name = "LabelPlayer1Name";
 			this.LabelPlayer1Name.Size = new System.Drawing.Size(127, 32);
 			this.LabelPlayer1Name.TabIndex = 0;
@@ -49,39 +49,35 @@ namespace Ex05.FormsUserInterface
 			// 
 			this.LabelPlayer2Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.LabelPlayer2Name.AutoSize = true;
-			this.LabelPlayer2Name.Location = new System.Drawing.Point(498, 111);
+			this.LabelPlayer2Name.Location = new System.Drawing.Point(394, 111);
 			this.LabelPlayer2Name.Name = "LabelPlayer2Name";
 			this.LabelPlayer2Name.Size = new System.Drawing.Size(127, 32);
 			this.LabelPlayer2Name.TabIndex = 1;
 			this.LabelPlayer2Name.Text = "Player 2:";
-			this.LabelPlayer2Name.Click += new System.EventHandler(this.LabelPlayer2Name_Click);
 			// 
 			// LabelPlayer1Score
 			// 
-			this.LabelPlayer1Score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.LabelPlayer1Score.AutoSize = true;
-			this.LabelPlayer1Score.Location = new System.Drawing.Point(241, 111);
+			this.LabelPlayer1Score.Location = new System.Drawing.Point(260, 111);
 			this.LabelPlayer1Score.Name = "LabelPlayer1Score";
-			this.LabelPlayer1Score.Size = new System.Drawing.Size(112, 32);
+			this.LabelPlayer1Score.Size = new System.Drawing.Size(78, 80);
 			this.LabelPlayer1Score.TabIndex = 2;
-			this.LabelPlayer1Score.Text = "Score 1";
-			this.LabelPlayer1Score.Click += new System.EventHandler(this.LabelScorePlayer1_Click);
+			this.LabelPlayer1Score.Text = "0";
 			// 
 			// LabelPlayer2Score
 			// 
-			this.LabelPlayer2Score.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.LabelPlayer2Score.AutoSize = true;
-			this.LabelPlayer2Score.Location = new System.Drawing.Point(631, 111);
+			this.LabelPlayer2Score.Location = new System.Drawing.Point(527, 111);
 			this.LabelPlayer2Score.Name = "LabelPlayer2Score";
-			this.LabelPlayer2Score.Size = new System.Drawing.Size(112, 32);
+			this.LabelPlayer2Score.Size = new System.Drawing.Size(31, 32);
 			this.LabelPlayer2Score.TabIndex = 3;
-			this.LabelPlayer2Score.Text = "Score 2";
+			this.LabelPlayer2Score.Text = "0";
 			// 
 			// FormGamePlay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(859, 188);
+			this.ClientSize = new System.Drawing.Size(735, 188);
 			this.Controls.Add(this.LabelPlayer2Score);
 			this.Controls.Add(this.LabelPlayer1Score);
 			this.Controls.Add(this.LabelPlayer2Name);

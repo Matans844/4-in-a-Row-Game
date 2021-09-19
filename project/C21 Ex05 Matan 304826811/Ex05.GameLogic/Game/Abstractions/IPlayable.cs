@@ -24,5 +24,9 @@
 		bool IsMoveValid(int i_ChosenColumn);
 
 		string GetGameName();
+
+		Player GetPlayerByDisc(eDiscType i_PlayerDiscType);
+
+		Player GetPlayerByNumber(ePlayerNumber i_NumberOfPlayer);
 	}
 }

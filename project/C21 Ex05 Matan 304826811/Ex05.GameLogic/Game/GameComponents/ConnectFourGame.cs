@@ -292,6 +292,20 @@
 		{
 			return this.ToString();
 		}
+
+		public Player GetPlayerByDisc(eDiscType i_PlayerDiscType)
+		{
+			return i_PlayerDiscType == eDiscType.XDisc
+						? this.Player1WithXs
+						: this.Player2WithOs;
+		}
+
+		public Player GetPlayerByNumber(ePlayerNumber i_NumberOfPlayer)
+		{
+			return i_NumberOfPlayer == ePlayerNumber.Player1
+						? this.Player1WithXs
+						: this.Player2WithOs;
+		}
 	}
 
 	public enum eGameMode

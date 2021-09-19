@@ -7,7 +7,7 @@ using System.Drawing;
 
 namespace Ex05.FormsUserInterface
 {
-	public sealed class ButtonCell : Button
+	public sealed class ButtonBoardCell : Button
 	{
 	}
 }

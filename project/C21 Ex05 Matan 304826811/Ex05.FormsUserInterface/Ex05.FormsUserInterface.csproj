@@ -44,7 +44,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\ButtonCell.cs">
+    <Compile Include="BoardControls\ButtonBoardCell.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="BoardControls\LabelPlayerScore.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="UIForms\FormGamePlay.cs">

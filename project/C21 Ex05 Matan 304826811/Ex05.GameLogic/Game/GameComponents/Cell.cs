@@ -87,4 +87,10 @@
 		XDisc = 1,
 		ODisc = 2
 	}
+
+	public enum eDiscType
+	{
+		XDisc = 1,
+		ODisc = 2
+	}
 }

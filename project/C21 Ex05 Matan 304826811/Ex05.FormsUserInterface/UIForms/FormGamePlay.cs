@@ -71,17 +71,8 @@ namespace Ex05.FormsUserInterface
 			base.OnLoad(i_EventArgs);
 			this.LabelPlayer1Name.Text = this.Player1NameLabelText;
 			this.LabelPlayer2Name.Text = this.Player2NameLabelText;
+
 			this.Size = new Size(this.BoardSizeSettingsManager.BoardWidth, this.BoardSizeSettingsManager.BoardHeight);
-		}
-
-		private void LabelScorePlayer1_Click(object sender, EventArgs e)
-		{
-
-		}
-
-		private void LabelPlayer2Name_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

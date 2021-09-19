@@ -111,4 +111,10 @@
 		YourTurn = 1,
 		NotYourTurn = 2
 	}
+
+	public enum ePlayerNumber
+	{
+		Player1 = 1,
+		Player2 = 2
+	}
 }

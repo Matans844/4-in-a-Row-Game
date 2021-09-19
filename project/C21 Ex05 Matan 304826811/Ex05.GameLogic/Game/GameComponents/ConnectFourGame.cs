@@ -130,16 +130,16 @@
 		{
 			this.r_Mode = i_GameMode;
 			this.r_Board = new Board(i_NumberOfBoardRows, i_NumberOfBoardColumns, this);
-			this.r_Player1WithXs = new PlayerHuman(this.GameBoard, eBoardCellType.XDisc, eTurnState.YourTurn, i_Player1Name);
+			this.r_Player1WithXs = new PlayerHuman(this, this.GameBoard, eBoardCellType.XDisc, eTurnState.YourTurn, i_Player1Name);
 			this.GameNumber++;
 
 			if (i_GameMode == eGameMode.PlayerVsPlayer)
 			{
-				this.r_Player2WithOs = new PlayerHuman(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
+				this.r_Player2WithOs = new PlayerHuman(this, this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
 			}
 			else
 			{
-				this.r_Player2WithOs = new PlayerComputer(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
+				this.r_Player2WithOs = new PlayerComputer(this, this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
 			}
 
 			this.PlayersInGame[0] = this.Player1WithXs;

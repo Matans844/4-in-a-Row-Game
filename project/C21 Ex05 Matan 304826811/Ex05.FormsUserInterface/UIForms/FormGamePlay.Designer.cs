@@ -33,6 +33,7 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer2Name = new System.Windows.Forms.Label();
 			this.LabelPlayer1Score = new System.Windows.Forms.Label();
 			this.LabelPlayer2Score = new System.Windows.Forms.Label();
+			this.labelPlayerScore1 = new Ex05.FormsUserInterface.LabelPlayerScore();
 			this.SuspendLayout();
 			// 
 			// LabelPlayer1Name
@@ -60,7 +61,7 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer1Score.AutoSize = true;
 			this.LabelPlayer1Score.Location = new System.Drawing.Point(260, 111);
 			this.LabelPlayer1Score.Name = "LabelPlayer1Score";
-			this.LabelPlayer1Score.Size = new System.Drawing.Size(78, 80);
+			this.LabelPlayer1Score.Size = new System.Drawing.Size(31, 32);
 			this.LabelPlayer1Score.TabIndex = 2;
 			this.LabelPlayer1Score.Text = "0";
 			// 
@@ -73,11 +74,22 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer2Score.TabIndex = 3;
 			this.LabelPlayer2Score.Text = "0";
 			// 
+			// labelPlayerScore1
+			// 
+			this.labelPlayerScore1.AutoSize = true;
+			this.labelPlayerScore1.Game = null;
+			this.labelPlayerScore1.Location = new System.Drawing.Point(128, 38);
+			this.labelPlayerScore1.Name = "labelPlayerScore1";
+			this.labelPlayerScore1.Size = new System.Drawing.Size(248, 32);
+			this.labelPlayerScore1.TabIndex = 4;
+			this.labelPlayerScore1.Text = "labelPlayerScore1";
+			// 
 			// FormGamePlay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(735, 188);
+			this.Controls.Add(this.labelPlayerScore1);
 			this.Controls.Add(this.LabelPlayer2Score);
 			this.Controls.Add(this.LabelPlayer1Score);
 			this.Controls.Add(this.LabelPlayer2Name);
@@ -98,5 +110,6 @@ namespace Ex05.FormsUserInterface
 		private System.Windows.Forms.Label LabelPlayer2Name;
 		private System.Windows.Forms.Label LabelPlayer1Score;
 		private System.Windows.Forms.Label LabelPlayer2Score;
+		private LabelPlayerScore labelPlayerScore1;
 	}
 }

@@ -67,8 +67,9 @@
 			set => this.m_TurnState = value;
 		}
 
-		protected Player(Board i_BoardOfPlayer, eBoardCellType i_DiscType, eTurnState i_TurnState, string i_PlayerName)
+		protected Player(IPlayable i_Game, Board i_BoardOfPlayer, eBoardCellType i_DiscType, eTurnState i_TurnState, string i_PlayerName)
 		{
+			this.r_GameForBoard = i_Game;
 			this.r_DiscType = i_DiscType;
 			this.r_BoardOfPlayer = i_BoardOfPlayer;
 			this.TurnState = i_TurnState;

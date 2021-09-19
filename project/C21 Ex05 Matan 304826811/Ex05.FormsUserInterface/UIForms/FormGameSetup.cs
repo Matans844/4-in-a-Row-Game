@@ -74,20 +74,34 @@ namespace Ex05.FormsUserInterface
 			{
 				chosenNumberOfBoardRows = (int)this.NumericUpDownChooseNumberOfRows.Value;
 				chosenNumberOfBoardColumns = (int)this.NumericUpDownChooseNumberOfColumns.Value;
+
 				this.GameSettingsManager.Player1Name = this.TextBoxPlayer1ChooseName.Text;
 				this.GameSettingsManager.Player2Name = this.TextBoxPlayer2ChooseName.Text;
 				this.GameSettingsManager.RowsForGame = chosenNumberOfBoardRows;
 				this.GameSettingsManager.ColumnsForGame = chosenNumberOfBoardColumns;
+				this.GameSettingsManager.ModeForGame = this.ChosenGameMode;
 
-				this.BoardSizeManager.BoardNumberOfRows = chosenNumberOfBoardRows;
-				this.BoardSizeManager.BoardNumberOfColumns = chosenNumberOfBoardColumns;
-				this.BoardSizeManager.UpdateBoardDimensions();
-				this.Close();
+				if (this.GameSettingsManager.ReadyForGame)
+				{
+					this.BoardSizeManager.BoardNumberOfRows = chosenNumberOfBoardRows;
+					this.BoardSizeManager.BoardNumberOfColumns = chosenNumberOfBoardColumns;
+					this.BoardSizeManager.UpdateBoardDimensions();
+					this.Close();
+				}
+				else
+				{
+					this.errorOccured();
+				}
 			}
 			else
 			{
-				MessageBox.Show(k_MessageMissingFields, k_TitleError, MessageBoxButtons.OK, MessageBoxIcon.Error);
+				this.errorOccured();
 			}
+		}
+
+		private void errorOccured()
+		{
+			MessageBox.Show(k_MessageMissingFields, k_TitleError, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}
 	}
 }

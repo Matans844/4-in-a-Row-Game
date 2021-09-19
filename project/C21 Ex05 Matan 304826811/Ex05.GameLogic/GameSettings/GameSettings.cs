@@ -45,7 +45,7 @@
 
 					if (NumberOperations.ValueInRange(integerToSet, k_MinimumBoardDimension, k_MaximumBoardDimension))
 					{
-						s_RowsForGame = integerToSet;
+						this.s_RowsForGame = integerToSet;
 					}
 				}
 			}
@@ -64,7 +64,7 @@
 
 					if (NumberOperations.ValueInRange(integerToSet, k_MinimumBoardDimension, k_MaximumBoardDimension))
 					{
-						s_ColumnsForGame = integerToSet;
+						this.s_ColumnsForGame = integerToSet;
 					}
 				}
 			}
@@ -77,10 +77,10 @@
 			{
 				if (value.Equals(eGameMode.PlayerVsComputer))
 				{
-					Player2Name = k_DefaultComputerPlayerName;
+					this.Player2Name = k_DefaultComputerPlayerName;
 				}
 
-				s_GameMode = value;
+				this.s_GameMode = value;
 			}
 		}
 
@@ -92,19 +92,19 @@
 		{
 			if (allRequiredSettingsAreSet())
 			{
-				ReadyForGame = true;
+				this.ReadyForGame = true;
 			}
 
-			return ReadyForGame;
+			return this.ReadyForGame;
 		}
 
 		private bool allRequiredSettingsAreSet()
 		{
-			bool allNullableValuesSet = RowsForGame.HasValue
-										&& ColumnsForGame.HasValue
-										&& ModeForGame.HasValue
-										&& !string.IsNullOrEmpty(Player1Name)
-										&& !string.IsNullOrEmpty(Player2Name);
+			bool allNullableValuesSet = this.RowsForGame.HasValue
+										&& this.ColumnsForGame.HasValue
+										&& this.ModeForGame.HasValue
+										&& !string.IsNullOrEmpty(this.Player1Name)
+										&& !string.IsNullOrEmpty(this.Player2Name);
 
 			return allNullableValuesSet;
 		}

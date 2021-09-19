@@ -124,8 +124,8 @@ namespace GameLogic
 			// Also consider that:
 			// 1. A player receives indices from 1 to the width of the board.
 			// 2. The matrix has column indices from 0 to with of the board minus 1.
-			int focalRowIndex = i_FocalBoardCell.Row;
-			int focalColumnIndex = i_FocalBoardCell.Column;
+			int focalRowIndex = i_FocalBoardCell.RowIndex;
+			int focalColumnIndex = i_FocalBoardCell.ColumnIndex;
 
 			SetWeights(
 				i_DirectionOfConnection,

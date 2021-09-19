@@ -5,6 +5,9 @@ using System.Text;
 
 namespace GameLogic
 {
+	public delegate void BoardColumnByIndexBecameFullEventHandler(object sender, BoardColumnByIndexBecameFullEventArgs e);
+
+
 	public class Board
 	{
 		public const int k_TransformBoardToMatrixIndicesWith1 = 1;
@@ -12,11 +15,14 @@ namespace GameLogic
 		private readonly IPlayable r_GameForBoard;
 		private readonly Cell[,] r_CellMatrix;
 		private readonly int[] r_NumberOfCellVacanciesByColumn;
+		private readonly bool[] r_IsColumnFullArray;
 		private int m_NumberOfRowIndices;
 		private int m_NumberOfColumnIndices;
 		private int m_NumberOfRows;
 		private int m_NumberOfColumns;
 		private int m_NumberOfCellVacanciesInBoard;
+
+		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
 
 		public int NumberOfCellVacanciesInBoard
 		{
@@ -54,6 +60,8 @@ namespace GameLogic
 
 		public Cell[,] CellMatrix => this.r_CellMatrix;
 
+		public bool[] IsColumnFullArrayArray => this.r_IsColumnFullArray;
+
 		public Board(int i_ChosenNumberOfRows, int i_ChosenNumberOfColumns, IPlayable i_GameForBoard)
 		{
 			this.r_GameForBoard = i_GameForBoard;
@@ -65,6 +73,7 @@ namespace GameLogic
 			this.r_CellMatrix.InitWithBoardCells();
 			this.NumberOfCellVacanciesInBoard = i_ChosenNumberOfRows * i_ChosenNumberOfColumns;
 			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
+			this.r_IsColumnFullArray = Enumerable.Repeat(false, i_ChosenNumberOfRows).ToArray();
 		}
 
 		public void SlideDiskToBoard(int i_ChosenBoardColumnAdjustedForMatrix, eBoardCellType i_PlayerDiscType)
@@ -75,7 +84,29 @@ namespace GameLogic
 			this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix]--;
 			this.NumberOfCellVacanciesInBoard--;
 
+			if (!this.IsColumnAvailableForDisc(i_ChosenBoardColumnAdjustedForMatrix))
+			{
+				this.markColumnFull(i_ChosenBoardColumnAdjustedForMatrix);
+			}
+
 			this.CellMatrix[rowIndexOfLastVacantCellInChosenColumn, i_ChosenBoardColumnAdjustedForMatrix].CellType = i_PlayerDiscType;
+		}
+
+		private void markColumnFull(int i_FullColumnIndex)
+		{
+			this.IsColumnFullArrayArray[i_FullColumnIndex] = true;
+
+			BoardColumnByIndexBecameFullEventArgs e = new BoardColumnByIndexBecameFullEventArgs
+			{
+				m_FilledBoardColumnIndex = i_FullColumnIndex
+			};
+
+			this.OnBoardColumnByIndexBecameFull(e);
+		}
+
+		protected virtual void OnBoardColumnByIndexBecameFull(BoardColumnByIndexBecameFullEventArgs e)
+		{
+			this.BoardColumnByIndexBecameFull?.Invoke(this, e);
 		}
 
 		public bool IsColumnAvailableForDisc(int i_ChosenColumnIndex)
@@ -106,6 +137,7 @@ namespace GameLogic
 			this.resetCellMatrix();
 			this.resetNumberOfCellVacanciesInBoard();
 			this.resetNumberOfCellVacanciesByColumn();
+			this.resetIsColumnAvailableForDisc();
 		}
 
 		private void resetCellMatrix()
@@ -123,6 +155,14 @@ namespace GameLogic
 			for (int i = 0; i < this.NumberOfColumnIndices; i++)
 			{
 				this.r_NumberOfCellVacanciesByColumn[i] = this.NumberOfRows;
+			}
+		}
+
+		private void resetIsColumnAvailableForDisc()
+		{
+			for (int i = 0; i < this.NumberOfColumnIndices; i++)
+			{
+				this.r_IsColumnFullArray[i] = false;
 			}
 		}
 	}

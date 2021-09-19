@@ -25,5 +25,7 @@ namespace GameLogic
 		void SetUpNewGame();
 
 		bool IsMoveValid(int i_ChosenColumn);
+
+		string GetGameName();
 	}
 }

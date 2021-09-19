@@ -5,8 +5,8 @@ using System.Text;
 
 namespace GameLogic
 {
-	public class CellOccupiedByMoveEventArgs : EventArgs
+	public class BoardColumnByIndexBecameFullEventArgs : EventArgs
 	{
-		public eBoardCellType m_NewCellType;
+		public int m_FilledBoardColumnIndex;
 	}
 }

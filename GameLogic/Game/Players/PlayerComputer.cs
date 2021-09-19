@@ -11,8 +11,8 @@ namespace GameLogic
 
 		public ePlayerType PlayerType => k_PlayerType;
 
-		public PlayerComputer(Board i_BoardOfPlayer, eBoardCellType i_DiscType, eTurnState i_TurnState)
-			: base(i_BoardOfPlayer, i_DiscType, i_TurnState)
+		public PlayerComputer(Board i_BoardOfPlayer, eBoardCellType i_DiscType, eTurnState i_TurnState, string i_PlayerName)
+			: base(i_BoardOfPlayer, i_DiscType, i_TurnState, i_PlayerName)
 		{
 		}
 

@@ -5,28 +5,44 @@ using System.Text;
 
 namespace GameLogic
 {
-	using System.Diagnostics.Eventing.Reader;
+	public delegate void GameStateChangedEventHandler(object sender, GameStateChangedEventArgs e);
 
 	public class ConnectFourGame : IPlayable
 	{
 		public const int k_ZeroPoints = 0;
+		public const string k_GameName = "4 in a Row !!";
 		private readonly object[] r_Players = new object[2];
 		private readonly Board r_Board;
 		private readonly Player r_Player1WithXs;
 		private readonly Player r_Player2WithOs;
 		private readonly eGameMode r_Mode;
-		private Cell m_LastMovePlayed; // Needs update after move in game loop
-		private int m_GameNumber;
 		private eGameState m_GameState = eGameState.NotFinished;
+		private Cell m_LastMovePlayed; // Needs update after move in game loop
 		private Player m_WinnerOfLastGame;
 		private Player m_PlayerToWinIfOtherQuit;
 		private Player m_PlayerToMove;
+		private int m_GameNumber;
 		private bool m_PlayerToMoveQuitSingleGame = false;
+
+		public event GameStateChangedEventHandler GameStateChanged;
 
 		public eGameState GameState
 		{
 			get => this.m_GameState;
-			set => this.m_GameState = value;
+			set
+			{
+				this.m_GameState = value;
+
+				if (this.m_GameState != eGameState.NotFinished)
+				{
+					GameStateChangedEventArgs e = new GameStateChangedEventArgs
+					{
+						m_NewGameState = value
+					};
+
+					this.OnGameStateChanged(e);
+				}
+			}
 		}
 
 		public Player PlayerToWinIfOtherQuit
@@ -79,20 +95,25 @@ namespace GameLogic
 			set => this.m_LastMovePlayed = value;
 		}
 
-		public ConnectFourGame(int i_NumberOfBoardRows, int i_NumberOfBoardColumns, eGameMode i_GameMode)
+		public ConnectFourGame(
+			int i_NumberOfBoardRows,
+			int i_NumberOfBoardColumns,
+			eGameMode i_GameMode,
+			string i_Player1Name,
+			string i_Player2Name)
 		{
 			this.r_Mode = i_GameMode;
 			this.r_Board = new Board(i_NumberOfBoardRows, i_NumberOfBoardColumns, this);
-			this.r_Player1WithXs = new PlayerHuman(this.GameBoard, eBoardCellType.XDisc, eTurnState.YourTurn);
+			this.r_Player1WithXs = new PlayerHuman(this.GameBoard, eBoardCellType.XDisc, eTurnState.YourTurn, i_Player1Name);
 			this.GameNumber++;
 
 			if (i_GameMode == eGameMode.PlayerVsPlayer)
 			{
-				this.r_Player2WithOs = new PlayerHuman(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn);
+				this.r_Player2WithOs = new PlayerHuman(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
 			}
 			else
 			{
-				this.r_Player2WithOs = new PlayerComputer(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn);
+				this.r_Player2WithOs = new PlayerComputer(this.GameBoard, eBoardCellType.ODisc, eTurnState.NotYourTurn, i_Player2Name);
 			}
 
 			this.PlayersInGame[0] = this.Player1WithXs;
@@ -201,6 +222,7 @@ namespace GameLogic
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;
+			this.GameNumber++;
 		}
 
 		public eGameState GetGameState()
@@ -224,6 +246,21 @@ namespace GameLogic
 			}
 
 		}*/
+
+		protected virtual void OnGameStateChanged(GameStateChangedEventArgs e)
+		{
+			this.GameStateChanged?.Invoke(this, e);
+		}
+
+		public override string ToString()
+		{
+			return k_GameName;
+		}
+
+		public string GetGameName()
+		{
+			return this.ToString();
+		}
 	}
 
 	public enum eGameMode

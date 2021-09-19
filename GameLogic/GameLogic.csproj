@@ -38,20 +38,24 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CellOccupiedByMoveEventArgs.cs" />
-    <Compile Include="Delegates.cs" />
-    <Compile Include="Game\Board.cs" />
-    <Compile Include="Game\Cell.cs" />
-    <Compile Include="Game\ConnectFourGame.cs" />
-    <Compile Include="Abstractions\IPlayable.cs" />
-    <Compile Include="Game\ResultChecker.cs" />
+    <Compile Include="Game\EventArgsForUI\BoardColumnByIndexBecameFullEventArgs.cs" />
+    <Compile Include="GameSettings\GameSettings.cs" />
+    <Compile Include="Game\EventArgsForUI\CellOccupiedByMoveEventArgs.cs" />
+    <Compile Include="Game\EventArgsForUI\GameStateChangedEventArgs.cs" />
+    <Compile Include="Game\EventArgsForUI\NameSetEventArgs.cs" />
+    <Compile Include="Game\EventArgsForUI\ScoreChangedEventArgs.cs" />
+    <Compile Include="Game\GameComponents\Board.cs" />
+    <Compile Include="Game\GameComponents\Cell.cs" />
+    <Compile Include="Game\GameComponents\ConnectFourGame.cs" />
+    <Compile Include="Game\Abstractions\IPlayable.cs" />
+    <Compile Include="Game\GameComponents\ResultChecker.cs" />
     <Compile Include="Extensions\Array2DimOperations.cs" />
     <Compile Include="Extensions\Array2DimInitOrReset.cs" />
     <Compile Include="Extensions\JaggedArray2DimOperations.cs" />
     <Compile Include="Extensions\NumberOperations.cs" />
-    <Compile Include="Players\Player.cs" />
-    <Compile Include="Players\PlayerComputer.cs" />
-    <Compile Include="Players\PlayerHuman.cs" />
+    <Compile Include="Game\Players\Player.cs" />
+    <Compile Include="Game\Players\PlayerComputer.cs" />
+    <Compile Include="Game\Players\PlayerHuman.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

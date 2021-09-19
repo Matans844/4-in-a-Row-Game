@@ -8,10 +8,12 @@ namespace GameLogic
 	public class GameSettings
 	{
 		public const string k_DefaultComputerPlayerName = "Computer";
+		public const string k_DefaultHumanPlayer1Name = "Player 1";
+		public const string k_DefaultHumanPlayer2Name = "Player 2";
 		public const int k_MinimumBoardDimension = 4;
 		// public const int k_MaximumBoardDimension = 8;
-		private static string s_Player1Name;
-		private static string s_Player2Name;
+		private static string s_Player1Name = k_DefaultHumanPlayer1Name;
+		private static string s_Player2Name = k_DefaultHumanPlayer2Name;
 		private static int? s_RowsForGame;
 		private static int? s_ColumnsForGame;
 		private static eGameMode? s_GameMode;

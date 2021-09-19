@@ -53,6 +53,7 @@ namespace Ex05.FormsUserInterface
 		private void CheckBoxHumanOpponent_CheckedChanged(object sender, EventArgs e)
 		{
 			this.TextBoxPlayer2ChooseName.ReadOnly = !this.TextBoxPlayer2ChooseName.ReadOnly;
+			this.TextBoxPlayer2ChooseName.Enabled = !this.TextBoxPlayer2ChooseName.Enabled;
 
 			this.TextBoxPlayer2ChooseName.Text = this.TextBoxPlayer2ChooseName.ReadOnly
 											? k_DefaultComputerName
@@ -65,12 +66,12 @@ namespace Ex05.FormsUserInterface
 			int chosenNumberOfBoardRows;
 			int chosenNumberOfBoardColumns;
 
-			bool isFieldNotEmpty = !string.IsNullOrEmpty(this.TextBoxPlayer1ChooseName.Text)
+			bool allFieldsNotEmpty = !string.IsNullOrEmpty(this.TextBoxPlayer1ChooseName.Text)
 									&& !string.IsNullOrEmpty(this.TextBoxPlayer2ChooseName.Text)
 									&& !string.IsNullOrWhiteSpace(this.TextBoxPlayer1ChooseName.Text)
 									&& !string.IsNullOrWhiteSpace(this.TextBoxPlayer2ChooseName.Text);
 
-			if (isFieldNotEmpty)
+			if (allFieldsNotEmpty)
 			{
 				chosenNumberOfBoardRows = (int)this.NumericUpDownChooseNumberOfRows.Value;
 				chosenNumberOfBoardColumns = (int)this.NumericUpDownChooseNumberOfColumns.Value;
@@ -81,7 +82,7 @@ namespace Ex05.FormsUserInterface
 				this.GameSettingsManager.ColumnsForGame = chosenNumberOfBoardColumns;
 				this.GameSettingsManager.ModeForGame = this.ChosenGameMode;
 
-				if (this.GameSettingsManager.ReadyForGame)
+				if (this.GameSettingsManager.CanGameBegin())
 				{
 					this.BoardSizeManager.BoardNumberOfRows = chosenNumberOfBoardRows;
 					this.BoardSizeManager.BoardNumberOfColumns = chosenNumberOfBoardColumns;

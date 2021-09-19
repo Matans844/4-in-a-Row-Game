@@ -14,7 +14,8 @@ namespace Ex05.FormsUserInterface
 	{
 		private const string k_MessageMissingFields = "Some fields are missing!";
 		private const string k_TitleError = "Error";
-		private const string k_DefaultComputerName = "[Computer]";
+		private const string k_DefaultComputerLabelText = "[Computer]";
+		private const string k_DefaultComputerName = "Computer";
 		private readonly BoardSizeSettings r_BoardSizeSettingManager;
 		private readonly GameSettings r_GameSettingsManager;
 		private bool m_IsComputerGameMode = true;
@@ -56,7 +57,7 @@ namespace Ex05.FormsUserInterface
 			this.TextBoxPlayer2ChooseName.Enabled = !this.TextBoxPlayer2ChooseName.Enabled;
 
 			this.TextBoxPlayer2ChooseName.Text = this.TextBoxPlayer2ChooseName.ReadOnly
-											? k_DefaultComputerName
+											? k_DefaultComputerLabelText
 											: string.Empty;
 			this.IsComputerGameMode = !this.IsComputerGameMode;
 		}
@@ -77,7 +78,11 @@ namespace Ex05.FormsUserInterface
 				chosenNumberOfBoardColumns = (int)this.NumericUpDownChooseNumberOfColumns.Value;
 
 				this.GameSettingsManager.Player1Name = this.TextBoxPlayer1ChooseName.Text;
-				this.GameSettingsManager.Player2Name = this.TextBoxPlayer2ChooseName.Text;
+
+				this.GameSettingsManager.Player2Name = this.ChosenGameMode == eGameMode.PlayerVsComputer
+															? k_DefaultComputerName
+															: this.TextBoxPlayer2ChooseName.Text;
+
 				this.GameSettingsManager.RowsForGame = chosenNumberOfBoardRows;
 				this.GameSettingsManager.ColumnsForGame = chosenNumberOfBoardColumns;
 				this.GameSettingsManager.ModeForGame = this.ChosenGameMode;

@@ -15,6 +15,8 @@ namespace Ex05.FormsUserInterface
 		private const int k_ButtonCellWidth = 100;
 		private const int k_DistanceBetweenBoardRowElements = 20;
 		private const int k_DistanceBetweenBoardColumnElements = 20;
+		private const int k_SpacingBufferVertical = 50;
+		private const int k_SpacingBufferHorizontal = 50;
 		private int m_BoardNumberOfRows;
 		private int m_BoardNumberOfColumns;
 		private int m_BoardHeight;
@@ -50,8 +52,11 @@ namespace Ex05.FormsUserInterface
 
 		public void UpdateBoardDimensions()
 		{
-			this.BoardWidth = (this.BoardNumberOfColumns * (k_DistanceBetweenBoardColumnElements + k_ButtonCellWidth)) - k_DistanceBetweenBoardColumnElements;
-			this.BoardHeight = (this.BoardNumberOfRows * (k_DistanceBetweenBoardRowElements + k_ButtonCellHeight)) + k_LabelHeight;
+			this.BoardWidth =
+				(this.BoardNumberOfColumns * (k_DistanceBetweenBoardColumnElements + k_ButtonCellWidth)) - k_DistanceBetweenBoardColumnElements + k_SpacingBufferHorizontal;
+
+			this.BoardHeight =
+				(this.BoardNumberOfRows * (k_DistanceBetweenBoardRowElements + k_ButtonCellHeight)) + k_LabelHeight + k_SpacingBufferVertical;
 		}
 
 		/*		private int MeasureStringMin(string i_StringToMeasure, PaintEventArgs e)

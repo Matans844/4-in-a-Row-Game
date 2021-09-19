@@ -73,6 +73,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UIForms\FormGamePlay.resx">
+      <DependentUpon>FormGamePlay.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="UIForms\FormGameSetup.resx">
       <DependentUpon>FormGameSetup.cs</DependentUpon>
     </EmbeddedResource>

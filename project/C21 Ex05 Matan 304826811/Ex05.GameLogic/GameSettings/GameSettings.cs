@@ -1,5 +1,7 @@
 ﻿namespace Ex05.GameLogic
 {
+	using System;
+
 	public class GameSettings
 	{
 		public const string k_DefaultComputerPlayerName = "Computer";
@@ -12,7 +14,46 @@
 		private int? s_RowsForGame;
 		private int? s_ColumnsForGame;
 		private eGameMode? s_GameMode;
+		private int m_ChosenNumberOfRows;
+		private int m_ChosenNumberOfColumns;
+		private eGameMode m_ChosenGameMode;
 		private bool s_ReadyForGame = false;
+
+		public int ChosenNumberOfRows
+		{
+			get => this.m_ChosenNumberOfRows;
+			private set
+			{
+				if (!this.ReadyForGame)
+				{
+					this.m_ChosenNumberOfRows = value;
+				}
+			}
+		}
+
+		public int ChosenNumberOfColumns
+		{
+			get => this.m_ChosenNumberOfColumns;
+			private set
+			{
+				if (!this.ReadyForGame)
+				{
+					this.m_ChosenNumberOfColumns = value;
+				}
+			}
+		}
+
+		public eGameMode ChosenGameMode
+		{
+			get => this.m_ChosenGameMode;
+			private set
+			{
+				if (!this.ReadyForGame)
+				{
+					this.m_ChosenGameMode = value;
+				}
+			}
+		}
 
 		public bool ReadyForGame
 		{
@@ -90,8 +131,11 @@
 
 		public bool CanGameBegin()
 		{
-			if (allRequiredSettingsAreSet())
+			if (this.allRequiredSettingsAreSet())
 			{
+				this.ChosenNumberOfColumns = this.ColumnsForGame.GetValueOrDefault();
+				this.ChosenNumberOfRows = this.RowsForGame.GetValueOrDefault();
+				this.ChosenGameMode = this.ModeForGame.GetValueOrDefault();
 				this.ReadyForGame = true;
 			}
 

@@ -1,7 +1,7 @@
 ﻿
-namespace Ex05.GameUI
+namespace Ex05.FormsUserInterface
 {
-	partial class Form1
+	partial class FormGameSettings
 	{
 		/// <summary>
 		/// Required designer variable.
@@ -32,7 +32,7 @@ namespace Ex05.GameUI
 			this.components = new System.ComponentModel.Container();
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(800, 450);
-			this.Text = "Form1";
+			this.Text = "FormGameSettings";
 		}
 
 		#endregion

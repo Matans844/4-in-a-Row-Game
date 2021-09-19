@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 
-namespace Ex05.GameUI
+namespace Ex05.FormsUserInterface
 {
 	static class Program
 	{
@@ -15,7 +15,7 @@ namespace Ex05.GameUI
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Form1());
+			Application.Run(new FormGameSettings());
 		}
 	}
 }

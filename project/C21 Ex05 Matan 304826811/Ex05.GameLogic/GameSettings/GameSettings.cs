@@ -6,7 +6,7 @@
 		public const string k_DefaultHumanPlayer1Name = "Player 1";
 		public const string k_DefaultHumanPlayer2Name = "Player 2";
 		public const int k_MinimumBoardDimension = 4;
-		// public const int k_MaximumBoardDimension = 8;
+		public const int k_MaximumBoardDimension = 8;
 		private static string s_Player1Name = k_DefaultHumanPlayer1Name;
 		private static string s_Player2Name = k_DefaultHumanPlayer2Name;
 		private static int? s_RowsForGame;
@@ -37,9 +37,16 @@
 			get => s_RowsForGame;
 			set
 			{
-				if (value >= k_MinimumBoardDimension)
+				int integerToSet;
+
+				if (value.HasValue)
 				{
-					s_RowsForGame = value;
+					integerToSet = (int)value;
+
+					if (NumberOperations.ValueInRange(integerToSet, k_MinimumBoardDimension, k_MaximumBoardDimension))
+					{
+						s_RowsForGame = integerToSet;
+					}
 				}
 			}
 		}
@@ -49,9 +56,16 @@
 			get => s_ColumnsForGame;
 			set
 			{
-				if (value >= k_MinimumBoardDimension)
+				int integerToSet;
+
+				if (value.HasValue)
 				{
-					s_ColumnsForGame = value;
+					integerToSet = (int)value;
+
+					if (NumberOperations.ValueInRange(integerToSet, k_MinimumBoardDimension, k_MaximumBoardDimension))
+					{
+						s_ColumnsForGame = integerToSet;
+					}
 				}
 			}
 		}
@@ -68,6 +82,10 @@
 
 				s_GameMode = value;
 			}
+		}
+
+		public GameSettings()
+		{
 		}
 
 		public static bool CanGameBegin()

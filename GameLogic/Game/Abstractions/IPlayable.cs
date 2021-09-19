@@ -18,6 +18,8 @@ namespace GameLogic
 
 		eGameState GetGameState();
 
+		string GetGameWinnerName();
+
 		void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn);
 
 		void QuitSingleGameAndUpdateGameState();

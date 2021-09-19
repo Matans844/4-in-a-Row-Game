@@ -13,7 +13,7 @@ namespace GameLogic
 		private readonly Board r_BoardOfPlayer;
 		private readonly int r_PlayerId;
 		private readonly eBoardCellType r_DiscType;
-		private string r_PlayerName;
+		private string m_PlayerName;
 		private int m_PointsEarned = ConnectFourGame.k_ZeroPoints;
 		private eTurnState m_TurnState;
 
@@ -29,10 +29,10 @@ namespace GameLogic
 
 		public string PlayerName
 		{
-			get => this.r_PlayerName;
+			get => this.m_PlayerName;
 			set
 			{
-				this.r_PlayerName = value;
+				this.m_PlayerName = value;
 
 				NameSetEventArgs e = new NameSetEventArgs
 					{

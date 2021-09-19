@@ -146,6 +146,11 @@ namespace GameLogic
 			return this.LastMove;
 		}
 
+		public string GetGameWinnerName()
+		{
+			return this.WinnerOfLastGame.ToString();
+		}
+
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
 			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;

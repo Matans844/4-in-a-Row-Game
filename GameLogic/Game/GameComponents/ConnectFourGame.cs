@@ -5,12 +5,15 @@ using System.Text;
 
 namespace GameLogic
 {
-	public delegate void GameStateChangedEventHandler(object sender, GameStateChangedEventArgs e);
+	public delegate void GameEndedEventHandler(object sender, GameEndedEventArgs e);
 
 	public class ConnectFourGame : IPlayable
 	{
 		public const int k_ZeroPoints = 0;
 		public const string k_GameName = "4 in a Row !!";
+		public const string k_DrawMessage = "Tie!!";
+		public const string k_DrawTitle = "A Tie!";
+		public const string k_WinTitle = "A Win!";
 		private readonly object[] r_Players = new object[2];
 		private readonly Board r_Board;
 		private readonly Player r_Player1WithXs;
@@ -23,24 +26,52 @@ namespace GameLogic
 		private Player m_PlayerToMove;
 		private int m_GameNumber;
 		private bool m_PlayerToMoveQuitSingleGame = false;
+		private string m_WinMessage;
 
-		public event GameStateChangedEventHandler GameStateChanged;
+		public event GameEndedEventHandler GameEnded;
+
+		public string WinMessage
+		{
+			get => this.m_WinMessage;
+			set => this.m_WinMessage = $"{value} Won!!";
+		}
 
 		public eGameState GameState
 		{
 			get => this.m_GameState;
 			set
 			{
+				GameEndedEventArgs e = new GameEndedEventArgs();
 				this.m_GameState = value;
 
 				if (this.m_GameState != eGameState.NotFinished)
 				{
-					GameStateChangedEventArgs e = new GameStateChangedEventArgs
-					{
-						m_NewGameState = value
-					};
+					// Game finished
+					e.m_NewGameState = value;
 
-					this.OnGameStateChanged(e);
+					switch (value)
+					{
+						case eGameState.FinishedInDraw:
+							e.m_ResultMessage = k_DrawMessage;
+							e.m_ResultTitle = k_DrawTitle;
+							break;
+
+						case eGameState.FinishedInWinByBoard:
+							this.WinnerOfLastGame = this.PlayerToMove;
+							break;
+
+						case eGameState.FinishedInWinByQuit:
+							this.WinnerOfLastGame = this.PlayerToWinIfOtherQuit;
+							break;
+
+						default:
+							this.WinMessage = this.WinnerOfLastGame.PlayerName;
+							e.m_ResultMessage = this.WinMessage;
+							e.m_ResultTitle = k_WinTitle;
+							break;
+					}
+
+					this.OnGameEnded(e);
 				}
 			}
 		}
@@ -180,6 +211,8 @@ namespace GameLogic
 			return this.PlayerToMoveQuitSingleGame;
 		}
 
+		// When GameState is changed to finished (draw, winByQuit, winByBoard), notification is sent to listeners.
+		// If the game is finished in win, the GameState setter also updates the winner.
 		private void updateGameState()
 		{
 			if (ResultChecker.IsGameFinished(this))
@@ -193,7 +226,6 @@ namespace GameLogic
 					else
 					{
 						this.GameState = eGameState.FinishedInWinByBoard;
-						this.WinnerOfLastGame = this.PlayerToMove;
 						this.WinnerOfLastGame.PointsEarned++;
 					}
 				}
@@ -201,7 +233,6 @@ namespace GameLogic
 				{
 					// Game finished by quit
 					this.GameState = eGameState.FinishedInWinByQuit;
-					this.WinnerOfLastGame = this.PlayerToWinIfOtherQuit;
 					this.WinnerOfLastGame.PointsEarned++;
 				}
 			}
@@ -209,7 +240,7 @@ namespace GameLogic
 			{
 				// Game is not finished
 				this.PlayerToMove.TurnState = eTurnState.NotYourTurn;
-				this.switchPlayerTurn(); // switches players
+				this.switchPlayerTurn(); // switches players' turns
 				this.PlayerToMove.TurnState = eTurnState.YourTurn;
 			}
 		}
@@ -252,9 +283,9 @@ namespace GameLogic
 
 		}*/
 
-		protected virtual void OnGameStateChanged(GameStateChangedEventArgs e)
+		protected virtual void OnGameEnded(GameEndedEventArgs e)
 		{
-			this.GameStateChanged?.Invoke(this, e);
+			this.GameEnded?.Invoke(this, e);
 		}
 
 		public override string ToString()

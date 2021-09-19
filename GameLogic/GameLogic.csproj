@@ -41,7 +41,7 @@
     <Compile Include="Game\EventArgsForUI\BoardColumnByIndexBecameFullEventArgs.cs" />
     <Compile Include="GameSettings\GameSettings.cs" />
     <Compile Include="Game\EventArgsForUI\CellOccupiedByMoveEventArgs.cs" />
-    <Compile Include="Game\EventArgsForUI\GameStateChangedEventArgs.cs" />
+    <Compile Include="Game\EventArgsForUI\GameEndedEventArgs.cs" />
     <Compile Include="Game\EventArgsForUI\NameSetEventArgs.cs" />
     <Compile Include="Game\EventArgsForUI\ScoreChangedEventArgs.cs" />
     <Compile Include="Game\GameComponents\Board.cs" />

@@ -7,7 +7,6 @@ namespace GameLogic
 {
 	public delegate void BoardColumnByIndexBecameFullEventHandler(object sender, BoardColumnByIndexBecameFullEventArgs e);
 
-
 	public class Board
 	{
 		public const int k_TransformBoardToMatrixIndicesWith1 = 1;

@@ -5,8 +5,10 @@ using System.Text;
 
 namespace GameLogic
 {
-	public class GameStateChangedEventArgs : EventArgs
+	public class GameEndedEventArgs : EventArgs
 	{
 		public eGameState m_NewGameState;
+		public string m_ResultMessage;
+		public string m_ResultTitle;
 	}
 }

@@ -10,16 +10,31 @@ namespace Ex05.FormsUserInterface
 {
 	public sealed class LabelPlayerScore : Label
 	{
+		private IParentable m_ParentOfControl;
 		private IPlayable m_Game;
-		private ePlayerNumber? m_PlayerNumber;
+		private ePlayerNumber m_PlayerNumber;
+
+		public IParentable ParentOfControl
+		{
+			get => this.m_ParentOfControl;
+			set
+			{
+				this.m_ParentOfControl = value;
+				this.Game = this.ParentOfControl.GetPlayableMember();
+			}
+		}
 
 		public IPlayable Game
 		{
 			get => this.m_Game;
-			set => this.m_Game = value;
+			set
+			{
+				this.m_Game = value;
+				this.startListening();
+			}
 		}
 
-		public ePlayerNumber? PlayerNumber
+		public ePlayerNumber PlayerNumber
 		{
 			get => this.m_PlayerNumber;
 			set => this.m_PlayerNumber = value;
@@ -32,15 +47,8 @@ namespace Ex05.FormsUserInterface
 
 		private void startListening()
 		{
-			this.Game.GetPlayerByNumber(this.PlayerNumber.GetValueOrDefault()).ScoreChanged +=
+			this.Game.GetPlayerByNumber(this.PlayerNumber).ScoreChanged +=
 				new ScoreChangedEventHandler(this.player_ScoreChanged);
-		}
-
-		public void UpdateFields(IPlayable i_Game, ePlayerNumber i_PlayerNumber)
-		{
-			this.Game = i_Game;
-			this.PlayerNumber = i_PlayerNumber;
-			this.startListening();
 		}
 
 		private void player_ScoreChanged(object sender, ScoreChangedEventArgs e)

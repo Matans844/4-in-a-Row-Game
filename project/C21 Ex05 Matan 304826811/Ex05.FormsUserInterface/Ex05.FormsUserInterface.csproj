@@ -50,6 +50,8 @@
     <Compile Include="BoardControls\LabelPlayerScore.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Extensions\FormOperations.cs" />
+    <Compile Include="Interfaces\IParentable.cs" />
     <Compile Include="UIForms\FormGamePlay.cs">
       <SubType>Form</SubType>
     </Compile>

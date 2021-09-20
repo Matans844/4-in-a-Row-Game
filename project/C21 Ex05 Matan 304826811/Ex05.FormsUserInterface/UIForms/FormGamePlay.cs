@@ -10,9 +10,9 @@ using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
-	public partial class FormGamePlay : Form
+	public partial class FormGamePlay : Form, IParentable
 	{
-		private readonly IPlayable r_Game;
+		private readonly IPlayable m_PlayableGame;
 		private readonly GameSettings r_GameSettingsManager;
 		private readonly string r_Player1NameLabelText;
 		private readonly string r_Player2NameLabelText;
@@ -21,7 +21,7 @@ namespace Ex05.FormsUserInterface
 
 		public string Player2NameLabelText => this.r_Player2NameLabelText;
 
-		public IPlayable Game => this.r_Game;
+		public IPlayable PlayableGame => this.m_PlayableGame;
 
 		public GameSettings GameSettingsManager => this.r_GameSettingsManager;
 
@@ -32,7 +32,7 @@ namespace Ex05.FormsUserInterface
 			this.r_Player1NameLabelText = $"{this.GameSettingsManager.Player1Name}:";
 			this.r_Player2NameLabelText = $"{this.GameSettingsManager.Player2Name}:";
 
-			this.r_Game = new ConnectFourGame(
+			this.m_PlayableGame = new ConnectFourGame(
 				this.GameSettingsManager.ChosenNumberOfRows,
 				this.GameSettingsManager.ChosenNumberOfColumns,
 				this.GameSettingsManager.ChosenGameMode,
@@ -43,23 +43,24 @@ namespace Ex05.FormsUserInterface
 		protected override void OnLoad(EventArgs i_EventArgs)
 		{
 			base.OnLoad(i_EventArgs);
-			this.LabelPlayer1Name.Text = this.Player1NameLabelText;
-			this.LabelPlayer2Name.Text = this.Player2NameLabelText;
+
+			foreach (Control control in this.Controls)
+			{
+				if (control.HasProperty("ParentOfControl"))
+				{
+					control.SetProperty<IParentable>("ParentOfControl", this);
+				}
+			}
 		}
 
-		private void FormGamePlay_Load(object sender, EventArgs e)
+		public IPlayable GetPlayableMember()
 		{
-
+			return this.PlayableGame;
 		}
 
-		private void panel1_Paint(object sender, PaintEventArgs e)
+		public TableLayoutPanel GetBoardTable()
 		{
-
-		}
-
-		private void LabelPlayer1Name_Click(object sender, EventArgs e)
-		{
-
+			return this.TableBoardCells;
 		}
 	}
 }

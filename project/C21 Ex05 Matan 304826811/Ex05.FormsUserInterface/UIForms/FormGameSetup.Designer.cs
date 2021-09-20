@@ -203,7 +203,7 @@ namespace Ex05.FormsUserInterface
 			this.MinimizeBox = false;
 			this.Name = "FormGameSetup";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
-			this.Text = "Game Settings";
+			this.Text = "PlayableGame Settings";
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfRows)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfColumns)).EndInit();
 			this.ResumeLayout(false);

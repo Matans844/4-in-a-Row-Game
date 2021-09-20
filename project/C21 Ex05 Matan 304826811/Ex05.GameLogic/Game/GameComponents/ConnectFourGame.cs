@@ -1,5 +1,7 @@
 ﻿namespace Ex05.GameLogic
 {
+	using System;
+
 	public delegate void GameEndedEventHandler(object sender, GameEndedEventArgs e);
 
 	public class ConnectFourGame : IPlayable
@@ -9,6 +11,7 @@
 		public const string k_DrawMessage = "Tie!!";
 		public const string k_DrawTitle = "A Tie!";
 		public const string k_WinTitle = "A Win!";
+		public const string k_AnotherRound = "Another Round?";
 		private readonly object[] r_Players = new object[2];
 		private readonly Board r_Board;
 		private readonly Player r_Player1WithXs;
@@ -48,7 +51,7 @@
 					{
 						case eGameState.FinishedInDraw:
 							e.m_ResultMessage = k_DrawMessage;
-							e.m_ResultTitle = k_DrawTitle;
+							e.m_ResultTitle = $"{k_DrawTitle}{Environment.NewLine}{k_AnotherRound}";
 							break;
 
 						case eGameState.FinishedInWinByBoard:
@@ -62,7 +65,7 @@
 						default:
 							this.WinMessage = this.WinnerOfLastGame.PlayerName;
 							e.m_ResultMessage = this.WinMessage;
-							e.m_ResultTitle = k_WinTitle;
+							e.m_ResultTitle = $"{k_WinTitle}{Environment.NewLine}{k_AnotherRound}";
 							break;
 					}
 
@@ -179,7 +182,7 @@
 
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
-			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
+			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_ConversionFactor1NumberToIndices;
 			this.LastMove = this.GameBoard.GetLastAvailableCellInColumn(chosenMoveAdjustedToMatrix);
 
 			// The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
@@ -196,7 +199,7 @@
 
 		public bool IsMoveValid(int i_ChosenColumn)
 		{
-			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_TransformBoardToMatrixIndicesWith1;
+			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_ConversionFactor1NumberToIndices;
 
 			return this.GameBoard.IsColumnAvailableForDisc(chosenMoveAdjustedToMatrix);
 		}
@@ -249,7 +252,7 @@
 		public void SetUpNewGame()
 		{
 			this.PlayerToMoveQuitSingleGame = false;
-			this.GameBoard.PrepareBoardForNewGame();
+			this.GameBoard.OnNewGameRequested();
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;

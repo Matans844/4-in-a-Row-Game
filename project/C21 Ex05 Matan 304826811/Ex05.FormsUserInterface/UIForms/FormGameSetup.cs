@@ -89,16 +89,16 @@ namespace Ex05.FormsUserInterface
 				}
 				else
 				{
-					this.errorOccured();
+					this.errorOccurred();
 				}
 			}
 			else
 			{
-				this.errorOccured();
+				this.errorOccurred();
 			}
 		}
 
-		private void errorOccured()
+		private void errorOccurred()
 		{
 			MessageBox.Show(k_MessageMissingFields, k_TitleError, MessageBoxButtons.OK, MessageBoxIcon.Error);
 		}

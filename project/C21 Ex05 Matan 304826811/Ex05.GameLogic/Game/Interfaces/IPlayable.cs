@@ -1,14 +1,14 @@
 ﻿namespace Ex05.GameLogic
 {
+	// Used for communication inside the logic unit and with the UI unit.
 	public interface IPlayable
 	{
-		// Used for communication inside Logic unit
+		event GameEndedEventHandler GameEnded;
+
 		Board GetBoard();
 
-		// Used for communication inside Logic unit
 		Cell GetLastMove();
 
-		// From here onwards, used for communication with UI
 		bool DidLastPlayerQuitSingleGame();
 
 		eGameState GetGameState();

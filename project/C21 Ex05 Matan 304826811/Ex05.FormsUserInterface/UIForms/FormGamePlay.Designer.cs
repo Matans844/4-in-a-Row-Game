@@ -56,6 +56,8 @@ namespace Ex05.FormsUserInterface
 			// LabelPlayer1Name
 			// 
 			this.LabelPlayer1Name.AutoSize = true;
+			this.LabelPlayer1Name.BackColor = System.Drawing.SystemColors.Control;
+			this.LabelPlayer1Name.Enabled = false;
 			this.LabelPlayer1Name.Location = new System.Drawing.Point(15, 15);
 			this.LabelPlayer1Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer1Name.Name = "LabelPlayer1Name";
@@ -68,6 +70,7 @@ namespace Ex05.FormsUserInterface
 			// 
 			this.LabelPlayer2Name.AutoSize = true;
 			this.LabelPlayer2Name.BackColor = System.Drawing.SystemColors.Control;
+			this.LabelPlayer2Name.Enabled = false;
 			this.LabelPlayer2Name.Location = new System.Drawing.Point(15, 15);
 			this.LabelPlayer2Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer2Name.Name = "LabelPlayer2Name";
@@ -126,6 +129,7 @@ namespace Ex05.FormsUserInterface
 			// buttonR2C0
 			// 
 			this.buttonR2C0.Anchor = System.Windows.Forms.AnchorStyles.None;
+			this.buttonR2C0.BackColor = System.Drawing.SystemColors.Control;
 			this.buttonR2C0.Enabled = false;
 			this.buttonR2C0.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
 			this.buttonR2C0.Location = new System.Drawing.Point(20, 300);
@@ -148,7 +152,7 @@ namespace Ex05.FormsUserInterface
 			this.FlowAllSection.Margin = new System.Windows.Forms.Padding(10);
 			this.FlowAllSection.Name = "FlowAllSection";
 			this.FlowAllSection.Padding = new System.Windows.Forms.Padding(10);
-			this.FlowAllSection.Size = new System.Drawing.Size(790, 1055);
+			this.FlowAllSection.Size = new System.Drawing.Size(961, 1235);
 			this.FlowAllSection.TabIndex = 9;
 			// 
 			// FlowSectionBoard
@@ -191,7 +195,6 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionInfo.Padding = new System.Windows.Forms.Padding(10);
 			this.FlowSectionInfo.Size = new System.Drawing.Size(464, 112);
 			this.FlowSectionInfo.TabIndex = 10;
-			this.FlowSectionInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowSectionInfo_Paint);
 			// 
 			// FlowPlayer1Info
 			// 
@@ -251,7 +254,7 @@ namespace Ex05.FormsUserInterface
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(790, 1055);
+			this.ClientSize = new System.Drawing.Size(961, 1235);
 			this.Controls.Add(this.FlowAllSection);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;

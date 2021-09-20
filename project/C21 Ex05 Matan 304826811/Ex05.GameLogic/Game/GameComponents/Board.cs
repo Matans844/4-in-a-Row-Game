@@ -9,11 +9,11 @@ namespace Ex05.GameLogic
 
 	public class Board
 	{
-		public event Action ResetRequested;
+		public event Action NewGameRequested;
 
 		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
 
-		public const int k_TransformBoardToMatrixIndicesWith1 = 1;
+		public const int k_ConversionFactor1NumberToIndices = 1;
 		public const int k_ZeroIndex = 0;
 		private readonly IPlayable r_GameForBoard;
 		private readonly Cell[,] r_CellMatrix;
@@ -67,9 +67,9 @@ namespace Ex05.GameLogic
 		{
 			this.r_GameForBoard = i_GameForBoard;
 			this.NumberOfColumns = i_ChosenNumberOfColumns;
-			this.NumberOfColumnIndices = i_ChosenNumberOfColumns - k_TransformBoardToMatrixIndicesWith1;
+			this.NumberOfColumnIndices = i_ChosenNumberOfColumns - k_ConversionFactor1NumberToIndices;
 			this.NumberOfRows = i_ChosenNumberOfRows;
-			this.NumberOfRowIndices = i_ChosenNumberOfRows - k_TransformBoardToMatrixIndicesWith1;
+			this.NumberOfRowIndices = i_ChosenNumberOfRows - k_ConversionFactor1NumberToIndices;
 			this.r_CellMatrix = new Cell[i_ChosenNumberOfRows, i_ChosenNumberOfColumns];
 			this.r_CellMatrix.InitWithBoardCells();
 			this.NumberOfCellVacanciesInBoard = i_ChosenNumberOfRows * i_ChosenNumberOfColumns;
@@ -80,7 +80,7 @@ namespace Ex05.GameLogic
 		public void SlideDiskToBoard(int i_ChosenBoardColumnAdjustedForMatrix, eBoardCellType i_PlayerDiscType)
 		{
 			int rowIndexOfLastVacantCellInChosenColumn =
-				this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix] - k_TransformBoardToMatrixIndicesWith1;
+				this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix] - k_ConversionFactor1NumberToIndices;
 
 			this.NumberOfCellVacanciesByColumn[i_ChosenBoardColumnAdjustedForMatrix]--;
 			this.NumberOfCellVacanciesInBoard--;
@@ -105,11 +105,6 @@ namespace Ex05.GameLogic
 			this.OnBoardColumnByIndexBecameFull(e);
 		}
 
-		protected virtual void OnBoardColumnByIndexBecameFull(BoardColumnByIndexBecameFullEventArgs e)
-		{
-			this.BoardColumnByIndexBecameFull?.Invoke(this, e);
-		}
-
 		public bool IsColumnAvailableForDisc(int i_ChosenColumnIndex)
 		{
 			int chosenColumnTranslatedToMatrixIndices = i_ChosenColumnIndex;
@@ -128,13 +123,19 @@ namespace Ex05.GameLogic
 
 		public Cell GetLastAvailableCellInColumn(int i_ColumnIndex)
 		{
-			int rowIndex = this.NumberOfCellVacanciesByColumn[i_ColumnIndex] - k_TransformBoardToMatrixIndicesWith1;
+			int rowIndex = this.NumberOfCellVacanciesByColumn[i_ColumnIndex] - k_ConversionFactor1NumberToIndices;
 
 			return this.CellMatrix[rowIndex, i_ColumnIndex];
 		}
 
-		public void PrepareBoardForNewGame()
+		protected virtual void OnBoardColumnByIndexBecameFull(BoardColumnByIndexBecameFullEventArgs e)
 		{
+			this.BoardColumnByIndexBecameFull?.Invoke(this, e);
+		}
+
+		public void OnNewGameRequested()
+		{
+			this.NewGameRequested?.Invoke();
 			this.resetCellMatrix();
 			this.resetNumberOfCellVacanciesInBoard();
 			this.resetNumberOfCellVacanciesByColumn();

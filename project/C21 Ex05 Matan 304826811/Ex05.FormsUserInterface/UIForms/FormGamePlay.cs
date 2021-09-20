@@ -10,6 +10,8 @@ using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
+	using System.Diagnostics.Eventing.Reader;
+
 	public partial class FormGamePlay : Form
 	{
 		private readonly IPlayable m_PlayableGame;
@@ -45,6 +47,26 @@ namespace Ex05.FormsUserInterface
 
 			this.initializeBoard();
 			this.updateExistingPlayerScoreLabelsWithPlayer();
+			this.startListening();
+		}
+
+		private void startListening()
+		{
+			this.PlayableGame.GameEnded += new GameEndedEventHandler(this.game_SingleGameEnded);
+		}
+
+		private void game_SingleGameEnded(object sender, GameEndedEventArgs e)
+		{
+			DialogResult result = MessageBox.Show(e.m_ResultMessage, e.m_ResultTitle, MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+			if (result == DialogResult.Yes)
+			{
+				this.PlayableGame.SetUpNewGame();
+			}
+			else
+			{
+				this.Close();
+			}
 		}
 
 		private void initializeBoard()
@@ -57,7 +79,7 @@ namespace Ex05.FormsUserInterface
 		{
 			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 			{
-				ButtonBoardCell cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
+				LabelBoardColumn cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
 			}
 		}
 
@@ -78,9 +100,9 @@ namespace Ex05.FormsUserInterface
 			}
 		}
 
-		private void FlowSectionInfo_Paint(object sender, PaintEventArgs e)
+		protected override void OnFormClosing(FormClosingEventArgs e)
 		{
-
+			this.PlayableGame.QuitSingleGameAndUpdateGameState();
 		}
 	}
 }

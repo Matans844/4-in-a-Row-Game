@@ -16,7 +16,7 @@ namespace Ex05.FormsUserInterface
 		private const string k_TitleError = "Error";
 		private const string k_DefaultComputerLabelText = "[Computer]";
 		private const string k_DefaultComputerName = "Computer";
-		private readonly GameSettings r_GameSettingsManager;
+		private readonly GameSettings r_GameSettingsManager = new GameSettings();
 		private bool m_IsComputerGameMode = true;
 		private eGameMode m_ChosenGameMode = eGameMode.PlayerVsComputer;
 
@@ -43,8 +43,7 @@ namespace Ex05.FormsUserInterface
 
 		public FormGameSetup()
 		{
-			this.InitializeComponent();
-			this.r_GameSettingsManager = new GameSettings();
+			InitializeComponent();
 		}
 
 		private void CheckBoxHumanOpponent_CheckedChanged(object sender, EventArgs e)
@@ -85,6 +84,7 @@ namespace Ex05.FormsUserInterface
 
 				if (this.GameSettingsManager.CanGameBegin())
 				{
+					this.DialogResult = DialogResult.OK;
 					this.Close();
 				}
 				else

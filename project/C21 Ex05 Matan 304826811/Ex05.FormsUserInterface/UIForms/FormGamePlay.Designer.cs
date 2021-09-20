@@ -34,9 +34,6 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer1Name = new System.Windows.Forms.Label();
 			this.LabelPlayer2Name = new System.Windows.Forms.Label();
 			this.TableBoardCells = new System.Windows.Forms.TableLayoutPanel();
-			this.buttonR0C0 = new System.Windows.Forms.Button();
-			this.buttonR1C0 = new System.Windows.Forms.Button();
-			this.buttonR2C0 = new System.Windows.Forms.Button();
 			this.FlowAllSection = new System.Windows.Forms.FlowLayoutPanel();
 			this.FlowSectionBoard = new System.Windows.Forms.FlowLayoutPanel();
 			this.TableRowOfColumnLabels = new System.Windows.Forms.TableLayoutPanel();
@@ -45,7 +42,6 @@ namespace Ex05.FormsUserInterface
 			this.LabelPlayer1Score = new Ex05.FormsUserInterface.LabelPlayerScore();
 			this.FlowPlayer2Info = new System.Windows.Forms.FlowLayoutPanel();
 			this.LabelPlayer2Score = new Ex05.FormsUserInterface.LabelPlayerScore();
-			this.TableBoardCells.SuspendLayout();
 			this.FlowAllSection.SuspendLayout();
 			this.FlowSectionBoard.SuspendLayout();
 			this.FlowSectionInfo.SuspendLayout();
@@ -88,9 +84,6 @@ namespace Ex05.FormsUserInterface
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TableBoardCells.Controls.Add(this.buttonR0C0, 0, 0);
-			this.TableBoardCells.Controls.Add(this.buttonR1C0, 0, 1);
-			this.TableBoardCells.Controls.Add(this.buttonR2C0, 0, 2);
 			this.TableBoardCells.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TableBoardCells.Location = new System.Drawing.Point(3, 9);
 			this.TableBoardCells.Name = "TableBoardCells";
@@ -99,60 +92,22 @@ namespace Ex05.FormsUserInterface
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TableBoardCells.Size = new System.Drawing.Size(140, 420);
+			this.TableBoardCells.Size = new System.Drawing.Size(0, 0);
 			this.TableBoardCells.TabIndex = 8;
-			// 
-			// buttonR0C0
-			// 
-			this.buttonR0C0.Enabled = false;
-			this.buttonR0C0.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-			this.buttonR0C0.Location = new System.Drawing.Point(20, 20);
-			this.buttonR0C0.Margin = new System.Windows.Forms.Padding(20);
-			this.buttonR0C0.Name = "buttonR0C0";
-			this.buttonR0C0.Padding = new System.Windows.Forms.Padding(20);
-			this.buttonR0C0.Size = new System.Drawing.Size(100, 100);
-			this.buttonR0C0.TabIndex = 13;
-			this.buttonR0C0.UseVisualStyleBackColor = true;
-			// 
-			// buttonR1C0
-			// 
-			this.buttonR1C0.Enabled = false;
-			this.buttonR1C0.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-			this.buttonR1C0.Location = new System.Drawing.Point(20, 160);
-			this.buttonR1C0.Margin = new System.Windows.Forms.Padding(20);
-			this.buttonR1C0.Name = "buttonR1C0";
-			this.buttonR1C0.Padding = new System.Windows.Forms.Padding(20);
-			this.buttonR1C0.Size = new System.Drawing.Size(100, 100);
-			this.buttonR1C0.TabIndex = 12;
-			this.buttonR1C0.UseVisualStyleBackColor = true;
-			// 
-			// buttonR2C0
-			// 
-			this.buttonR2C0.Anchor = System.Windows.Forms.AnchorStyles.None;
-			this.buttonR2C0.BackColor = System.Drawing.SystemColors.Control;
-			this.buttonR2C0.Enabled = false;
-			this.buttonR2C0.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(177)));
-			this.buttonR2C0.Location = new System.Drawing.Point(20, 300);
-			this.buttonR2C0.Margin = new System.Windows.Forms.Padding(20);
-			this.buttonR2C0.Name = "buttonR2C0";
-			this.buttonR2C0.Padding = new System.Windows.Forms.Padding(20);
-			this.buttonR2C0.Size = new System.Drawing.Size(100, 100);
-			this.buttonR2C0.TabIndex = 14;
-			this.buttonR2C0.UseVisualStyleBackColor = true;
 			// 
 			// FlowAllSection
 			// 
+			this.FlowAllSection.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowAllSection.AutoSize = true;
 			this.FlowAllSection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowAllSection.Controls.Add(this.FlowSectionBoard);
 			this.FlowAllSection.Controls.Add(this.FlowSectionInfo);
-			this.FlowAllSection.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FlowAllSection.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.FlowAllSection.Location = new System.Drawing.Point(0, 0);
+			this.FlowAllSection.Location = new System.Drawing.Point(20, 34);
 			this.FlowAllSection.Margin = new System.Windows.Forms.Padding(10);
 			this.FlowAllSection.Name = "FlowAllSection";
 			this.FlowAllSection.Padding = new System.Windows.Forms.Padding(10);
-			this.FlowAllSection.Size = new System.Drawing.Size(961, 1235);
+			this.FlowAllSection.Size = new System.Drawing.Size(490, 156);
 			this.FlowAllSection.TabIndex = 9;
 			// 
 			// FlowSectionBoard
@@ -163,9 +118,9 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionBoard.Controls.Add(this.TableRowOfColumnLabels);
 			this.FlowSectionBoard.Controls.Add(this.TableBoardCells);
 			this.FlowSectionBoard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.FlowSectionBoard.Location = new System.Drawing.Point(172, 13);
+			this.FlowSectionBoard.Location = new System.Drawing.Point(242, 13);
 			this.FlowSectionBoard.Name = "FlowSectionBoard";
-			this.FlowSectionBoard.Size = new System.Drawing.Size(146, 432);
+			this.FlowSectionBoard.Size = new System.Drawing.Size(6, 12);
 			this.FlowSectionBoard.TabIndex = 11;
 			// 
 			// TableRowOfColumnLabels
@@ -190,7 +145,7 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionInfo.Controls.Add(this.FlowPlayer1Info);
 			this.FlowSectionInfo.Controls.Add(this.FlowPlayer2Info);
 			this.FlowSectionInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.FlowSectionInfo.Location = new System.Drawing.Point(13, 451);
+			this.FlowSectionInfo.Location = new System.Drawing.Point(13, 31);
 			this.FlowSectionInfo.Name = "FlowSectionInfo";
 			this.FlowSectionInfo.Padding = new System.Windows.Forms.Padding(10);
 			this.FlowSectionInfo.Size = new System.Drawing.Size(464, 112);
@@ -212,7 +167,6 @@ namespace Ex05.FormsUserInterface
 			// LabelPlayer1Score
 			// 
 			this.LabelPlayer1Score.AutoSize = true;
-			this.LabelPlayer1Score.Game = null;
 			this.LabelPlayer1Score.Location = new System.Drawing.Point(155, 15);
 			this.LabelPlayer1Score.Margin = new System.Windows.Forms.Padding(1, 5, 5, 5);
 			this.LabelPlayer1Score.Name = "LabelPlayer1Score";
@@ -238,7 +192,6 @@ namespace Ex05.FormsUserInterface
 			// LabelPlayer2Score
 			// 
 			this.LabelPlayer2Score.AutoSize = true;
-			this.LabelPlayer2Score.Game = null;
 			this.LabelPlayer2Score.Location = new System.Drawing.Point(155, 15);
 			this.LabelPlayer2Score.Margin = new System.Windows.Forms.Padding(1, 5, 5, 5);
 			this.LabelPlayer2Score.Name = "LabelPlayer2Score";
@@ -254,14 +207,13 @@ namespace Ex05.FormsUserInterface
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.AutoSize = true;
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-			this.ClientSize = new System.Drawing.Size(961, 1235);
+			this.ClientSize = new System.Drawing.Size(539, 596);
 			this.Controls.Add(this.FlowAllSection);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.Name = "FormGamePlay";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "4 In A Row !!";
-			this.TableBoardCells.ResumeLayout(false);
 			this.FlowAllSection.ResumeLayout(false);
 			this.FlowAllSection.PerformLayout();
 			this.FlowSectionBoard.ResumeLayout(false);
@@ -290,8 +242,5 @@ namespace Ex05.FormsUserInterface
 		private LabelPlayerScore LabelPlayer1Score;
 		private System.Windows.Forms.FlowLayoutPanel FlowPlayer2Info;
 		private LabelPlayerScore LabelPlayer2Score;
-		private System.Windows.Forms.Button buttonR1C0;
-		private System.Windows.Forms.Button buttonR0C0;
-		private System.Windows.Forms.Button buttonR2C0;
 	}
 }

@@ -10,18 +10,7 @@ namespace Ex05.FormsUserInterface
 {
 	public sealed class LabelPlayerScore : Label
 	{
-		private IPlayable m_Game;
 		private ePlayerNumber m_PlayerNumber;
-
-		public IPlayable Game
-		{
-			get => this.m_Game;
-			set
-			{
-				this.m_Game = value;
-				this.startListening();
-			}
-		}
 
 		public ePlayerNumber PlayerNumber
 		{
@@ -34,9 +23,9 @@ namespace Ex05.FormsUserInterface
 		{
 		}
 
-		private void startListening()
+		public void StartListening(IPlayable i_GameInterface)
 		{
-			this.Game.GetPlayerByNumber(this.PlayerNumber).ScoreChanged +=
+			i_GameInterface.GetPlayerByNumber(this.PlayerNumber).ScoreChanged +=
 				new ScoreChangedEventHandler(this.player_ScoreChanged);
 		}
 

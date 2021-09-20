@@ -32,7 +32,7 @@ namespace Ex05.FormsUserInterface
 
 		public FormGamePlay(GameSettings i_GameSettingsManager)
 		{
-			this.InitializeComponent();
+			InitializeComponent();
 			this.r_Player1NameLabelText = $"{i_GameSettingsManager.Player1Name}:";
 			this.r_Player2NameLabelText = $"{i_GameSettingsManager.Player2Name}:";
 			this.r_BoardColumns = i_GameSettingsManager.ChosenNumberOfColumns;
@@ -85,8 +85,8 @@ namespace Ex05.FormsUserInterface
 
 		private void updateExistingPlayerScoreLabelsWithPlayer()
 		{
-			this.LabelPlayer1Score.Game = this.PlayableGame;
-			this.LabelPlayer2Score.Game = this.PlayableGame;
+			this.LabelPlayer1Score.StartListening(this.PlayableGame);
+			this.LabelPlayer2Score.StartListening(this.PlayableGame);
 		}
 
 		private void populateBoardCells()

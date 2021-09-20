@@ -8,12 +8,16 @@ using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
+	using System.Drawing.Printing;
+
 	public sealed class ButtonBoardCell : Button
 	{
 		public const string k_XDiscText = "X";
 		public const string k_ODiscText = "O";
-		private const int k_HeightOfCell = 40;
-		private const int k_WidthOfCell = 40;
+		private const int k_HeightOfCell = 100;
+		private const int k_WidthOfCell = 100;
+		private const int k_AllMargin = 20;
+		private const int k_AllPadding = 20;
 		private const float k_ButtonFontSize = 12f;
 		private readonly string r_EmptyCellText = string.Empty;
 		private readonly IPlayable r_Game;
@@ -41,6 +45,9 @@ namespace Ex05.FormsUserInterface
 		private void modifyButtonControl()
 		{
 			this.Enabled = false;
+			this.Margin = new System.Windows.Forms.Padding(k_AllMargin);
+			this.Padding = new System.Windows.Forms.Padding(k_AllPadding);
+			this.Name = $"buttonR{this.RowIndex}C{this.ColumnIndex}";
 			this.Text = this.EmptyCellText;
 			this.Font = new Font(this.Font.FontFamily, k_ButtonFontSize);
 			this.TextAlign = ContentAlignment.MiddleCenter;

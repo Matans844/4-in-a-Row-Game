@@ -27,14 +27,18 @@ namespace Ex05.FormsUserInterface
 
 		public void Start()
 		{
-			this.FormSetup.ShowDialog();
-			this.FormPlay = new FormGamePlay(this.FormSetup.GameSettingsManager);
+			DialogResult setupResult = this.FormSetup.ShowDialog();
 
-			do
+			if (setupResult == DialogResult.OK)
 			{
-				this.FormPlay.ShowDialog();
+				this.FormPlay = new FormGamePlay(this.FormSetup.GameSettingsManager);
+
+				do
+				{
+					this.FormPlay.ShowDialog();
+				}
+				while (this.FormPlay.DialogResult == DialogResult.OK);
 			}
-			while (this.FormPlay.DialogResult == DialogResult.OK);
 		}
 	}
 }

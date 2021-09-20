@@ -11,8 +11,8 @@ namespace Ex05.FormsUserInterface
 	public class LabelBoardColumn : Label
 	{
 		private const float k_ButtonFontSize = 10f;
-		private const int k_HeightOfCell = 20;
-		private const int k_WidthOfCell = 40;
+		private const int k_HeightOfCell = 50;
+		private const int k_WidthOfCell = 100;
 		private readonly IPlayable r_Game;
 		private readonly int r_ColumnIndex;
 

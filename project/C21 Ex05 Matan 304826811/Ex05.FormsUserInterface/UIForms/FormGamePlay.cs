@@ -80,6 +80,7 @@ namespace Ex05.FormsUserInterface
 			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 			{
 				LabelBoardColumn cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
+				this.TableRowOfColumnLabels.Controls.Add(cellToAdd);
 			}
 		}
 
@@ -96,6 +97,7 @@ namespace Ex05.FormsUserInterface
 				for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 				{
 					ButtonBoardCell cellToAdd = new ButtonBoardCell(rowIndex, columnIndex, this.PlayableGame);
+					this.TableBoardCells.Controls.Add(cellToAdd);
 				}
 			}
 		}

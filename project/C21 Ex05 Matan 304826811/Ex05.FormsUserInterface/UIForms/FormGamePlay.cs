@@ -10,7 +10,7 @@ using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
-	public partial class FormGamePlay : Form, IParentable
+	public partial class FormGamePlay : Form
 	{
 		private readonly IPlayable m_PlayableGame;
 		private readonly string r_Player1NameLabelText;
@@ -44,47 +44,43 @@ namespace Ex05.FormsUserInterface
 				i_GameSettingsManager.Player2Name);
 
 			this.initializeBoard();
+			this.updateExistingPlayerScoreLabelsWithPlayer();
 		}
 
 		private void initializeBoard()
 		{
 			this.populateBoardCells();
-			this.populateBoardColumnLabels;
+			this.populateBoardColumnLabels();
+		}
+
+		private void populateBoardColumnLabels()
+		{
+			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
+			{
+				ButtonBoardCell cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
+			}
+		}
+
+		private void updateExistingPlayerScoreLabelsWithPlayer()
+		{
+			this.LabelPlayer1Score.Game = this.PlayableGame;
+			this.LabelPlayer2Score.Game = this.PlayableGame;
 		}
 
 		private void populateBoardCells()
 		{
 			for (int rowIndex = 0; rowIndex < this.BoardRows; rowIndex++)
 			{
-				for (int columnIndex = 0; rowIndex < this.BoardColumns; columnIndex++)
+				for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 				{
-					ButtonBoardCell cellToAdd = new ButtonBoardCell();
+					ButtonBoardCell cellToAdd = new ButtonBoardCell(rowIndex, columnIndex, this.PlayableGame);
 				}
 			}
 		}
 
-
-		protected override void OnLoad(EventArgs i_EventArgs)
+		private void FlowSectionInfo_Paint(object sender, PaintEventArgs e)
 		{
-			base.OnLoad(i_EventArgs);
 
-			foreach (Control control in this.Controls)
-			{
-				if (control.HasProperty("ParentOfControl"))
-				{
-					control.SetProperty<IParentable>("ParentOfControl", this);
-				}
-			}
-		}
-
-		public IPlayable GetPlayableMember()
-		{
-			return this.PlayableGame;
-		}
-
-		public TableLayoutPanel GetBoardTable()
-		{
-			return this.TableBoardCells;
 		}
 	}
 }

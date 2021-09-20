@@ -10,19 +10,8 @@ namespace Ex05.FormsUserInterface
 {
 	public sealed class LabelPlayerScore : Label
 	{
-		private IParentable m_ParentOfControl;
 		private IPlayable m_Game;
 		private ePlayerNumber m_PlayerNumber;
-
-		public IParentable ParentOfControl
-		{
-			get => this.m_ParentOfControl;
-			set
-			{
-				this.m_ParentOfControl = value;
-				this.Game = this.ParentOfControl.GetPlayableMember();
-			}
-		}
 
 		public IPlayable Game
 		{

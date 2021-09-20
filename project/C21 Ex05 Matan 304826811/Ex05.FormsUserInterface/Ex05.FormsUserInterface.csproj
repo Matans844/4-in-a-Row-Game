@@ -44,14 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BoardControls\ButtonBoardCell.cs">
+    <Compile Include="CustomControls\BoardControls\ButtonBoardCell.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="BoardControls\LabelPlayerScore.cs">
+    <Compile Include="CustomControls\InfoSection\LabelPlayerScore.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Extensions\FormOperations.cs" />
-    <Compile Include="Interfaces\IParentable.cs" />
+    <Compile Include="ReflectionExtensions\FormOperations.cs" />
     <Compile Include="UIForms\FormGamePlay.cs">
       <SubType>Form</SubType>
     </Compile>

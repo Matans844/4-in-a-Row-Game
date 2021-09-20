@@ -96,7 +96,7 @@ namespace Ex05.FormsUserInterface
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
 			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle());
-			this.TableBoardCells.Size = new System.Drawing.Size(440, 560);
+			this.TableBoardCells.Size = new System.Drawing.Size(140, 420);
 			this.TableBoardCells.TabIndex = 8;
 			// 
 			// buttonR0C0
@@ -159,9 +159,9 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionBoard.Controls.Add(this.TableRowOfColumnLabels);
 			this.FlowSectionBoard.Controls.Add(this.TableBoardCells);
 			this.FlowSectionBoard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.FlowSectionBoard.Location = new System.Drawing.Point(22, 13);
+			this.FlowSectionBoard.Location = new System.Drawing.Point(172, 13);
 			this.FlowSectionBoard.Name = "FlowSectionBoard";
-			this.FlowSectionBoard.Size = new System.Drawing.Size(446, 572);
+			this.FlowSectionBoard.Size = new System.Drawing.Size(146, 432);
 			this.FlowSectionBoard.TabIndex = 11;
 			// 
 			// TableRowOfColumnLabels
@@ -186,11 +186,12 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionInfo.Controls.Add(this.FlowPlayer1Info);
 			this.FlowSectionInfo.Controls.Add(this.FlowPlayer2Info);
 			this.FlowSectionInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
-			this.FlowSectionInfo.Location = new System.Drawing.Point(13, 591);
+			this.FlowSectionInfo.Location = new System.Drawing.Point(13, 451);
 			this.FlowSectionInfo.Name = "FlowSectionInfo";
 			this.FlowSectionInfo.Padding = new System.Windows.Forms.Padding(10);
 			this.FlowSectionInfo.Size = new System.Drawing.Size(464, 112);
 			this.FlowSectionInfo.TabIndex = 10;
+			this.FlowSectionInfo.Paint += new System.Windows.Forms.PaintEventHandler(this.FlowSectionInfo_Paint);
 			// 
 			// FlowPlayer1Info
 			// 

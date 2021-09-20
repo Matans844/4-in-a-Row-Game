@@ -10,15 +10,17 @@ namespace Ex05.FormsUserInterface
 {
 	public sealed class ButtonBoardCell : Button
 	{
-		public const string k_EmptyCell = String.Empty;
 		public const string k_XDiscText = "X";
 		public const string k_ODiscText = "O";
 		private const int k_HeightOfCell = 40;
 		private const int k_WidthOfCell = 40;
 		private const float k_ButtonFontSize = 12f;
+		private readonly string r_EmptyCellText = string.Empty;
 		private readonly IPlayable r_Game;
 		private readonly int r_RowIndex;
 		private readonly int r_ColumnIndex;
+
+		public string EmptyCellText => this.r_EmptyCellText;
 
 		public IPlayable MyGame => this.r_Game;
 
@@ -39,7 +41,7 @@ namespace Ex05.FormsUserInterface
 		private void modifyButtonControl()
 		{
 			this.Enabled = false;
-			this.Text = k_EmptyCell;
+			this.Text = this.EmptyCellText;
 			this.Font = new Font(this.Font.FontFamily, k_ButtonFontSize);
 			this.TextAlign = ContentAlignment.MiddleCenter;
 			this.Size = new Size(k_WidthOfCell, k_HeightOfCell);
@@ -65,7 +67,7 @@ namespace Ex05.FormsUserInterface
 					break;
 
 				case eBoardCellType.Empty:
-					this.Text = k_EmptyCell;
+					this.Text = this.EmptyCellText;
 					break;
 			}
 		}

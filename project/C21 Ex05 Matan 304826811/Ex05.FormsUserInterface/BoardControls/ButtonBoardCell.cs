@@ -10,85 +10,33 @@ namespace Ex05.FormsUserInterface
 {
 	public sealed class ButtonBoardCell : Button
 	{
-		public const string k_EmptyCell = "";
+		public const string k_EmptyCell = String.Empty;
 		public const string k_XDiscText = "X";
 		public const string k_ODiscText = "O";
 		private const int k_HeightOfCell = 40;
 		private const int k_WidthOfCell = 40;
 		private const float k_ButtonFontSize = 12f;
-		private TableLayoutPanel m_TableForBoard;
-		private IParentable m_ParentOfControl;
-		private IPlayable m_Game;
-		private int? m_RowIndex;
-		private int? m_ColumnIndex;
-		private bool m_CanSubscribe;
+		private readonly IPlayable r_Game;
+		private readonly int r_RowIndex;
+		private readonly int r_ColumnIndex;
 
-		public TableLayoutPanel TableForBoard
-		{
-			get => this.m_TableForBoard;
-			set => this.m_TableForBoard = value;
-		}
+		public IPlayable MyGame => this.r_Game;
 
-		public IParentable ParentOfControl
-		{
-			get => this.m_ParentOfControl;
-			set
-			{
-				this.m_ParentOfControl = value;
-				this.Game = this.ParentOfControl.GetPlayableMember();
-			}
-		}
+		public int RowIndex => this.r_RowIndex;
 
-		public IPlayable Game
-		{
-			get => this.m_Game;
-			set
-			{
-				this.m_Game = value;
-			}
-		}
+		public int ColumnIndex => this.r_ColumnIndex;
 
-		public int? RowIndex
-		{
-			get => this.m_RowIndex;
-			set
-			{
-				this.m_RowIndex = value;
-
-				if (this.ColumnIndex.HasValue)
-				{
-					this.CanSubscribe = true;
-				}
-			}
-		}
-
-		public int? ColumnIndex
-		{
-			get => this.m_ColumnIndex;
-			set
-			{
-				this.m_ColumnIndex = value;
-
-				if (this.RowIndex.HasValue)
-				{
-					this.CanSubscribe = true;
-				}
-			}
-		}
-
-		public bool CanSubscribe
-		{
-			get => this.m_CanSubscribe;
-			private set
-			{
-				this.m_CanSubscribe = value;
-				this.addToTableBoard();
-				this.startListening();
-			}
-		}
-
-		public ButtonBoardCell()
+		public ButtonBoardCell(int i_RowIndex, int i_ColumnIndex, IPlayable i_Game)
 			: base()
+		{
+			this.r_Game = i_Game;
+			this.r_ColumnIndex = i_ColumnIndex;
+			this.r_RowIndex = i_RowIndex;
+			this.modifyButtonControl();
+			this.startListening();
+		}
+
+		private void modifyButtonControl()
 		{
 			this.Enabled = false;
 			this.Text = k_EmptyCell;
@@ -100,21 +48,26 @@ namespace Ex05.FormsUserInterface
 
 		private void startListening()
 		{
-			Cell connectedCell = this.Game.GetBoard().CellMatrix[this.RowIndex.GetValueOrDefault(), this.ColumnIndex.GetValueOrDefault()];
-			connectedCell.CellTypeChanged += new CellOccupiedByMoveEventHandler(this.boardCell_DiscEntered)
+			Cell connectedGameCell = this.MyGame.GetBoard().CellMatrix[this.RowIndex, this.ColumnIndex];
+			connectedGameCell.CellTypeChanged += new CellOccupancyChangedEventHandler(this.boardCell_OccupancyChanged);
 		}
 
-		private void addToTableBoard()
+		private void boardCell_OccupancyChanged(object sender, CellOccupancyChangedEventArgs e)
 		{
-			this.TableForBoard = this.ParentOfControl.GetBoardTable();
-			this.TableForBoard.Controls.Add(this, this.m_ColumnIndex.GetValueOrDefault(), this.RowIndex.GetValueOrDefault());
-		}
+			switch (e.m_NewCellType)
+			{
+				case eBoardCellType.XDisc:
+					this.Text = k_XDiscText;
+					break;
 
-		private void boardCell_DiscEntered(object sender, CellOccupiedByMoveEventArgs e)
-		{
-			this.Text = e.m_NewCellType == eBoardCellType.XDisc
-							? k_XDiscText
-							: k_ODiscText;
+				case eBoardCellType.ODisc:
+					this.Text = k_ODiscText;
+					break;
+
+				case eBoardCellType.Empty:
+					this.Text = k_EmptyCell;
+					break;
+			}
 		}
 	}
 }

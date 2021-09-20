@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
+
+using Ex05.GameLogic;
 
 namespace Ex05.GameLogic
 {
@@ -6,6 +9,10 @@ namespace Ex05.GameLogic
 
 	public class Board
 	{
+		public event Action ResetRequested;
+
+		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
+
 		public const int k_TransformBoardToMatrixIndicesWith1 = 1;
 		public const int k_ZeroIndex = 0;
 		private readonly IPlayable r_GameForBoard;
@@ -17,8 +24,6 @@ namespace Ex05.GameLogic
 		private int m_NumberOfRows;
 		private int m_NumberOfColumns;
 		private int m_NumberOfCellVacanciesInBoard;
-
-		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
 
 		public int NumberOfCellVacanciesInBoard
 		{

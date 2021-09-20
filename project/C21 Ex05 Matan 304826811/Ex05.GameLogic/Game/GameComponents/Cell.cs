@@ -1,6 +1,6 @@
 ﻿namespace Ex05.GameLogic
 {
-	public delegate void CellOccupiedByMoveEventHandler(object sender, CellOccupiedByMoveEventArgs e);
+	public delegate void CellOccupancyChangedEventHandler(object sender, CellOccupancyChangedEventArgs e);
 
 	public class Cell
 	{
@@ -8,7 +8,7 @@
 		private readonly int r_RowIndex;
 		private eBoardCellType m_CellType;
 
-		public event CellOccupiedByMoveEventHandler CellTypeChanged;
+		public event CellOccupancyChangedEventHandler CellTypeChanged;
 
 		public int ColumnIndex => this.r_ColumnIndex;
 
@@ -21,7 +21,7 @@
 			{
 				this.m_CellType = value;
 
-				CellOccupiedByMoveEventArgs e = new CellOccupiedByMoveEventArgs
+				CellOccupancyChangedEventArgs e = new CellOccupancyChangedEventArgs
 					{
 						m_CellRowIndex = this.RowIndex,
 						m_CellColumnIndex = this.ColumnIndex,
@@ -32,7 +32,7 @@
 			}
 		}
 
-		protected virtual void OnCellOccupied(CellOccupiedByMoveEventArgs e)
+		protected virtual void OnCellOccupied(CellOccupancyChangedEventArgs e)
 		{
 			this.CellTypeChanged?.Invoke(this, e);
 		}

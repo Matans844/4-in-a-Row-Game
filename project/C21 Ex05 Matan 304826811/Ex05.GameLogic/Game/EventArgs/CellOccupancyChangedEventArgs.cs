@@ -2,7 +2,7 @@
 
 namespace Ex05.GameLogic
 {
-	public class CellOccupiedByMoveEventArgs : EventArgs
+	public class CellOccupancyChangedEventArgs : EventArgs
 	{
 		public int m_CellRowIndex;
 		public int m_CellColumnIndex;

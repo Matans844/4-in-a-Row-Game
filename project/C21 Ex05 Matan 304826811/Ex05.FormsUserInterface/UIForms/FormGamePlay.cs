@@ -13,9 +13,14 @@ namespace Ex05.FormsUserInterface
 	public partial class FormGamePlay : Form, IParentable
 	{
 		private readonly IPlayable m_PlayableGame;
-		private readonly GameSettings r_GameSettingsManager;
 		private readonly string r_Player1NameLabelText;
 		private readonly string r_Player2NameLabelText;
+		private readonly int r_BoardRows;
+		private readonly int r_BoardColumns;
+
+		public int BoardColumns => this.r_BoardColumns;
+
+		public int BoardRows => this.r_BoardRows;
 
 		public string Player1NameLabelText => this.r_Player1NameLabelText;
 
@@ -23,26 +28,41 @@ namespace Ex05.FormsUserInterface
 
 		public IPlayable PlayableGame => this.m_PlayableGame;
 
-		public GameSettings GameSettingsManager => this.r_GameSettingsManager;
-
 		public FormGamePlay(GameSettings i_GameSettingsManager)
 		{
 			this.InitializeComponent();
-			this.r_GameSettingsManager = i_GameSettingsManager;
-			this.r_Player1NameLabelText = $"{this.GameSettingsManager.Player1Name}:";
-			this.r_Player2NameLabelText = $"{this.GameSettingsManager.Player2Name}:";
+			this.r_Player1NameLabelText = $"{i_GameSettingsManager.Player1Name}:";
+			this.r_Player2NameLabelText = $"{i_GameSettingsManager.Player2Name}:";
+			this.r_BoardColumns = i_GameSettingsManager.ChosenNumberOfColumns;
+			this.r_BoardRows = i_GameSettingsManager.ChosenNumberOfRows;
 
 			this.m_PlayableGame = new ConnectFourGame(
-				this.GameSettingsManager.ChosenNumberOfRows,
-				this.GameSettingsManager.ChosenNumberOfColumns,
-				this.GameSettingsManager.ChosenGameMode,
-				this.GameSettingsManager.Player1Name,
-				this.GameSettingsManager.Player2Name);
+				i_GameSettingsManager.ChosenNumberOfRows,
+				i_GameSettingsManager.ChosenNumberOfColumns,
+				i_GameSettingsManager.ChosenGameMode,
+				i_GameSettingsManager.Player1Name,
+				i_GameSettingsManager.Player2Name);
 
 			this.initializeBoard();
 		}
 
-		private 
+		private void initializeBoard()
+		{
+			this.populateBoardCells();
+			this.populateBoardColumnLabels;
+		}
+
+		private void populateBoardCells()
+		{
+			for (int rowIndex = 0; rowIndex < this.BoardRows; rowIndex++)
+			{
+				for (int columnIndex = 0; rowIndex < this.BoardColumns; columnIndex++)
+				{
+					ButtonBoardCell cellToAdd = new ButtonBoardCell();
+				}
+			}
+		}
+
 
 		protected override void OnLoad(EventArgs i_EventArgs)
 		{

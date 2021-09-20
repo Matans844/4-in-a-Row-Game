@@ -40,7 +40,7 @@
   <ItemGroup>
     <Compile Include="Game\EventArgs\BoardColumnByIndexBecameFullEventArgs.cs" />
     <Compile Include="GameSettings\GameSettings.cs" />
-    <Compile Include="Game\EventArgs\CellOccupiedByMoveEventArgs.cs" />
+    <Compile Include="Game\EventArgs\CellOccupancyChangedEventArgs.cs" />
     <Compile Include="Game\EventArgs\GameEndedEventArgs.cs" />
     <Compile Include="Game\EventArgs\NameSetEventArgs.cs" />
     <Compile Include="Game\EventArgs\ScoreChangedEventArgs.cs" />

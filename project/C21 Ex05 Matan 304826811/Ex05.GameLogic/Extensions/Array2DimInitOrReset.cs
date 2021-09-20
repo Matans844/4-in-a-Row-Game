@@ -31,6 +31,9 @@
 			}
 		}
 
+		// I could have used an event at the cell level for this.
+		// But then I would have to register cells as listeners to a method in the game or board object.
+		// This puts danger w.r.t circularity.
 		public static void ResetBoardCells(this Cell[,] io_Matrix)
 		{
 			int numberOfRowsInMatrix = io_Matrix.GetLength(k_RowDimension);

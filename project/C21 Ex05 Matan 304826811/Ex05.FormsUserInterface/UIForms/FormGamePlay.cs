@@ -14,47 +14,21 @@ namespace Ex05.FormsUserInterface
 	{
 		private readonly IPlayable r_Game;
 		private readonly GameSettings r_GameSettingsManager;
-		private readonly BoardSizeSettings r_BoardSizeSettingsManager;
-		private readonly int r_WithoutBoardWindowWidth;
-		private readonly int r_WithoutBoardWindowHeight;
 		private readonly string r_Player1NameLabelText;
 		private readonly string r_Player2NameLabelText;
-		private int m_ModifiedWindowWidth;
-		private int m_ModifiedWindowHeight;
 
 		public string Player1NameLabelText => this.r_Player1NameLabelText;
 
 		public string Player2NameLabelText => this.r_Player2NameLabelText;
 
-		public int WithoutBoardWindowWidth => this.r_WithoutBoardWindowWidth;
-
-		public int WithoutBoardWindowHeight => this.r_WithoutBoardWindowHeight;
-
-		public int ModifiedWindowHeight
-		{
-			get => this.m_ModifiedWindowHeight;
-			set => this.m_ModifiedWindowHeight = value;
-		}
-
-		public int ModifiedWindowWidth
-		{
-			get => this.m_ModifiedWindowWidth;
-			set => this.m_ModifiedWindowWidth = value;
-		}
-
 		public IPlayable Game => this.r_Game;
 
 		public GameSettings GameSettingsManager => this.r_GameSettingsManager;
 
-		public BoardSizeSettings BoardSizeSettingsManager => this.r_BoardSizeSettingsManager;
-
-		public FormGamePlay(GameSettings i_GameSettingsManager, BoardSizeSettings i_BoardSizeSettingsManager)
+		public FormGamePlay(GameSettings i_GameSettingsManager)
 		{
 			this.InitializeComponent();
 			this.r_GameSettingsManager = i_GameSettingsManager;
-			this.r_BoardSizeSettingsManager = i_BoardSizeSettingsManager;
-			this.r_WithoutBoardWindowWidth = this.Size.Width;
-			this.r_WithoutBoardWindowHeight = this.Size.Height;
 			this.r_Player1NameLabelText = $"{this.GameSettingsManager.Player1Name}:";
 			this.r_Player2NameLabelText = $"{this.GameSettingsManager.Player2Name}:";
 
@@ -71,8 +45,21 @@ namespace Ex05.FormsUserInterface
 			base.OnLoad(i_EventArgs);
 			this.LabelPlayer1Name.Text = this.Player1NameLabelText;
 			this.LabelPlayer2Name.Text = this.Player2NameLabelText;
+		}
 
-			this.Size = new Size(this.BoardSizeSettingsManager.BoardWidth, this.BoardSizeSettingsManager.BoardHeight);
+		private void FormGamePlay_Load(object sender, EventArgs e)
+		{
+
+		}
+
+		private void panel1_Paint(object sender, PaintEventArgs e)
+		{
+
+		}
+
+		private void LabelPlayer1Name_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }

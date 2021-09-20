@@ -16,12 +16,9 @@ namespace Ex05.FormsUserInterface
 		private const string k_TitleError = "Error";
 		private const string k_DefaultComputerLabelText = "[Computer]";
 		private const string k_DefaultComputerName = "Computer";
-		private readonly BoardSizeSettings r_BoardSizeSettingManager;
 		private readonly GameSettings r_GameSettingsManager;
 		private bool m_IsComputerGameMode = true;
 		private eGameMode m_ChosenGameMode = eGameMode.PlayerVsComputer;
-
-		public BoardSizeSettings BoardSizeManager => this.r_BoardSizeSettingManager;
 
 		public GameSettings GameSettingsManager => this.r_GameSettingsManager;
 
@@ -47,7 +44,6 @@ namespace Ex05.FormsUserInterface
 		public FormGameSetup()
 		{
 			this.InitializeComponent();
-			this.r_BoardSizeSettingManager = new BoardSizeSettings();
 			this.r_GameSettingsManager = new GameSettings();
 		}
 
@@ -89,9 +85,6 @@ namespace Ex05.FormsUserInterface
 
 				if (this.GameSettingsManager.CanGameBegin())
 				{
-					this.BoardSizeManager.BoardNumberOfRows = chosenNumberOfBoardRows;
-					this.BoardSizeManager.BoardNumberOfColumns = chosenNumberOfBoardColumns;
-					this.BoardSizeManager.UpdateBoardDimensions();
 					this.Close();
 				}
 				else

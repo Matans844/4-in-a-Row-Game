@@ -62,10 +62,9 @@
     <Compile Include="UIForms\FormGameSetup.Designer.cs">
       <DependentUpon>FormGameSetup.cs</DependentUpon>
     </Compile>
-    <Compile Include="Flow\GameLauncher.cs" />
+    <Compile Include="GameLauncher.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Flow\BoardSizeSettings.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

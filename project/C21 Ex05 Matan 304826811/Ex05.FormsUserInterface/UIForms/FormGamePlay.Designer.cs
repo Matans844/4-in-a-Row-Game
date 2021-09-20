@@ -31,74 +31,193 @@ namespace Ex05.FormsUserInterface
 		{
 			this.LabelPlayer1Name = new System.Windows.Forms.Label();
 			this.LabelPlayer2Name = new System.Windows.Forms.Label();
-			this.LabelPlayer1Score = new System.Windows.Forms.Label();
-			this.LabelPlayer2Score = new System.Windows.Forms.Label();
-			this.labelPlayerScore1 = new Ex05.FormsUserInterface.LabelPlayerScore();
+			this.TableBoardCells = new System.Windows.Forms.TableLayoutPanel();
+			this.FlowAllSection = new System.Windows.Forms.FlowLayoutPanel();
+			this.FlowSectionInfo = new System.Windows.Forms.FlowLayoutPanel();
+			this.FlowSectionBoard = new System.Windows.Forms.FlowLayoutPanel();
+			this.FlowPlayer1Info = new System.Windows.Forms.FlowLayoutPanel();
+			this.LabelPlayer1Score = new Ex05.FormsUserInterface.LabelPlayerScore();
+			this.FlowPlayer2Info = new System.Windows.Forms.FlowLayoutPanel();
+			this.LabelPlayer2Score = new Ex05.FormsUserInterface.LabelPlayerScore();
+			this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+			this.FlowAllSection.SuspendLayout();
+			this.FlowSectionInfo.SuspendLayout();
+			this.FlowSectionBoard.SuspendLayout();
+			this.FlowPlayer1Info.SuspendLayout();
+			this.FlowPlayer2Info.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// LabelPlayer1Name
 			// 
-			this.LabelPlayer1Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
 			this.LabelPlayer1Name.AutoSize = true;
-			this.LabelPlayer1Name.Location = new System.Drawing.Point(127, 111);
+			this.LabelPlayer1Name.Location = new System.Drawing.Point(15, 15);
+			this.LabelPlayer1Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer1Name.Name = "LabelPlayer1Name";
-			this.LabelPlayer1Name.Size = new System.Drawing.Size(127, 32);
+			this.LabelPlayer1Name.Padding = new System.Windows.Forms.Padding(10, 10, 1, 10);
+			this.LabelPlayer1Name.Size = new System.Drawing.Size(138, 52);
 			this.LabelPlayer1Name.TabIndex = 0;
 			this.LabelPlayer1Name.Text = "Player 1:";
+			this.LabelPlayer1Name.Click += new System.EventHandler(this.LabelPlayer1Name_Click);
 			// 
 			// LabelPlayer2Name
 			// 
-			this.LabelPlayer2Name.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
 			this.LabelPlayer2Name.AutoSize = true;
-			this.LabelPlayer2Name.Location = new System.Drawing.Point(394, 111);
+			this.LabelPlayer2Name.BackColor = System.Drawing.SystemColors.Control;
+			this.LabelPlayer2Name.Location = new System.Drawing.Point(15, 15);
+			this.LabelPlayer2Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer2Name.Name = "LabelPlayer2Name";
-			this.LabelPlayer2Name.Size = new System.Drawing.Size(127, 32);
+			this.LabelPlayer2Name.Padding = new System.Windows.Forms.Padding(10, 10, 1, 10);
+			this.LabelPlayer2Name.Size = new System.Drawing.Size(138, 52);
 			this.LabelPlayer2Name.TabIndex = 1;
 			this.LabelPlayer2Name.Text = "Player 2:";
+			// 
+			// TableBoardCells
+			// 
+			this.TableBoardCells.AutoSize = true;
+			this.TableBoardCells.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.TableBoardCells.ColumnCount = 3;
+			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 33.33333F));
+			this.TableBoardCells.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.TableBoardCells.Location = new System.Drawing.Point(3, 17);
+			this.TableBoardCells.Name = "TableBoardCells";
+			this.TableBoardCells.RowCount = 2;
+			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TableBoardCells.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TableBoardCells.Size = new System.Drawing.Size(8, 0);
+			this.TableBoardCells.TabIndex = 8;
+			// 
+			// FlowAllSection
+			// 
+			this.FlowAllSection.AutoSize = true;
+			this.FlowAllSection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FlowAllSection.Controls.Add(this.FlowSectionBoard);
+			this.FlowAllSection.Controls.Add(this.FlowSectionInfo);
+			this.FlowAllSection.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.FlowAllSection.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			this.FlowAllSection.Location = new System.Drawing.Point(0, 0);
+			this.FlowAllSection.Margin = new System.Windows.Forms.Padding(10);
+			this.FlowAllSection.Name = "FlowAllSection";
+			this.FlowAllSection.Padding = new System.Windows.Forms.Padding(10);
+			this.FlowAllSection.Size = new System.Drawing.Size(530, 624);
+			this.FlowAllSection.TabIndex = 9;
+			// 
+			// FlowSectionInfo
+			// 
+			this.FlowSectionInfo.AutoSize = true;
+			this.FlowSectionInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FlowSectionInfo.Controls.Add(this.FlowPlayer1Info);
+			this.FlowSectionInfo.Controls.Add(this.FlowPlayer2Info);
+			this.FlowSectionInfo.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.FlowSectionInfo.Location = new System.Drawing.Point(13, 39);
+			this.FlowSectionInfo.Name = "FlowSectionInfo";
+			this.FlowSectionInfo.Padding = new System.Windows.Forms.Padding(10);
+			this.FlowSectionInfo.Size = new System.Drawing.Size(464, 112);
+			this.FlowSectionInfo.TabIndex = 10;
+			// 
+			// FlowSectionBoard
+			// 
+			this.FlowSectionBoard.AutoSize = true;
+			this.FlowSectionBoard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FlowSectionBoard.Controls.Add(this.tableLayoutPanel1);
+			this.FlowSectionBoard.Controls.Add(this.TableBoardCells);
+			this.FlowSectionBoard.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.FlowSectionBoard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+			this.FlowSectionBoard.Location = new System.Drawing.Point(13, 13);
+			this.FlowSectionBoard.Name = "FlowSectionBoard";
+			this.FlowSectionBoard.Size = new System.Drawing.Size(464, 20);
+			this.FlowSectionBoard.TabIndex = 11;
+			// 
+			// FlowPlayer1Info
+			// 
+			this.FlowPlayer1Info.AutoSize = true;
+			this.FlowPlayer1Info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FlowPlayer1Info.Controls.Add(this.LabelPlayer1Name);
+			this.FlowPlayer1Info.Controls.Add(this.LabelPlayer1Score);
+			this.FlowPlayer1Info.Location = new System.Drawing.Point(15, 15);
+			this.FlowPlayer1Info.Margin = new System.Windows.Forms.Padding(5);
+			this.FlowPlayer1Info.Name = "FlowPlayer1Info";
+			this.FlowPlayer1Info.Padding = new System.Windows.Forms.Padding(10);
+			this.FlowPlayer1Info.Size = new System.Drawing.Size(212, 82);
+			this.FlowPlayer1Info.TabIndex = 12;
 			// 
 			// LabelPlayer1Score
 			// 
 			this.LabelPlayer1Score.AutoSize = true;
-			this.LabelPlayer1Score.Location = new System.Drawing.Point(260, 111);
+			this.LabelPlayer1Score.Game = null;
+			this.LabelPlayer1Score.Location = new System.Drawing.Point(155, 15);
+			this.LabelPlayer1Score.Margin = new System.Windows.Forms.Padding(1, 5, 5, 5);
 			this.LabelPlayer1Score.Name = "LabelPlayer1Score";
-			this.LabelPlayer1Score.Size = new System.Drawing.Size(31, 32);
-			this.LabelPlayer1Score.TabIndex = 2;
+			this.LabelPlayer1Score.Padding = new System.Windows.Forms.Padding(1, 10, 10, 10);
+			this.LabelPlayer1Score.PlayerNumber = Ex05.GameLogic.ePlayerNumber.Player1;
+			this.LabelPlayer1Score.Size = new System.Drawing.Size(42, 52);
+			this.LabelPlayer1Score.TabIndex = 12;
 			this.LabelPlayer1Score.Text = "0";
+			// 
+			// FlowPlayer2Info
+			// 
+			this.FlowPlayer2Info.AutoSize = true;
+			this.FlowPlayer2Info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.FlowPlayer2Info.Controls.Add(this.LabelPlayer2Name);
+			this.FlowPlayer2Info.Controls.Add(this.LabelPlayer2Score);
+			this.FlowPlayer2Info.Location = new System.Drawing.Point(237, 15);
+			this.FlowPlayer2Info.Margin = new System.Windows.Forms.Padding(5);
+			this.FlowPlayer2Info.Name = "FlowPlayer2Info";
+			this.FlowPlayer2Info.Padding = new System.Windows.Forms.Padding(10);
+			this.FlowPlayer2Info.Size = new System.Drawing.Size(212, 82);
+			this.FlowPlayer2Info.TabIndex = 12;
 			// 
 			// LabelPlayer2Score
 			// 
 			this.LabelPlayer2Score.AutoSize = true;
-			this.LabelPlayer2Score.Location = new System.Drawing.Point(527, 111);
+			this.LabelPlayer2Score.Game = null;
+			this.LabelPlayer2Score.Location = new System.Drawing.Point(155, 15);
+			this.LabelPlayer2Score.Margin = new System.Windows.Forms.Padding(1, 5, 5, 5);
 			this.LabelPlayer2Score.Name = "LabelPlayer2Score";
-			this.LabelPlayer2Score.Size = new System.Drawing.Size(31, 32);
-			this.LabelPlayer2Score.TabIndex = 3;
+			this.LabelPlayer2Score.Padding = new System.Windows.Forms.Padding(1, 10, 10, 10);
+			this.LabelPlayer2Score.PlayerNumber = Ex05.GameLogic.ePlayerNumber.Player2;
+			this.LabelPlayer2Score.Size = new System.Drawing.Size(42, 52);
+			this.LabelPlayer2Score.TabIndex = 12;
 			this.LabelPlayer2Score.Text = "0";
 			// 
-			// labelPlayerScore1
+			// tableLayoutPanel1
 			// 
-			this.labelPlayerScore1.AutoSize = true;
-			this.labelPlayerScore1.Game = null;
-			this.labelPlayerScore1.Location = new System.Drawing.Point(128, 38);
-			this.labelPlayerScore1.Name = "labelPlayerScore1";
-			this.labelPlayerScore1.Size = new System.Drawing.Size(248, 32);
-			this.labelPlayerScore1.TabIndex = 4;
-			this.labelPlayerScore1.Text = "labelPlayerScore1";
+			this.tableLayoutPanel1.ColumnCount = 2;
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 3);
+			this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+			this.tableLayoutPanel1.RowCount = 2;
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.tableLayoutPanel1.Size = new System.Drawing.Size(8, 8);
+			this.tableLayoutPanel1.TabIndex = 12;
 			// 
 			// FormGamePlay
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(16F, 31F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(735, 188);
-			this.Controls.Add(this.labelPlayerScore1);
-			this.Controls.Add(this.LabelPlayer2Score);
-			this.Controls.Add(this.LabelPlayer1Score);
-			this.Controls.Add(this.LabelPlayer2Name);
-			this.Controls.Add(this.LabelPlayer1Name);
+			this.AutoSize = true;
+			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+			this.ClientSize = new System.Drawing.Size(530, 624);
+			this.Controls.Add(this.FlowAllSection);
 			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
 			this.MaximizeBox = false;
 			this.Name = "FormGamePlay";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "4 In A Row !!";
+			this.Load += new System.EventHandler(this.FormGamePlay_Load);
+			this.FlowAllSection.ResumeLayout(false);
+			this.FlowAllSection.PerformLayout();
+			this.FlowSectionInfo.ResumeLayout(false);
+			this.FlowSectionInfo.PerformLayout();
+			this.FlowSectionBoard.ResumeLayout(false);
+			this.FlowSectionBoard.PerformLayout();
+			this.FlowPlayer1Info.ResumeLayout(false);
+			this.FlowPlayer1Info.PerformLayout();
+			this.FlowPlayer2Info.ResumeLayout(false);
+			this.FlowPlayer2Info.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -108,8 +227,14 @@ namespace Ex05.FormsUserInterface
 
 		private System.Windows.Forms.Label LabelPlayer1Name;
 		private System.Windows.Forms.Label LabelPlayer2Name;
-		private System.Windows.Forms.Label LabelPlayer1Score;
-		private System.Windows.Forms.Label LabelPlayer2Score;
-		private LabelPlayerScore labelPlayerScore1;
+		private System.Windows.Forms.TableLayoutPanel TableBoardCells;
+		private System.Windows.Forms.FlowLayoutPanel FlowAllSection;
+		private System.Windows.Forms.FlowLayoutPanel FlowSectionInfo;
+		private System.Windows.Forms.FlowLayoutPanel FlowSectionBoard;
+		private System.Windows.Forms.FlowLayoutPanel FlowPlayer1Info;
+		private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+		private LabelPlayerScore LabelPlayer1Score;
+		private System.Windows.Forms.FlowLayoutPanel FlowPlayer2Info;
+		private LabelPlayerScore LabelPlayer2Score;
 	}
 }

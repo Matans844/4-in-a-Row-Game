@@ -38,7 +38,11 @@ namespace Ex05.FormsUserInterface
 				this.GameSettingsManager.ChosenGameMode,
 				this.GameSettingsManager.Player1Name,
 				this.GameSettingsManager.Player2Name);
+
+			this.initializeBoard();
 		}
+
+		private 
 
 		protected override void OnLoad(EventArgs i_EventArgs)
 		{

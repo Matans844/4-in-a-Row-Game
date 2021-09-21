@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows.Forms;
 using System.Drawing;
 using Ex05.GameLogic;
@@ -48,11 +45,20 @@ namespace Ex05.FormsUserInterface
 			Board connectedBoard = this.MyGame.GetBoard();
 			connectedBoard.BoardColumnByIndexBecameFull += new BoardColumnByIndexBecameFullEventHandler(this.board_ColumnIsFull);
 			connectedBoard.NewGameRequested += new Action(this.board_NewGameRequested);
+			this.MyGame.ComputerToMove += new ComputerToMoveEventHandler(this.game_ComputerToMove);
 		}
 
 		private void board_NewGameRequested()
 		{
 			this.Enabled = true;
+		}
+
+		private void game_ComputerToMove(object sender, ComputerToMoveEventArgs e)
+		{
+			if (e.m_MoveStatus.Equals(eMoveStatus.BeforeUIUpdate))
+			{
+				this.Enabled = false;
+			}
 		}
 
 		private void board_ColumnIsFull(object sender, BoardColumnByIndexBecameFullEventArgs e)

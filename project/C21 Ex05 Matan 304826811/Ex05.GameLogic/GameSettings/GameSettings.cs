@@ -1,7 +1,5 @@
 ﻿namespace Ex05.GameLogic
 {
-	using System;
-
 	public class GameSettings
 	{
 		public const string k_DefaultComputerPlayerName = "Computer";

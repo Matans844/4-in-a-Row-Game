@@ -2,7 +2,6 @@
 
 namespace Ex05.GameLogic
 {
-
 	public static class Array2DimOperations<T>
 	{
 		public const int k_RowDimension = 0;

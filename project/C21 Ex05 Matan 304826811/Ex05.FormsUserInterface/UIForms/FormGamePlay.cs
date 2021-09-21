@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Windows.Forms;
+
 using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
-	using System.Diagnostics.Eventing.Reader;
-
 	public partial class FormGamePlay : Form
 	{
 		private readonly IPlayable m_PlayableGame;
@@ -22,6 +15,7 @@ namespace Ex05.FormsUserInterface
 		private readonly GameSettings r_ChosenGameSettings;
 		private bool m_NotSureAboutExit = true;
 		private bool m_CloseUponExit = false;
+		private List<LabelBoardColumn> r_BoardColumnLabels;
 
 		public GameSettings ChosenGameSettings => this.r_ChosenGameSettings;
 
@@ -36,6 +30,8 @@ namespace Ex05.FormsUserInterface
 			get => this.m_NotSureAboutExit;
 			set => this.m_NotSureAboutExit = value;
 		}
+
+		public List<LabelBoardColumn> BoardColumnLabels => this.r_BoardColumnLabels;
 
 		public int BoardColumns => this.r_BoardColumns;
 
@@ -55,6 +51,7 @@ namespace Ex05.FormsUserInterface
 			this.r_Player2NameLabelText = $"{i_GameSettingsManager.Player2Name}:";
 			this.r_BoardColumns = i_GameSettingsManager.ChosenNumberOfColumns;
 			this.r_BoardRows = i_GameSettingsManager.ChosenNumberOfRows;
+			this.r_BoardColumnLabels = new List<LabelBoardColumn>();
 
 			this.m_PlayableGame = new ConnectFourGame(
 				i_GameSettingsManager.ChosenNumberOfRows,
@@ -98,12 +95,20 @@ namespace Ex05.FormsUserInterface
 		private void populateBoardColumnLabels()
 		{
 			this.TableBoardCells.ColumnCount = this.BoardColumns;
-			//this.TableRowOfColumnLabels.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
 
 			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 			{
 				LabelBoardColumn cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
 				this.TableRowOfColumnLabels.Controls.Add(cellToAdd, columnIndex, Board.k_ZeroIndex);
+				this.BoardColumnLabels.Add(cellToAdd);
+			}
+		}
+
+		private void boardCell_ComputerMadeMove(object sender, ComputerToMoveEventArgs e)
+		{
+			foreach (LabelBoardColumn labelColumn in this.BoardColumnLabels)
+			{
+				labelColumn.Enabled = true;
 			}
 		}
 
@@ -119,7 +124,6 @@ namespace Ex05.FormsUserInterface
 		{
 			this.TableBoardCells.RowCount = this.BoardRows;
 			this.TableBoardCells.ColumnCount = this.BoardColumns;
-			//bool changeTableGrowStyle = true;
 
 			for (int rowIndex = 0; rowIndex < this.BoardRows; rowIndex++)
 			{
@@ -127,12 +131,7 @@ namespace Ex05.FormsUserInterface
 				{
 					ButtonBoardCell cellToAdd = new ButtonBoardCell(rowIndex, columnIndex, this.PlayableGame);
 					this.TableBoardCells.Controls.Add(cellToAdd, columnIndex, rowIndex);
-
-					//if ((columnIndex == this.BoardColumns - Board.k_ConversionFactor1NumberToIndices) && changeTableGrowStyle)
-					//{
-					//	this.TableBoardCells.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
-					//	changeTableGrowStyle = false;
-					//}
+					cellToAdd.ComputerMadeMove += new ComputerAfterMoveEventHandler(this.boardCell_ComputerMadeMove);
 				}
 			}
 		}

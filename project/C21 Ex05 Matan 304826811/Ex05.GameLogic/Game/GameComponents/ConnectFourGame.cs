@@ -4,6 +4,8 @@
 
 	public delegate void GameEndedEventHandler(object sender, GameEndedEventArgs e);
 
+	public delegate void ComputerToMoveEventHandler(object sender, ComputerToMoveEventArgs e);
+
 	public class ConnectFourGame : IPlayable
 	{
 		public const int k_ZeroPoints = 0;
@@ -19,7 +21,7 @@
 		private readonly Player r_Player2WithOs;
 		private readonly eGameMode r_Mode;
 		private eGameState m_GameState = eGameState.NotFinished;
-		private Cell m_LastMovePlayed; // Needs update after move in game loop
+		private Cell m_LastMovePlayed;
 		private Player m_WinnerOfLastGame;
 		private Player m_PlayerToWinIfOtherQuit;
 		private Player m_PlayerToMove;
@@ -30,6 +32,8 @@
 		private bool m_ReplayGame = false;
 
 		public event GameEndedEventHandler GameEnded;
+
+		public event ComputerToMoveEventHandler ComputerToMove;
 
 		public bool ReplayGame
 		{
@@ -205,11 +209,14 @@
 
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
+			ComputerToMoveEventArgs e = new ComputerToMoveEventArgs();
 			this.PlayerToMove.PlayMove(i_ChosenColumn);
 			this.updateGameState();
 
 			if (this.TakeAnotherMove && this.Mode.Equals(eGameMode.PlayerVsComputer))
 			{
+				e.m_MoveStatus = eMoveStatus.BeforeUIUpdate;
+				this.OnComputerToMove(e);
 				this.PlayerToMove.PlayRandomMove();
 				this.updateGameState();
 			}
@@ -298,26 +305,14 @@
 			return this.GameState;
 		}
 
-		// TODO This loop should be in the UI??
-/*		public StartGame()
-		{
-			int chosenValidBoardMoveAdjustedToMatrix;
-
-			while (this.DidLastPlayerQuitSingleGame())
-			{
-				foreach (Player currentPlayer in this.PlayersInGame)
-				{
-					this.PlayerToMove = currentPlayer;
-					currentPlayer.TurnState = eTurnState.YourTurn;
-				}
-
-			}
-
-		}*/
-
 		protected virtual void OnGameEnded(GameEndedEventArgs e)
 		{
 			this.GameEnded?.Invoke(this, e);
+		}
+
+		protected virtual void OnComputerToMove(ComputerToMoveEventArgs e)
+		{
+			this.ComputerToMove?.Invoke(this, e);
 		}
 
 		public override string ToString()
@@ -349,6 +344,12 @@
 	{
 		PlayerVsPlayer = 1,
 		PlayerVsComputer = 2
+	}
+
+	public enum eMoveStatus
+	{
+		BeforeUIUpdate = 1,
+		AfterUIUpdate = 2
 	}
 
 	public enum eGameState

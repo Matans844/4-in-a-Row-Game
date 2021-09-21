@@ -38,6 +38,7 @@
     <Reference Include="System" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Game\EventArgs\ComputerToMoveEventArgs.cs" />
     <Compile Include="Game\EventArgs\BoardColumnByIndexBecameFullEventArgs.cs" />
     <Compile Include="GameSettings\GameSettings.cs" />
     <Compile Include="Game\EventArgs\CellOccupancyChangedEventArgs.cs" />

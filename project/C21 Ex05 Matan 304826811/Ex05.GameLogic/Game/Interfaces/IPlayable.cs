@@ -5,6 +5,8 @@
 	{
 		event GameEndedEventHandler GameEnded;
 
+		event ComputerToMoveEventHandler ComputerToMove;
+
 		Board GetBoard();
 
 		Cell GetLastMove();

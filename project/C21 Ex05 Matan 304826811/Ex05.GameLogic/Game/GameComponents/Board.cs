@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Linq;
 
-using Ex05.GameLogic;
-
 namespace Ex05.GameLogic
 {
 	public delegate void BoardColumnByIndexBecameFullEventHandler(object sender, BoardColumnByIndexBecameFullEventArgs e);
 
 	public class Board
 	{
-		public event Action NewGameRequested;
-
-		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
-
 		public const int k_ConversionFactor1NumberToIndices = 1;
 		public const int k_ZeroIndex = 0;
 		private readonly IPlayable r_GameForBoard;
@@ -24,6 +18,10 @@ namespace Ex05.GameLogic
 		private int m_NumberOfRows;
 		private int m_NumberOfColumns;
 		private int m_NumberOfCellVacanciesInBoard;
+
+		public event Action NewGameRequested;
+
+		public event BoardColumnByIndexBecameFullEventHandler BoardColumnByIndexBecameFull;
 
 		public int NumberOfCellVacanciesInBoard
 		{
@@ -74,21 +72,8 @@ namespace Ex05.GameLogic
 			this.r_CellMatrix.InitWithBoardCells(this.GameForBoard);
 			this.NumberOfCellVacanciesInBoard = i_ChosenNumberOfRows * i_ChosenNumberOfColumns;
 
-			// TODO There's a problem here
-			// When the computer chooses a move it does not update the last chosen move!
-			// It is sent for winning condition.
-
-			// This option means that the last cell is at row 4
-			// We add something and it lands in row 4
-			// this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
-
-			// This option means that the last cell is at row 4
-			// We add something, it lands in row 6
-			// The cell sent to check winning condition is in row 4.
 			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfRows, i_ChosenNumberOfColumns).ToArray();
 
-
-			// Changed this to number of columns
 			this.r_IsColumnFullArray = Enumerable.Repeat(false, i_ChosenNumberOfColumns).ToArray();
 		}
 

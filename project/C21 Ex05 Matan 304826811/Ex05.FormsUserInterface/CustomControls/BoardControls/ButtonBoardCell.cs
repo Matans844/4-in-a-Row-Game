@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 using System.Drawing;
+using System.ComponentModel;
+
 using Ex05.GameLogic;
 
 namespace Ex05.FormsUserInterface
 {
-	using System.Drawing.Printing;
+	public delegate void ComputerAfterMoveEventHandler(object sender, ComputerToMoveEventArgs e);
 
-	public sealed class ButtonBoardCell : Button
+	public class ButtonBoardCell : Button
 	{
 		public const string k_XDiscText = "X";
 		public const string k_ODiscText = "O";
@@ -24,6 +22,11 @@ namespace Ex05.FormsUserInterface
 		private readonly IPlayable r_Game;
 		private readonly int r_RowIndex;
 		private readonly int r_ColumnIndex;
+
+		[Browsable(true)]
+		[Category("Action")]
+		[Description("Invoked when button finished loading computer move")]
+		public event ComputerAfterMoveEventHandler ComputerMadeMove;
 
 		public string EmptyCellText => this.r_EmptyCellText;
 
@@ -64,8 +67,6 @@ namespace Ex05.FormsUserInterface
 
 		private void boardCell_OccupancyChanged(object sender, CellOccupancyChangedEventArgs e)
 		{
-			bool canContinue = true;
-
 			if (e.m_NewCellType.Equals(eBoardCellType.Empty))
 			{
 				this.Text = this.EmptyCellText;
@@ -87,9 +88,19 @@ namespace Ex05.FormsUserInterface
 
 		private void setTextAfterOccupancyChanged(eBoardCellType i_UpdatedCellType)
 		{
+			ComputerToMoveEventArgs e = new ComputerToMoveEventArgs();
+
 			this.Text = i_UpdatedCellType.Equals(eBoardCellType.XDisc)
 							? k_XDiscText
 							: k_ODiscText;
+
+			e.m_MoveStatus = eMoveStatus.AfterUIUpdate;
+			this.OnComputerMadeMove(e);
+		}
+
+		protected virtual void OnComputerMadeMove(ComputerToMoveEventArgs e)
+		{
+			this.ComputerMadeMove?.Invoke(this, e);
 		}
 	}
 }

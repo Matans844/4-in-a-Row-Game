@@ -27,8 +27,15 @@
 		private bool m_PlayerToMoveQuitSingleGame = false;
 		private string m_WinMessage;
 		private bool m_TakeAnotherMove = true;
+		private bool m_ReplayGame = false;
 
 		public event GameEndedEventHandler GameEnded;
+
+		public bool ReplayGame
+		{
+			get => this.m_ReplayGame;
+			set => this.m_ReplayGame = value;
+		}
 
 		public bool TakeAnotherMove
 		{
@@ -206,6 +213,12 @@
 				this.PlayerToMove.PlayRandomMove();
 				this.updateGameState();
 			}
+
+			if (this.ReplayGame)
+			{
+				this.TakeAnotherMove = true;
+				this.ReplayGame = false;
+			}
 		}
 
 		public void QuitSingleGameAndUpdateGameState()
@@ -270,10 +283,10 @@
 
 		public void SetUpNewGame()
 		{
+			this.ReplayGame = true;
 			this.PlayerToMoveQuitSingleGame = false;
 			this.GameBoard.OnNewGameRequested();
 			this.GameState = eGameState.NotFinished;
-			this.TakeAnotherMove = true;
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;

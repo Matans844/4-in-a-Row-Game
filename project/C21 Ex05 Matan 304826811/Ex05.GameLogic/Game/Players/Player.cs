@@ -20,7 +20,7 @@
 
 		public event NameSetEventHandler NameSet;
 
-		public ePlayerNumber PlayerNumber => this.PlayerNumber;
+		public ePlayerNumber PlayerNumber => this.r_PlayerNumber;
 
 		public IPlayable GameForBoard => this.r_GameForBoard;
 

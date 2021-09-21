@@ -109,7 +109,8 @@ namespace Ex05.FormsUserInterface
 
 		private void updateExistingPlayerInformationSection()
 		{
-			this.LabelPlayer2Name.Text = $@"{this.ChosenGameSettings.Player2Name}:";
+			this.LabelPlayer1Name.Text = this.r_Player1NameLabelText;
+			this.LabelPlayer2Name.Text = this.r_Player2NameLabelText;
 			this.LabelPlayer1Score.StartListening(this.PlayableGame);
 			this.LabelPlayer2Score.StartListening(this.PlayableGame);
 		}

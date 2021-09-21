@@ -31,7 +31,10 @@ namespace Ex05.FormsUserInterface
 
 		private void player_ScoreChanged(object sender, ScoreChangedEventArgs e)
 		{
-			this.Text = e.m_NewScore.ToString();
+			if (e.m_ChangedScorePlayerNumber.Equals(this.PlayerNumber))
+			{
+				this.Text = e.m_NewScore.ToString();
+			}
 		}
 	}
 }

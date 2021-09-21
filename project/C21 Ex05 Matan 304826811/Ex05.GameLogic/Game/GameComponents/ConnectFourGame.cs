@@ -187,7 +187,7 @@
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
 			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_ConversionFactor1NumberToIndices;
-			this.LastMove = this.GameBoard.GetLastAvailableCellInColumn(chosenMoveAdjustedToMatrix);
+			this.LastMove = this.GameBoard.GetLastAvailableCellInGivenColumn(chosenMoveAdjustedToMatrix);
 
 			// The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
 			// This also updates the Board.

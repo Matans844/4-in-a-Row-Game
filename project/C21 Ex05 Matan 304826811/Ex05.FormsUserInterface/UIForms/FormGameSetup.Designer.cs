@@ -204,7 +204,6 @@ namespace Ex05.FormsUserInterface
 			this.Name = "FormGameSetup";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "PlayableGame Settings";
-			this.Click += new System.EventHandler(this.StartButton_Click);
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfRows)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.NumericUpDownChooseNumberOfColumns)).EndInit();
 			this.ResumeLayout(false);

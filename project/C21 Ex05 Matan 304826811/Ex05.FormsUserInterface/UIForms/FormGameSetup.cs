@@ -72,6 +72,10 @@ namespace Ex05.FormsUserInterface
 				chosenNumberOfBoardRows = (int)this.NumericUpDownChooseNumberOfRows.Value;
 				chosenNumberOfBoardColumns = (int)this.NumericUpDownChooseNumberOfColumns.Value;
 
+				this.ChosenGameMode = this.IsComputerGameMode
+										? eGameMode.PlayerVsComputer
+										: eGameMode.PlayerVsPlayer;
+
 				this.GameSettingsManager.Player1Name = this.TextBoxPlayer1ChooseName.Text;
 
 				this.GameSettingsManager.Player2Name = this.ChosenGameMode == eGameMode.PlayerVsComputer

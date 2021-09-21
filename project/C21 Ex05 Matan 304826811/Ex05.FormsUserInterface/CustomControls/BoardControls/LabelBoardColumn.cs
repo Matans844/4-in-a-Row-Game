@@ -10,9 +10,11 @@ namespace Ex05.FormsUserInterface
 {
 	public class LabelBoardColumn : Label
 	{
-		private const float k_ButtonFontSize = 10f;
-		private const int k_HeightOfCell = 50;
-		private const int k_WidthOfCell = 100;
+		private const float k_ButtonFontSize = 8f;
+		private const int k_HeightOfCell = 25;
+		private const int k_WidthOfCell = 50;
+		private const int k_AllMargin = 5;
+		private const int k_AllPadding = 5;
 		private readonly IPlayable r_Game;
 		private readonly int r_ColumnIndex;
 
@@ -34,6 +36,8 @@ namespace Ex05.FormsUserInterface
 			this.Text = this.ColumnIndex.ToString();
 			this.Font = new Font(this.Font.FontFamily, k_ButtonFontSize);
 			this.TextAlign = ContentAlignment.MiddleCenter;
+			this.Margin = new System.Windows.Forms.Padding(k_AllMargin);
+			this.Padding = new System.Windows.Forms.Padding(k_AllPadding);
 			this.Size = new Size(k_WidthOfCell, k_HeightOfCell);
 			this.Anchor = AnchorStyles.None;
 			this.BorderStyle = BorderStyle.FixedSingle;
@@ -62,7 +66,7 @@ namespace Ex05.FormsUserInterface
 		protected override void OnClick(EventArgs e)
 		{
 			int chosenColumnByText = this.ColumnIndex + Board.k_ConversionFactor1NumberToIndices;
-			this.MyGame.MakeValidMoveAndUpdateBoardAndGameState(this.ColumnIndex + chosenColumnByText);
+			this.MyGame.MakeValidMoveAndUpdateBoardAndGameState(chosenColumnByText);
 		}
 	}
 }

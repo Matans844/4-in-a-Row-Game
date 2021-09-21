@@ -19,8 +19,11 @@ namespace Ex05.FormsUserInterface
 		private readonly string r_Player2NameLabelText;
 		private readonly int r_BoardRows;
 		private readonly int r_BoardColumns;
-		private bool m_AskBeforeExit = true;
+		private readonly GameSettings r_ChosenGameSettings;
+		private bool m_NotSureAboutExit = true;
 		private bool m_CloseUponExit = false;
+
+		public GameSettings ChosenGameSettings => this.r_ChosenGameSettings;
 
 		public bool CloseUponExit
 		{
@@ -28,10 +31,10 @@ namespace Ex05.FormsUserInterface
 			set => this.m_CloseUponExit = value;
 		}
 
-		public bool AskBeforeExit
+		public bool NotSureAboutExit
 		{
-			get => this.m_AskBeforeExit;
-			set => this.m_AskBeforeExit = value;
+			get => this.m_NotSureAboutExit;
+			set => this.m_NotSureAboutExit = value;
 		}
 
 		public int BoardColumns => this.r_BoardColumns;
@@ -47,6 +50,7 @@ namespace Ex05.FormsUserInterface
 		public FormGamePlay(GameSettings i_GameSettingsManager)
 		{
 			InitializeComponent();
+			this.r_ChosenGameSettings = i_GameSettingsManager;
 			this.r_Player1NameLabelText = $"{i_GameSettingsManager.Player1Name}:";
 			this.r_Player2NameLabelText = $"{i_GameSettingsManager.Player2Name}:";
 			this.r_BoardColumns = i_GameSettingsManager.ChosenNumberOfColumns;
@@ -60,7 +64,7 @@ namespace Ex05.FormsUserInterface
 				i_GameSettingsManager.Player2Name);
 
 			this.initializeBoard();
-			this.updateExistingPlayerScoreLabelsWithPlayer();
+			this.updateExistingPlayerInformationSection();
 			this.startListening();
 		}
 
@@ -75,12 +79,12 @@ namespace Ex05.FormsUserInterface
 
 			if (result == DialogResult.Yes)
 			{
-				this.AskBeforeExit = false;
 				this.PlayableGame.SetUpNewGame();
 			}
 			else
 			{
 				this.CloseUponExit = true;
+				this.NotSureAboutExit = false;
 				this.Close();
 			}
 		}
@@ -93,27 +97,41 @@ namespace Ex05.FormsUserInterface
 
 		private void populateBoardColumnLabels()
 		{
+			this.TableBoardCells.ColumnCount = this.BoardColumns;
+			//this.TableRowOfColumnLabels.GrowStyle = TableLayoutPanelGrowStyle.AddColumns;
+
 			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 			{
 				LabelBoardColumn cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
-				this.TableRowOfColumnLabels.Controls.Add(cellToAdd, Board.k_ZeroIndex, columnIndex);
+				this.TableRowOfColumnLabels.Controls.Add(cellToAdd, columnIndex, Board.k_ZeroIndex);
 			}
 		}
 
-		private void updateExistingPlayerScoreLabelsWithPlayer()
+		private void updateExistingPlayerInformationSection()
 		{
+			this.LabelPlayer2Name.Text = $@"{this.ChosenGameSettings.Player2Name}:";
 			this.LabelPlayer1Score.StartListening(this.PlayableGame);
 			this.LabelPlayer2Score.StartListening(this.PlayableGame);
 		}
 
 		private void populateBoardCells()
 		{
+			this.TableBoardCells.RowCount = this.BoardRows;
+			this.TableBoardCells.ColumnCount = this.BoardColumns;
+			//bool changeTableGrowStyle = true;
+
 			for (int rowIndex = 0; rowIndex < this.BoardRows; rowIndex++)
 			{
 				for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 				{
 					ButtonBoardCell cellToAdd = new ButtonBoardCell(rowIndex, columnIndex, this.PlayableGame);
 					this.TableBoardCells.Controls.Add(cellToAdd, columnIndex, rowIndex);
+
+					//if ((columnIndex == this.BoardColumns - Board.k_ConversionFactor1NumberToIndices) && changeTableGrowStyle)
+					//{
+					//	this.TableBoardCells.GrowStyle = TableLayoutPanelGrowStyle.AddRows;
+					//	changeTableGrowStyle = false;
+					//}
 				}
 			}
 		}
@@ -125,7 +143,7 @@ namespace Ex05.FormsUserInterface
 				this.PlayableGame.QuitSingleGameAndUpdateGameState();
 			}
 
-			if (!this.AskBeforeExit)
+			if (this.NotSureAboutExit)
 			{
 				e.Cancel = true;
 			}

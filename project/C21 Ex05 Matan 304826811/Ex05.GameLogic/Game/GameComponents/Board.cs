@@ -121,11 +121,11 @@ namespace Ex05.GameLogic
 			return isValidChoice;
 		}
 
-		public Cell GetLastAvailableCellInColumn(int i_ColumnIndex)
+		public Cell GetLastAvailableCellInGivenColumn(int i_ColumnIndex)
 		{
-			int rowIndex = this.NumberOfCellVacanciesByColumn[i_ColumnIndex] - k_ConversionFactor1NumberToIndices;
+			int availableRowIndexInColumn = this.NumberOfCellVacanciesByColumn[i_ColumnIndex] - k_ConversionFactor1NumberToIndices;
 
-			return this.CellMatrix[rowIndex, i_ColumnIndex];
+			return this.CellMatrix[availableRowIndexInColumn, i_ColumnIndex];
 		}
 
 		protected virtual void OnBoardColumnByIndexBecameFull(BoardColumnByIndexBecameFullEventArgs e)

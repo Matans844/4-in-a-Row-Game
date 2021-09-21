@@ -90,6 +90,11 @@ namespace Ex05.GameLogic
 				if (i_Game.GetLastMove() != null)
 				{
 					hasWinner = ResultChecker.IsWinningConnection(i_Game.GetBoard(), i_Game.GetLastMove(), direction);
+
+					if (hasWinner)
+					{
+						break;
+					}
 				}
 			}
 

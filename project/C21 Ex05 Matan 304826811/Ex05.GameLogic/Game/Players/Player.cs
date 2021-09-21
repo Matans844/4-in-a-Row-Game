@@ -10,6 +10,7 @@
 		private readonly IPlayable r_GameForBoard;
 		private readonly Board r_BoardOfPlayer;
 		private readonly int r_PlayerId;
+		private readonly ePlayerNumber r_PlayerNumber;
 		private readonly eBoardCellType r_DiscType;
 		private string m_PlayerName;
 		private int m_PointsEarned = ConnectFourGame.k_ZeroPoints;
@@ -18,6 +19,8 @@
 		public event ScoreChangedEventHandler ScoreChanged;
 
 		public event NameSetEventHandler NameSet;
+
+		public ePlayerNumber PlayerNumber => this.PlayerNumber;
 
 		public IPlayable GameForBoard => this.r_GameForBoard;
 
@@ -51,7 +54,7 @@
 
 				ScoreChangedEventArgs e = new ScoreChangedEventArgs
 					{
-						m_PlayerId = this.PlayerID,
+						m_ChangedScorePlayerNumber = this.PlayerNumber,
 						m_NewScore = value
 					};
 
@@ -75,6 +78,11 @@
 			this.TurnState = i_TurnState;
 			this.PlayerName = i_PlayerName;
 			this.r_PlayerId = s_InstanceCounter;
+
+			this.r_PlayerNumber = i_DiscType == eBoardCellType.XDisc
+									? ePlayerNumber.Player1
+									: ePlayerNumber.Player2;
+
 			s_InstanceCounter++;
 		}
 

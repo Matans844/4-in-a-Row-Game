@@ -53,7 +53,6 @@ namespace Ex05.FormsUserInterface
 			// 
 			this.LabelPlayer1Name.AutoSize = true;
 			this.LabelPlayer1Name.BackColor = System.Drawing.SystemColors.Control;
-			this.LabelPlayer1Name.Enabled = false;
 			this.LabelPlayer1Name.Location = new System.Drawing.Point(15, 15);
 			this.LabelPlayer1Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer1Name.Name = "LabelPlayer1Name";
@@ -66,7 +65,6 @@ namespace Ex05.FormsUserInterface
 			// 
 			this.LabelPlayer2Name.AutoSize = true;
 			this.LabelPlayer2Name.BackColor = System.Drawing.SystemColors.Control;
-			this.LabelPlayer2Name.Enabled = false;
 			this.LabelPlayer2Name.Location = new System.Drawing.Point(15, 15);
 			this.LabelPlayer2Name.Margin = new System.Windows.Forms.Padding(5, 5, 1, 5);
 			this.LabelPlayer2Name.Name = "LabelPlayer2Name";
@@ -77,14 +75,13 @@ namespace Ex05.FormsUserInterface
 			// 
 			// TableBoardCells
 			// 
+			this.TableBoardCells.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.TableBoardCells.AutoSize = true;
-			this.TableBoardCells.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.TableBoardCells.ColumnCount = 1;
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
 			this.TableBoardCells.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
-			this.TableBoardCells.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.TableBoardCells.Location = new System.Drawing.Point(3, 9);
 			this.TableBoardCells.Name = "TableBoardCells";
 			this.TableBoardCells.RowCount = 1;
@@ -97,24 +94,23 @@ namespace Ex05.FormsUserInterface
 			// 
 			// FlowAllSection
 			// 
-			this.FlowAllSection.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowAllSection.AutoSize = true;
 			this.FlowAllSection.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowAllSection.Controls.Add(this.FlowSectionBoard);
 			this.FlowAllSection.Controls.Add(this.FlowSectionInfo);
+			this.FlowAllSection.Dock = System.Windows.Forms.DockStyle.Fill;
 			this.FlowAllSection.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
-			this.FlowAllSection.Location = new System.Drawing.Point(92, 31);
+			this.FlowAllSection.Location = new System.Drawing.Point(0, 0);
 			this.FlowAllSection.Margin = new System.Windows.Forms.Padding(10);
 			this.FlowAllSection.Name = "FlowAllSection";
 			this.FlowAllSection.Padding = new System.Windows.Forms.Padding(10);
-			this.FlowAllSection.Size = new System.Drawing.Size(490, 156);
+			this.FlowAllSection.Size = new System.Drawing.Size(1708, 1478);
 			this.FlowAllSection.TabIndex = 9;
 			// 
 			// FlowSectionBoard
 			// 
 			this.FlowSectionBoard.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowSectionBoard.AutoSize = true;
-			this.FlowSectionBoard.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowSectionBoard.Controls.Add(this.TableRowOfColumnLabels);
 			this.FlowSectionBoard.Controls.Add(this.TableBoardCells);
 			this.FlowSectionBoard.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
@@ -122,14 +118,16 @@ namespace Ex05.FormsUserInterface
 			this.FlowSectionBoard.Name = "FlowSectionBoard";
 			this.FlowSectionBoard.Size = new System.Drawing.Size(6, 12);
 			this.FlowSectionBoard.TabIndex = 11;
+			this.FlowSectionBoard.WrapContents = false;
 			// 
 			// TableRowOfColumnLabels
 			// 
+			this.TableRowOfColumnLabels.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.TableRowOfColumnLabels.AutoSize = true;
-			this.TableRowOfColumnLabels.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.TableRowOfColumnLabels.ColumnCount = 1;
 			this.TableRowOfColumnLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
 			this.TableRowOfColumnLabels.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
+			this.TableRowOfColumnLabels.GrowStyle = System.Windows.Forms.TableLayoutPanelGrowStyle.AddColumns;
 			this.TableRowOfColumnLabels.Location = new System.Drawing.Point(3, 3);
 			this.TableRowOfColumnLabels.Name = "TableRowOfColumnLabels";
 			this.TableRowOfColumnLabels.RowCount = 1;

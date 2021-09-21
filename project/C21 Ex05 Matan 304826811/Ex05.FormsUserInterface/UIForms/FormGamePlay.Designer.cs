@@ -104,7 +104,7 @@ namespace Ex05.FormsUserInterface
 			this.FlowAllSection.Margin = new System.Windows.Forms.Padding(10);
 			this.FlowAllSection.Name = "FlowAllSection";
 			this.FlowAllSection.Padding = new System.Windows.Forms.Padding(10);
-			this.FlowAllSection.Size = new System.Drawing.Size(1708, 1478);
+			this.FlowAllSection.Size = new System.Drawing.Size(683, 591);
 			this.FlowAllSection.TabIndex = 9;
 			// 
 			// FlowSectionBoard
@@ -138,6 +138,7 @@ namespace Ex05.FormsUserInterface
 			// 
 			// FlowSectionInfo
 			// 
+			this.FlowSectionInfo.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowSectionInfo.AutoSize = true;
 			this.FlowSectionInfo.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowSectionInfo.Controls.Add(this.FlowPlayer1Info);
@@ -150,6 +151,7 @@ namespace Ex05.FormsUserInterface
 			// 
 			// FlowPlayer1Info
 			// 
+			this.FlowPlayer1Info.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowPlayer1Info.AutoSize = true;
 			this.FlowPlayer1Info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowPlayer1Info.Controls.Add(this.LabelPlayer1Name);
@@ -163,6 +165,7 @@ namespace Ex05.FormsUserInterface
 			// 
 			// FlowPlayer2Info
 			// 
+			this.FlowPlayer2Info.Anchor = System.Windows.Forms.AnchorStyles.None;
 			this.FlowPlayer2Info.AutoSize = true;
 			this.FlowPlayer2Info.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.FlowPlayer2Info.Controls.Add(this.LabelPlayer2Name);
@@ -206,6 +209,8 @@ namespace Ex05.FormsUserInterface
 			this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
 			this.ClientSize = new System.Drawing.Size(683, 591);
 			this.Controls.Add(this.FlowAllSection);
+			this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+			this.MaximizeBox = false;
 			this.Name = "FormGamePlay";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
 			this.Text = "4 In A Row !!";

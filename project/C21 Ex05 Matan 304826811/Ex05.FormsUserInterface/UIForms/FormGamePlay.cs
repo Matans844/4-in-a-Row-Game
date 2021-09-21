@@ -12,12 +12,13 @@ namespace Ex05.FormsUserInterface
 		private readonly string r_Player2NameLabelText;
 		private readonly int r_BoardRows;
 		private readonly int r_BoardColumns;
+		private readonly eGameMode r_GameMode;
 		private readonly GameSettings r_ChosenGameSettings;
 		private bool m_NotSureAboutExit = true;
 		private bool m_CloseUponExit = false;
 		private List<LabelBoardColumn> r_BoardColumnLabels;
 
-		public GameSettings ChosenGameSettings => this.r_ChosenGameSettings;
+		public eGameMode GameMode => this.r_GameMode;
 
 		public bool CloseUponExit
 		{
@@ -30,6 +31,8 @@ namespace Ex05.FormsUserInterface
 			get => this.m_NotSureAboutExit;
 			set => this.m_NotSureAboutExit = value;
 		}
+
+		public GameSettings ChosenGameSettings => this.r_ChosenGameSettings;
 
 		public List<LabelBoardColumn> BoardColumnLabels => this.r_BoardColumnLabels;
 
@@ -52,6 +55,7 @@ namespace Ex05.FormsUserInterface
 			this.r_BoardColumns = i_GameSettingsManager.ChosenNumberOfColumns;
 			this.r_BoardRows = i_GameSettingsManager.ChosenNumberOfRows;
 			this.r_BoardColumnLabels = new List<LabelBoardColumn>();
+			this.r_GameMode = i_GameSettingsManager.ChosenGameMode;
 
 			this.m_PlayableGame = new ConnectFourGame(
 				i_GameSettingsManager.ChosenNumberOfRows,
@@ -106,9 +110,12 @@ namespace Ex05.FormsUserInterface
 
 		private void boardCell_ComputerMadeMove(object sender, ComputerToMoveEventArgs e)
 		{
-			foreach (LabelBoardColumn labelColumn in this.BoardColumnLabels)
+			if (this.GameMode.Equals(eGameMode.PlayerVsComputer))
 			{
-				labelColumn.Enabled = true;
+				foreach (LabelBoardColumn labelColumn in this.BoardColumnLabels)
+				{
+					labelColumn.Enabled = true;
+				}
 			}
 		}
 

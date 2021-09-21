@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
 
-
 namespace Ex05.FormsUserInterface
 {
 	public static class Program

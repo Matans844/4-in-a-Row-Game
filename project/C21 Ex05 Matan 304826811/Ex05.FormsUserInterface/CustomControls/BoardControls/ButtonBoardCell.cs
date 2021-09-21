@@ -14,10 +14,10 @@ namespace Ex05.FormsUserInterface
 	{
 		public const string k_XDiscText = "X";
 		public const string k_ODiscText = "O";
-		private const int k_HeightOfCell = 100;
-		private const int k_WidthOfCell = 100;
-		private const int k_AllMargin = 20;
-		private const int k_AllPadding = 20;
+		private const int k_HeightOfCell = 20;
+		private const int k_WidthOfCell = 20;
+		private const int k_AllMargin = 5;
+		private const int k_AllPadding = 5;
 		private const float k_ButtonFontSize = 12f;
 		private readonly string r_EmptyCellText = string.Empty;
 		private readonly IPlayable r_Game;

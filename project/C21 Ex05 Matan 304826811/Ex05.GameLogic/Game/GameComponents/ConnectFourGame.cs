@@ -11,6 +11,7 @@
 		public const string k_DrawMessage = "Tie!!";
 		public const string k_DrawTitle = "A Tie!";
 		public const string k_WinTitle = "A Win!";
+		public const string k_WinByQuitTitle = "A Win! (by Quit)";
 		public const string k_AnotherRound = "Another Round?";
 		private readonly object[] r_Players = new object[2];
 		private readonly Board r_Board;
@@ -50,22 +51,20 @@
 					switch (value)
 					{
 						case eGameState.FinishedInDraw:
-							e.m_ResultMessage = k_DrawMessage;
-							e.m_ResultTitle = $"{k_DrawTitle}{Environment.NewLine}{k_AnotherRound}";
+							e.m_ResultTitle = k_DrawTitle;
+							e.m_ResultMessage = $"{k_DrawMessage}{Environment.NewLine}{k_AnotherRound}";
 							break;
 
 						case eGameState.FinishedInWinByBoard:
 							this.WinnerOfLastGame = this.PlayerToMove;
+							e.m_ResultTitle = k_WinTitle;
+							e.m_ResultMessage = $"{this.WinMessage}{Environment.NewLine}{k_AnotherRound}";
 							break;
 
 						case eGameState.FinishedInWinByQuit:
 							this.WinnerOfLastGame = this.PlayerToWinIfOtherQuit;
-							break;
-
-						default:
-							this.WinMessage = this.WinnerOfLastGame.PlayerName;
-							e.m_ResultMessage = this.WinMessage;
-							e.m_ResultTitle = $"{k_WinTitle}{Environment.NewLine}{k_AnotherRound}";
+							e.m_ResultTitle = k_WinByQuitTitle;
+							e.m_ResultMessage = $"{this.WinMessage} (by Quit){Environment.NewLine}{k_AnotherRound}";
 							break;
 					}
 
@@ -99,7 +98,11 @@
 		public Player WinnerOfLastGame
 		{
 			get => this.m_WinnerOfLastGame;
-			set => this.m_WinnerOfLastGame = value;
+			set
+			{
+				this.m_WinnerOfLastGame = value;
+				this.WinMessage = value.PlayerName;
+			}
 		}
 
 		public int GameNumber
@@ -147,6 +150,7 @@
 
 			this.PlayersInGame[0] = this.Player1WithXs;
 			this.PlayersInGame[1] = this.Player2WithOs;
+			this.PlayerToMove = this.Player1WithXs;
 		}
 
 		private Player getOtherPlayer(Player i_Player)

@@ -87,11 +87,7 @@ namespace Ex05.GameLogic
 
 			foreach (eDirectionOfDiscConnection direction in Enum.GetValues(typeof(eDirectionOfDiscConnection)))
 			{
-				if (i_Game.GetLastMove() == null)
-				{
-					hasWinner = true;
-				}
-				else
+				if (i_Game.GetLastMove() != null)
 				{
 					hasWinner = ResultChecker.IsWinningConnection(i_Game.GetBoard(), i_Game.GetLastMove(), direction);
 				}

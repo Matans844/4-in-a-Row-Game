@@ -19,6 +19,20 @@ namespace Ex05.FormsUserInterface
 		private readonly string r_Player2NameLabelText;
 		private readonly int r_BoardRows;
 		private readonly int r_BoardColumns;
+		private bool m_AskBeforeExit = true;
+		private bool m_CloseUponExit = false;
+
+		public bool CloseUponExit
+		{
+			get => this.m_CloseUponExit;
+			set => this.m_CloseUponExit = value;
+		}
+
+		public bool AskBeforeExit
+		{
+			get => this.m_AskBeforeExit;
+			set => this.m_AskBeforeExit = value;
+		}
 
 		public int BoardColumns => this.r_BoardColumns;
 
@@ -61,10 +75,12 @@ namespace Ex05.FormsUserInterface
 
 			if (result == DialogResult.Yes)
 			{
+				this.AskBeforeExit = false;
 				this.PlayableGame.SetUpNewGame();
 			}
 			else
 			{
+				this.CloseUponExit = true;
 				this.Close();
 			}
 		}
@@ -80,7 +96,7 @@ namespace Ex05.FormsUserInterface
 			for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 			{
 				LabelBoardColumn cellToAdd = new LabelBoardColumn(columnIndex, this.PlayableGame);
-				this.TableRowOfColumnLabels.Controls.Add(cellToAdd);
+				this.TableRowOfColumnLabels.Controls.Add(cellToAdd, Board.k_ZeroIndex, columnIndex);
 			}
 		}
 
@@ -97,14 +113,22 @@ namespace Ex05.FormsUserInterface
 				for (int columnIndex = 0; columnIndex < this.BoardColumns; columnIndex++)
 				{
 					ButtonBoardCell cellToAdd = new ButtonBoardCell(rowIndex, columnIndex, this.PlayableGame);
-					this.TableBoardCells.Controls.Add(cellToAdd);
+					this.TableBoardCells.Controls.Add(cellToAdd, columnIndex, rowIndex);
 				}
 			}
 		}
 
 		protected override void OnFormClosing(FormClosingEventArgs e)
 		{
-			this.PlayableGame.QuitSingleGameAndUpdateGameState();
+			if (!this.CloseUponExit)
+			{
+				this.PlayableGame.QuitSingleGameAndUpdateGameState();
+			}
+
+			if (!this.AskBeforeExit)
+			{
+				e.Cancel = true;
+			}
 		}
 	}
 }

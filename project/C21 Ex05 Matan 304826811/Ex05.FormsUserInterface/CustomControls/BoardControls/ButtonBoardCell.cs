@@ -89,6 +89,7 @@ namespace Ex05.FormsUserInterface
 		private void setTextAfterOccupancyChanged(eBoardCellType i_UpdatedCellType)
 		{
 			ComputerToMoveEventArgs e = new ComputerToMoveEventArgs();
+			e.m_GameMode = this.MyGame.GetGameMode();
 
 			this.Text = i_UpdatedCellType.Equals(eBoardCellType.XDisc)
 							? k_XDiscText

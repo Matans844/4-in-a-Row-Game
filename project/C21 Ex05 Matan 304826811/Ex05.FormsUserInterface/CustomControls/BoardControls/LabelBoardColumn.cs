@@ -14,6 +14,13 @@ namespace Ex05.FormsUserInterface
 		private const int k_AllPadding = 5;
 		private readonly IPlayable r_Game;
 		private readonly int r_ColumnIndex;
+		private bool m_IsBoardColumnFull;
+
+		public bool IsBoardColumnFull
+		{
+			get => this.m_IsBoardColumnFull;
+			private set => this.m_IsBoardColumnFull = value;
+		}
 
 		public IPlayable MyGame => this.r_Game;
 
@@ -50,12 +57,13 @@ namespace Ex05.FormsUserInterface
 
 		private void board_NewGameRequested()
 		{
+			this.IsBoardColumnFull = false;
 			this.Enabled = true;
 		}
 
 		private void game_ComputerToMove(object sender, ComputerToMoveEventArgs e)
 		{
-			if (e.m_MoveStatus.Equals(eMoveStatus.BeforeUIUpdate))
+			if (e.m_MoveStatus.Equals(eMoveStatus.BeforeUIUpdate) && e.m_GameMode.Equals(eGameMode.PlayerVsComputer))
 			{
 				this.Enabled = false;
 			}
@@ -65,6 +73,7 @@ namespace Ex05.FormsUserInterface
 		{
 			if (this.ColumnIndex == e.m_FilledBoardColumnIndex)
 			{
+				this.IsBoardColumnFull = true;
 				this.Enabled = false;
 			}
 		}

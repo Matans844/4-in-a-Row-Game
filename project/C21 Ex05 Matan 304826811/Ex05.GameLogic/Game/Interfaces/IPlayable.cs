@@ -7,6 +7,8 @@
 
 		event ComputerToMoveEventHandler ComputerToMove;
 
+		eGameMode GetGameMode();
+
 		Board GetBoard();
 
 		Cell GetLastMove();

@@ -210,6 +210,7 @@
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
 			ComputerToMoveEventArgs e = new ComputerToMoveEventArgs();
+			e.m_GameMode = this.Mode;
 			this.PlayerToMove.PlayMove(i_ChosenColumn);
 			this.updateGameState();
 
@@ -323,6 +324,11 @@
 		public string GetGameName()
 		{
 			return this.ToString();
+		}
+
+		public eGameMode GetGameMode()
+		{
+			return this.Mode;
 		}
 
 		public Player GetPlayerByDisc(eDiscType i_PlayerDiscType)

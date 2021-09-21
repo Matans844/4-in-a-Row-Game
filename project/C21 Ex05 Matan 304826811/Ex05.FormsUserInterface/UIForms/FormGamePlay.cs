@@ -114,7 +114,10 @@ namespace Ex05.FormsUserInterface
 			{
 				foreach (LabelBoardColumn labelColumn in this.BoardColumnLabels)
 				{
-					labelColumn.Enabled = true;
+					if (!labelColumn.IsBoardColumnFull)
+					{
+						labelColumn.Enabled = true;
+					}
 				}
 			}
 		}

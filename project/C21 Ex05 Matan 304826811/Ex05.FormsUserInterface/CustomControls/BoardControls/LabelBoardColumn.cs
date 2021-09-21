@@ -26,7 +26,7 @@ namespace Ex05.FormsUserInterface
 			: base()
 		{
 			this.r_Game = i_Game;
-			this.r_ColumnIndex = i_ColumnIndex;
+			this.r_ColumnIndex = i_ColumnIndex + Board.k_ConversionFactor1NumberToIndices;
 			this.modifyButtonControl();
 			this.startListening();
 		}

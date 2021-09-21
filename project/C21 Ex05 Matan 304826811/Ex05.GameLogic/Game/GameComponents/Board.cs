@@ -87,7 +87,9 @@ namespace Ex05.GameLogic
 			// The cell sent to check winning condition is in row 4.
 			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfRows, i_ChosenNumberOfColumns).ToArray();
 
-			this.r_IsColumnFullArray = Enumerable.Repeat(false, i_ChosenNumberOfRows).ToArray();
+
+			// Changed this to number of columns
+			this.r_IsColumnFullArray = Enumerable.Repeat(false, i_ChosenNumberOfColumns).ToArray();
 		}
 
 		public void SlideDiskToBoard(int i_ChosenBoardColumnAdjustedForMatrix, eBoardCellType i_PlayerDiscType)
@@ -178,7 +180,7 @@ namespace Ex05.GameLogic
 
 		private void resetIsColumnAvailableForDisc()
 		{
-			for (int i = 0; i < this.NumberOfColumnIndices; i++)
+			for (int i = 0; i < this.NumberOfRowIndices; i++)
 			{
 				this.r_IsColumnFullArray[i] = false;
 			}

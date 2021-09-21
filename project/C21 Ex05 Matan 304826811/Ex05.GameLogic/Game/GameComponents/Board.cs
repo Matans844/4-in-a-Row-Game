@@ -165,7 +165,10 @@ namespace Ex05.GameLogic
 
 		private void resetIsColumnAvailableForDisc()
 		{
-			for (int i = 0; i < this.NumberOfRowIndices; i++)
+			int numberOfColumnsStartingFrom1 =
+				this.NumberOfColumnIndices + Board.k_ConversionFactor1NumberToIndices;
+
+			for (int i = 0; i < numberOfColumnsStartingFrom1; i++)
 			{
 				this.r_IsColumnFullArray[i] = false;
 			}

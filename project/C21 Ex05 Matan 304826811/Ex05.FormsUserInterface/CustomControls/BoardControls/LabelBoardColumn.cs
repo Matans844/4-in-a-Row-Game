@@ -23,14 +23,14 @@ namespace Ex05.FormsUserInterface
 			: base()
 		{
 			this.r_Game = i_Game;
-			this.r_ColumnIndex = i_ColumnIndex + Board.k_ConversionFactor1NumberToIndices;
+			this.r_ColumnIndex = i_ColumnIndex;
 			this.modifyButtonControl();
 			this.startListening();
 		}
 
 		private void modifyButtonControl()
 		{
-			this.Text = this.ColumnIndex.ToString();
+			this.Text = $@"{this.ColumnIndex + Board.k_ConversionFactor1NumberToIndices}";
 			this.Font = new Font(this.Font.FontFamily, k_ButtonFontSize);
 			this.TextAlign = ContentAlignment.MiddleCenter;
 			this.Margin = new System.Windows.Forms.Padding(k_AllMargin);

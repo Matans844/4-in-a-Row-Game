@@ -48,7 +48,7 @@ namespace Ex05.FormsUserInterface
 
 		private void modifyButtonControl()
 		{
-			this.Enabled = false;
+			this.Enabled = true;
 			this.Margin = new System.Windows.Forms.Padding(k_AllMargin);
 			this.Padding = new System.Windows.Forms.Padding(k_AllPadding);
 			this.Name = $"buttonR{this.RowIndex}C{this.ColumnIndex}";

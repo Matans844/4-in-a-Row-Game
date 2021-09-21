@@ -53,6 +53,7 @@
     <Compile Include="CustomControls\InfoSection\LabelPlayerScore.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="EventExtensions.cs" />
     <Compile Include="UIForms\FormGamePlay.cs">
       <SubType>Form</SubType>
     </Compile>

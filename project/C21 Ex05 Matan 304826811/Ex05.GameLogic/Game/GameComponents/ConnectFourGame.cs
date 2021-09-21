@@ -174,6 +174,11 @@
 			return this.GameBoard;
 		}
 
+		public void SetLastMove(int i_ChosenColumn)
+		{
+			this.LastMove = this.GameBoard.GetLastAvailableCellInGivenColumn(i_ChosenColumn);
+		}
+
 		public Cell GetLastMove()
 		{
 			return this.LastMove;
@@ -186,13 +191,19 @@
 
 		public void MakeValidMoveAndUpdateBoardAndGameState(int i_ChosenColumn)
 		{
-			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_ConversionFactor1NumberToIndices;
-			this.LastMove = this.GameBoard.GetLastAvailableCellInGivenColumn(chosenMoveAdjustedToMatrix);
-
-			// The PlayerHuman object takes the move from the IPlayable object last move (this Game's last move)
-			// This also updates the Board.
-			this.PlayerToMove.PlayMove();
+			this.PlayerToMove.PlayMove(i_ChosenColumn);
 			this.updateGameState();
+
+			if (!this.didLastMoveEndGame() && this.Mode.Equals(eGameMode.PlayerVsComputer))
+			{
+				this.PlayerToMove.PlayRandomMove();
+				this.updateGameState();
+			}
+		}
+
+		private bool didLastMoveEndGame()
+		{
+			return !this.GameState.Equals(eGameState.NotFinished);
 		}
 
 		public void QuitSingleGameAndUpdateGameState()
@@ -257,6 +268,7 @@
 		{
 			this.PlayerToMoveQuitSingleGame = false;
 			this.GameBoard.OnNewGameRequested();
+			this.GameState = eGameState.NotFinished;
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;

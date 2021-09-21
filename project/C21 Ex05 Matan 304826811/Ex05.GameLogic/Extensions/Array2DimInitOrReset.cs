@@ -17,7 +17,7 @@
 			}
 		}
 
-		public static void InitWithBoardCells(this Cell[,] io_Matrix)
+		public static void InitWithBoardCells(this Cell[,] io_Matrix, IPlayable i_GameInterface)
 		{
 			int numberOfRowsInMatrix = io_Matrix.GetLength(k_RowDimension);
 			int numberOfColumnsInMatrix = io_Matrix.GetLength(k_ColumnDimension);
@@ -26,7 +26,7 @@
 			{
 				for (int j = 0; j < numberOfColumnsInMatrix; j++)
 				{
-					io_Matrix[i, j] = new Cell(i, j);
+					io_Matrix[i, j] = new Cell(i, j, i_GameInterface);
 				}
 			}
 		}

@@ -9,6 +9,8 @@
 
 		Cell GetLastMove();
 
+		void SetLastMove(int i_ChosenColumn);
+
 		bool DidLastPlayerQuitSingleGame();
 
 		eGameState GetGameState();

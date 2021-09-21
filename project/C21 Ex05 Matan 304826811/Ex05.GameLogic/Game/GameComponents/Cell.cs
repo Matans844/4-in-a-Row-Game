@@ -6,13 +6,23 @@
 	{
 		private readonly int r_ColumnIndex;
 		private readonly int r_RowIndex;
+		private readonly IPlayable r_GameInterface;
 		private eBoardCellType m_CellType;
+		private eDiscType m_DiscType;
 
 		public event CellOccupancyChangedEventHandler CellTypeChanged;
+
+		public IPlayable GameInterface => r_GameInterface;
 
 		public int ColumnIndex => this.r_ColumnIndex;
 
 		public int RowIndex => this.r_RowIndex;
+
+		public eDiscType DiscType
+		{
+			get => this.m_DiscType;
+			private set => this.m_DiscType = value;
+		}
 
 		public eBoardCellType CellType
 		{
@@ -28,6 +38,14 @@
 						m_NewCellType = value
 					};
 
+				if (!value.Equals(eBoardCellType.Empty))
+				{
+					this.DiscType = value.Equals(eBoardCellType.XDisc)
+										? eDiscType.XDisc
+										: eDiscType.ODisc;
+					e.m_PlayerType = this.GameInterface.GetPlayerByDisc(this.DiscType).PlayerType;
+				}
+
 				this.OnCellOccupied(e);
 			}
 		}
@@ -37,18 +55,12 @@
 			this.CellTypeChanged?.Invoke(this, e);
 		}
 
-		public Cell(int i_RowIndex, int i_ColumnIndex, eBoardCellType i_CellType)
-		{
-			this.r_RowIndex = i_RowIndex;
-			this.r_ColumnIndex = i_ColumnIndex;
-			this.CellType = i_CellType;
-		}
-
-		public Cell(int i_RowIndex, int i_ColumnIndex)
+		public Cell(int i_RowIndex, int i_ColumnIndex, IPlayable i_GameInterface)
 		{
 			this.r_RowIndex = i_RowIndex;
 			this.r_ColumnIndex = i_ColumnIndex;
 			this.CellType = eBoardCellType.Empty;
+			this.r_GameInterface = i_GameInterface;
 		}
 
 		public bool HasSameTypeAs(Cell i_AnotherBoardCell)

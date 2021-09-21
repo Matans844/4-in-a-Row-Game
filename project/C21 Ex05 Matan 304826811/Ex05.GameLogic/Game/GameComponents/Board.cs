@@ -71,9 +71,22 @@ namespace Ex05.GameLogic
 			this.NumberOfRows = i_ChosenNumberOfRows;
 			this.NumberOfRowIndices = i_ChosenNumberOfRows - k_ConversionFactor1NumberToIndices;
 			this.r_CellMatrix = new Cell[i_ChosenNumberOfRows, i_ChosenNumberOfColumns];
-			this.r_CellMatrix.InitWithBoardCells();
+			this.r_CellMatrix.InitWithBoardCells(this.GameForBoard);
 			this.NumberOfCellVacanciesInBoard = i_ChosenNumberOfRows * i_ChosenNumberOfColumns;
-			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
+
+			// TODO There's a problem here
+			// When the computer chooses a move it does not update the last chosen move!
+			// It is sent for winning condition.
+
+			// This option means that the last cell is at row 4
+			// We add something and it lands in row 4
+			// this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfColumns, i_ChosenNumberOfRows).ToArray();
+
+			// This option means that the last cell is at row 4
+			// We add something, it lands in row 6
+			// The cell sent to check winning condition is in row 4.
+			this.r_NumberOfCellVacanciesByColumn = Enumerable.Repeat(i_ChosenNumberOfRows, i_ChosenNumberOfColumns).ToArray();
+
 			this.r_IsColumnFullArray = Enumerable.Repeat(false, i_ChosenNumberOfRows).ToArray();
 		}
 

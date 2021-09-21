@@ -19,6 +19,7 @@ namespace Ex05.FormsUserInterface
 		private const int k_AllMargin = 5;
 		private const int k_AllPadding = 5;
 		private const float k_ButtonFontSize = 12f;
+		private const int k_DelayInMilliSeconds = 80;
 		private readonly string r_EmptyCellText = string.Empty;
 		private readonly IPlayable r_Game;
 		private readonly int r_RowIndex;
@@ -63,20 +64,32 @@ namespace Ex05.FormsUserInterface
 
 		private void boardCell_OccupancyChanged(object sender, CellOccupancyChangedEventArgs e)
 		{
-			switch (e.m_NewCellType)
+			bool canContinue = true;
+
+			if (e.m_NewCellType.Equals(eBoardCellType.Empty))
 			{
-				case eBoardCellType.XDisc:
-					this.Text = k_XDiscText;
-					break;
-
-				case eBoardCellType.ODisc:
-					this.Text = k_ODiscText;
-					break;
-
-				case eBoardCellType.Empty:
-					this.Text = this.EmptyCellText;
-					break;
+				this.Text = this.EmptyCellText;
 			}
+			else
+			{
+				if (e.m_PlayerType.Equals(ePlayerType.Computer))
+				{
+					EventExtensions.Delay(
+						k_DelayInMilliSeconds,
+						(o, a) => this.setTextAfterOccupancyChanged(e.m_NewCellType));
+				}
+				else
+				{
+					this.setTextAfterOccupancyChanged(e.m_NewCellType);
+				}
+			}
+		}
+
+		private void setTextAfterOccupancyChanged(eBoardCellType i_UpdatedCellType)
+		{
+			this.Text = i_UpdatedCellType.Equals(eBoardCellType.XDisc)
+							? k_XDiscText
+							: k_ODiscText;
 		}
 	}
 }

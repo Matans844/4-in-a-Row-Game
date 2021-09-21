@@ -15,6 +15,7 @@
 		private string m_PlayerName;
 		private int m_PointsEarned = ConnectFourGame.k_ZeroPoints;
 		private eTurnState m_TurnState;
+		private ePlayerType m_PlayerType;
 
 		public event ScoreChangedEventHandler ScoreChanged;
 
@@ -27,6 +28,12 @@
 		public Board BoardOfPlayer => this.r_BoardOfPlayer;
 
 		public int PlayerID => this.r_PlayerId;
+
+		public ePlayerType PlayerType
+		{
+			get => this.m_PlayerType;
+			set => this.m_PlayerType = value;
+		}
 
 		public string PlayerName
 		{
@@ -54,6 +61,7 @@
 
 				ScoreChangedEventArgs e = new ScoreChangedEventArgs
 					{
+						m_ChangedScorePlayerType = this.PlayerType,
 						m_ChangedScorePlayerNumber = this.PlayerNumber,
 						m_NewScore = value
 					};
@@ -86,12 +94,41 @@
 			s_InstanceCounter++;
 		}
 
-		public void PlayMove()
+		public virtual void PlayRandomMove()
 		{
-			this.BoardOfPlayer.SlideDiskToBoard(this.ChooseColumnForMove(), this.DiscType);
+			int chosenColumnIndex = this.ChooseRandomColumnForMove();
+			this.GameForBoard.SetLastMove(chosenColumnIndex);
+			this.BoardOfPlayer.SlideDiskToBoard(chosenColumnIndex, this.DiscType);
 		}
 
-		public abstract int ChooseColumnForMove();
+		public virtual void PlayMove(int i_ChosenColumn)
+		{
+			int chosenColumnIndex = this.ChooseColumnForMove(i_ChosenColumn);
+			this.GameForBoard.SetLastMove(chosenColumnIndex);
+			this.BoardOfPlayer.SlideDiskToBoard(chosenColumnIndex, this.DiscType);
+		}
+
+		public virtual int ChooseRandomColumnForMove()
+		{
+			int numberOfColumnsStartingFrom1 =
+				this.BoardOfPlayer.NumberOfColumnIndices + Board.k_ConversionFactor1NumberToIndices;
+
+			int randomChoice = NumberOperations.GetRandomNumber(numberOfColumnsStartingFrom1);
+
+			while (!this.BoardOfPlayer.IsColumnAvailableForDisc(randomChoice))
+			{
+				randomChoice = NumberOperations.GetRandomNumber(numberOfColumnsStartingFrom1);
+			}
+
+			return randomChoice;
+		}
+
+		public virtual int ChooseColumnForMove(int i_ChosenColumn)
+		{
+			int chosenMoveAdjustedToMatrix = i_ChosenColumn - Board.k_ConversionFactor1NumberToIndices;
+
+			return chosenMoveAdjustedToMatrix;
+		}
 
 		protected virtual void OnScoreChanged(ScoreChangedEventArgs e)
 		{

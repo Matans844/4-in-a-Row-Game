@@ -167,7 +167,10 @@ namespace Ex05.GameLogic
 
 		private void resetNumberOfCellVacanciesByColumn()
 		{
-			for (int i = 0; i < this.NumberOfColumnIndices; i++)
+			int numberOfColumnsStartingFrom1 =
+				this.NumberOfColumnIndices + Board.k_ConversionFactor1NumberToIndices;
+
+			for (int i = 0; i < numberOfColumnsStartingFrom1; i++)
 			{
 				this.r_NumberOfCellVacanciesByColumn[i] = this.NumberOfRows;
 			}

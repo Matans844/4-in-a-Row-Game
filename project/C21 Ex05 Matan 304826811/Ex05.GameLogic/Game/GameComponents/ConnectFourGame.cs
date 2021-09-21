@@ -26,8 +26,15 @@
 		private int m_GameNumber;
 		private bool m_PlayerToMoveQuitSingleGame = false;
 		private string m_WinMessage;
+		private bool m_TakeAnotherMove = true;
 
 		public event GameEndedEventHandler GameEnded;
+
+		public bool TakeAnotherMove
+		{
+			get => this.m_TakeAnotherMove;
+			set => this.m_TakeAnotherMove = value;
+		}
 
 		public string WinMessage
 		{
@@ -194,16 +201,11 @@
 			this.PlayerToMove.PlayMove(i_ChosenColumn);
 			this.updateGameState();
 
-			if (!this.didLastMoveEndGame() && this.Mode.Equals(eGameMode.PlayerVsComputer))
+			if (this.TakeAnotherMove && this.Mode.Equals(eGameMode.PlayerVsComputer))
 			{
 				this.PlayerToMove.PlayRandomMove();
 				this.updateGameState();
 			}
-		}
-
-		private bool didLastMoveEndGame()
-		{
-			return !this.GameState.Equals(eGameState.NotFinished);
 		}
 
 		public void QuitSingleGameAndUpdateGameState()
@@ -230,6 +232,8 @@
 		{
 			if (ResultChecker.IsGameFinished(this))
 			{
+				this.TakeAnotherMove = false;
+
 				if (ResultChecker.IsGameFinishedByBoard(this))
 				{
 					if (ResultChecker.IsGameDrawnByBoard(this))
@@ -269,6 +273,7 @@
 			this.PlayerToMoveQuitSingleGame = false;
 			this.GameBoard.OnNewGameRequested();
 			this.GameState = eGameState.NotFinished;
+			this.TakeAnotherMove = true;
 			this.Player1WithXs.TurnState = eTurnState.YourTurn;
 			this.Player2WithOs.TurnState = eTurnState.NotYourTurn;
 			this.PlayerToMove = this.Player1WithXs;

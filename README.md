@@ -1,4 +1,4 @@
-# C21-Ex05-Matan-304826811: "Four"-In-A-Row game
+# C21-Ex05-Matan-304826811: 4 (or more) In-A-Row game
 
 Final Assignment for Object Oriented Programming course, summer semester, 2021, at IDC, taught by Ronen Guy. 
 
